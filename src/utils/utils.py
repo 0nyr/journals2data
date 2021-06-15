@@ -18,11 +18,11 @@ def print_pretty_json(json_data: dict):
     print(json_formatted_str)
 
 # csv manipulations
-def write_in_csv(datalog: dict, csv_file_name: str):
+def write_in_csv(data: dict, csv_file_name: str):
     """
     Write a dictionary of URLs to a CSV file with provided name
     """
     with open(csv_file_name, mode='a', encoding="utf-8", newline='') as file:
         writer = csv.writer(file, delimiter=';')
 
-        writer.writerow([datalog["date"], datalog["status"]])
+        writer.writerow([data["date"], data["status"]])

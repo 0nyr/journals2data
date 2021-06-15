@@ -19,7 +19,7 @@
 
 Development of a deployable Python library allowing the use of online  scraping functions at regular intervals, through the use of pre-trained models.
 
-##### Input: CSV or JSON config file
+##### Input: CSV (or JSON?) config file
 
 * URLs of journals to scrap
 * Scraping frequency, interval durations
@@ -37,7 +37,7 @@ Development of a deployable Python library allowing the use of online  scraping 
 
 ### Input
 
-inside `conf/`, a JSON file with necessary info. The "journals" attribute is optional. If you prefer, use instead a csv file called `journals.csv` with first line of "URL" and a list of URLs in column below.
+inside `conf/`, a .csv file with a list of source URLs, language and scraping frequency associated with each URL.
 
 ### Output
 
@@ -60,3 +60,18 @@ I have also tried to install WSL on windows but the installation is very slow an
 * Analyse further the results of the scraping.
 
 ### Tue 15th June 2021
+
+Installed WSL1, then WSL2 on the lab pc.
+
+Modified the program input to be only CSV. 
+
+* ?: How to ask for the out file path, which should be the same for all articles ? For now, it is hard coded in`main.py` file.
+
+Test write results to a csv
+
+* [ ] Modify the input from CSV
+* [ ] Add several languages and articles from my own dataset
+* [ ] Test article scraping to a file
+* [ ] Test recurrent scrapping
+* [ ] Test threads and concurent writing to a file
+* [ ] Make a URL source set with no paywall

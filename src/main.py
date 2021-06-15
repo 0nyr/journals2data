@@ -23,7 +23,7 @@ config_file_path: str = "conf/config.json"
 journals_file_path: str = "conf/journals.csv"
 
 def get_config_data(config_file_path, journals_file_path) -> dict:
-    # get config data from JSON file
+    # get config data from CSV file
     config_data: dict = utils.json_file_to_data(config_file_path)
 
     # if missing, get list of URLs from csv file
