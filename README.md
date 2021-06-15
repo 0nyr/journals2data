@@ -76,11 +76,8 @@ Test write results to a csv
 * [ ] Test threads and concurent writing to a file
 * [X] Make a URL source set with no paywall from manual verifications.
 
-I have added new classses like `SourceInfo` to build a more robust clean code solution for loading configs. This is still buggy and need a fix.
+I have added new classes like `SourceInfo` to build a more robust clean code solution for loading configs. This is still buggy and need a fix.
 
 Added support for Python3 static typing features, with custom types and options.
-
-
-
 
 > NB: some websites have paywalls only over certain articles.
