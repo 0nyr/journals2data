@@ -19,7 +19,7 @@ if DEBUG:
         "Python Current Working directory = " + str(os.getcwd())
     )
 
-# get config data
+# get sources from config data
 config_file_path: str = "conf/config.csv"
 
 def load_config(path: str) -> List[data.SourceInfo]:
@@ -32,7 +32,8 @@ def load_config(path: str) -> List[data.SourceInfo]:
             line_data: List[str] = list(line.split(";"))
             try:
                 utils.print_list(line_data)
-                new_source: data.SourceInfo = data.SourceInfo(
+                # TODO: fix error here at creation of objects
+                new_source: SourceInfo = data.SourceInfo(
                     line_data[0],
                     line_data[1],
                     line_data[2],
@@ -46,27 +47,8 @@ def load_config(path: str) -> List[data.SourceInfo]:
     return sources
 
 sources: List[data.SourceInfo] = load_config(config_file_path)
+print("********* sources *********")
 utils.print_list(sources)
-
-def get_config_data(config_file_path) -> dict:
-    # get config data from CSV file
-    config_data: dict = utils.json_file_to_data(config_file_path)
-
-    # if missing, get list of URLs from csv file
-    if config_data.get('journals') == None or config_data['journals'] == "":
-        journals: list = []
-        # read csv file containing journals
-        with open(journals_file_path, encoding='utf-8') as csvf:
-            csvReader = csv.DictReader(csvf)
-            for row in csvReader:
-                journals.append(row['URL'])
-        config_data['journals'] = journals
-    
-    return config_data
-
-#config_data: dict = get_config_data(config_file_path, journals_file_path)
-
-#utils.print_pretty_json(config_data)
 
 
 

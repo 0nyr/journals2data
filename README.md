@@ -65,15 +65,22 @@ Installed WSL1, then WSL2 on the lab pc.
 
 Modified the program input to be only CSV.
 
-* ?: How to ask for the out file path, which should be the same for all articles ? For now, it is hard coded in`main.py` file. -> Ok pour chaque source
+* ?: How to ask for the out file path, which should be the same for all articles ? For now, it is hard coded in`main.py` file. -> Ok, 1 path per source
 
 Test write results to a csv
 
-* [ ] Modify the input from CSV
+* [ ] Modify the input from CSV (currently working on it).
 * [X] Add several languages and articles from my own dataset
 * [ ] Test article scraping to a file
 * [ ] Test recurrent scrapping
 * [ ] Test threads and concurent writing to a file
 * [X] Make a URL source set with no paywall from manual verifications.
+
+I have added new classses like `SourceInfo` to build a more robust clean code solution for loading configs. This is still buggy and need a fix.
+
+Added support for Python3 static typing features, with custom types and options.
+
+
+
 
 > NB: some websites have paywalls only over certain articles.

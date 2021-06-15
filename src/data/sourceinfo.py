@@ -1,3 +1,7 @@
+import typing
+from typing import Dict
+
+SourceInfo = typing.NewType('SourceInfo', Dict[str, str])
 
 
 class SourceInfo(dict):
@@ -16,7 +20,7 @@ class SourceInfo(dict):
         url: str, 
         language: str, 
         scrap_frequency: str, 
-        output_filepath: str | None
+        output_filepath: typing.Optional[str]=None
     ):
         self = dict()
         self.url = url
