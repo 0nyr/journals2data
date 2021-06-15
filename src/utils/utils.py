@@ -1,5 +1,6 @@
 import json
 import csv
+from typing import Any, List
 
 # json manipulations
 def json_file_to_data(json_file_path: str):
@@ -26,3 +27,8 @@ def write_in_csv(data: dict, csv_file_name: str):
         writer = csv.writer(file, delimiter=';')
 
         writer.writerow([data["date"], data["status"]])
+
+# list manipulations
+def print_list(list: List[Any]):
+    from pprint import pprint
+    pprint(list)

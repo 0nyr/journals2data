@@ -63,15 +63,17 @@ I have also tried to install WSL on windows but the installation is very slow an
 
 Installed WSL1, then WSL2 on the lab pc.
 
-Modified the program input to be only CSV. 
+Modified the program input to be only CSV.
 
-* ?: How to ask for the out file path, which should be the same for all articles ? For now, it is hard coded in`main.py` file.
+* ?: How to ask for the out file path, which should be the same for all articles ? For now, it is hard coded in`main.py` file. -> Ok pour chaque source
 
 Test write results to a csv
 
 * [ ] Modify the input from CSV
-* [ ] Add several languages and articles from my own dataset
+* [X] Add several languages and articles from my own dataset
 * [ ] Test article scraping to a file
 * [ ] Test recurrent scrapping
 * [ ] Test threads and concurent writing to a file
-* [ ] Make a URL source set with no paywall
+* [X] Make a URL source set with no paywall from manual verifications.
+
+> NB: some websites have paywalls only over certain articles.
