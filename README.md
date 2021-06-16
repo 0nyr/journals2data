@@ -92,6 +92,7 @@ Droped WSL for VirtualBox. Installed Ubuntu20.04 and fixed some problems with Vi
 * [X] Fix error at creation of `data.Source` objects
 * [X] Added `str` conversion support
 * [X] Modify the input from CSV (currently working on it)
+* [ ] URGENT: Add git to VScode !
 * [ ] Add color support for `data.Source` `str` conversion
 * [ ] Implement Unit Tests
 * [ ] Complete Article class
