@@ -94,9 +94,13 @@ Droped WSL for VirtualBox. Installed Ubuntu20.04 and fixed some problems with Vi
 * [X] Modify the input from CSV (currently working on it)
 * [ ] Add color support for `data.Source` `str` conversion
 * [ ] Implement Unit Tests
+* [ ] Complete Article class
+* [ ] Add a write to file function, don't use semaphore for now
+* [ ] Use hash-map to create a list of ongoing Articles inside he Source object
 * [ ] Test article scraping to a file
 * [ ] Test recurrent scrapping
-* [ ] Test threads and concurent writing to a file
+* [ ] Test threads and concurent writing to a file with semaphores
+* [ ] Perform integration of threads into Source object
 
 
 
