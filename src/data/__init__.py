@@ -1,1 +1,1 @@
-from .sourceinfo import SourceInfo
+from .source import Source

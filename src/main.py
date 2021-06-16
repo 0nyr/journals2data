@@ -19,21 +19,33 @@ if DEBUG:
         "Python Current Working directory = " + str(os.getcwd())
     )
 
+# TODO: Move that into unit tests
+test_source: data.Source = data.Source('a', 'b', "c", None)
+print(str(test_source))
+print("*****************")
+print(test_source.to_str())
+print("*****************")
+
 # get sources from config data
 config_file_path: str = "conf/config.csv"
 
-def load_config(path: str) -> List[data.SourceInfo]:
+def load_config(path: str) -> List[data.Source]:
     with open(path, encoding = 'utf-8', mode = 'r') as file:
         lines: List[str] = file.readlines()
+
+        # if present, remove the headline
+        if(lines[0].find('http') == -1): # the headline do not contain a link
+            del lines[0]
         
-        # build list of data.SourceInfo objects
-        sources: List[data.SourceInfo] = []
+        # build list of data.Source objects
+        sources: List[data.Source] = []
         for line in lines:
+            line = line.replace('\n', '')
             line_data: List[str] = list(line.split(";"))
             try:
                 utils.print_list(line_data)
-                # TODO: fix error here at creation of objects
-                new_source: SourceInfo = data.SourceInfo(
+
+                new_source: data.Source = data.Source(
                     line_data[0],
                     line_data[1],
                     line_data[2],
@@ -41,17 +53,23 @@ def load_config(path: str) -> List[data.SourceInfo]:
                 )
                 sources.append(new_source)
             except:
-                print("""Error: Fail creating a data.SourceInfo object, 
+                print("""Error: Fail creating a data.Source object, 
                 possible error with the conf/conf.csv file.""")
 
     return sources
 
-sources: List[data.SourceInfo] = load_config(config_file_path)
+sources: List[data.Source] = load_config(config_file_path)
+
 print("********* sources *********")
 utils.print_list(sources)
 
+print("********* sources list content *********")
+for source in sources:
+    print(str(source))
 
-
+print("********* sources list content pretty *********")
+for source in sources:
+    print(source.to_str())
 
 # for each journal, get all URLs on the front page
 # then decide which ones are URLs of articles

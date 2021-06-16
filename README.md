@@ -81,3 +81,29 @@ I have added new classes like `SourceInfo` to build a more robust clean code sol
 Added support for Python3 static typing features, with custom types and options.
 
 > NB: some websites have paywalls only over certain articles.
+
+### Wed 16th June 2021
+
+Droped WSL for VirtualBox. Installed Ubuntu20.04 and fixed some problems with VirtualBox.
+
+* ?: Still can't know why the multi-screen support of VB fails... ?
+
+
+* [X] Fix error at creation of `data.Source` objects
+* [X] Added `str` conversion support
+* [X] Modify the input from CSV (currently working on it)
+* [ ] Add color support for `data.Source` `str` conversion
+* [ ] Implement Unit Tests
+* [ ] Test article scraping to a file
+* [ ] Test recurrent scrapping
+* [ ] Test threads and concurent writing to a file
+
+
+
+
+
+
+
+
+
+end
