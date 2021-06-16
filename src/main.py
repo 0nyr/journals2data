@@ -5,6 +5,8 @@ import os
 import csv
 from typing import Any, List
 
+import json
+
 # personal imports
 import utils
 import console
@@ -21,15 +23,26 @@ if DEBUG:
 
 # TODO: Move that into unit tests
 test_source: data.Source = data.Source('a', 'b', "c", None)
+print("***************** __str__ ")
 print(str(test_source))
-print("*****************")
+print("***************** to_str")
 print(test_source.to_str())
-print("*****************")
+
+print("****** Source to Dict")
+source_json: str = str(test_source)
+source_dict: dict = json.loads(source_json)
+utils.print_pretty_json(source_dict)
+# test casting
+print("****** Source to Dict casting")
+souce_dict_casted: dict = test_source.to_dict()
+utils.print_pretty_json(souce_dict_casted)
 
 # get sources from config data
 config_file_path: str = "conf/config.csv"
 
 def load_config(path: str) -> List[data.Source]:
+    sources: List[data.Source] = []
+
     with open(path, encoding = 'utf-8', mode = 'r') as file:
         lines: List[str] = file.readlines()
 
@@ -38,13 +51,10 @@ def load_config(path: str) -> List[data.Source]:
             del lines[0]
         
         # build list of data.Source objects
-        sources: List[data.Source] = []
         for line in lines:
             line = line.replace('\n', '')
             line_data: List[str] = list(line.split(";"))
             try:
-                utils.print_list(line_data)
-
                 new_source: data.Source = data.Source(
                     line_data[0],
                     line_data[1],
@@ -53,23 +63,18 @@ def load_config(path: str) -> List[data.Source]:
                 )
                 sources.append(new_source)
             except:
-                print("""Error: Fail creating a data.Source object, 
-                possible error with the conf/conf.csv file.""")
+                print(
+                    """Error: Fail creating a data.Source object, 
+                    possible error with the conf/conf.csv file."""
+                )
 
     return sources
 
 sources: List[data.Source] = load_config(config_file_path)
 
-print("********* sources *********")
-utils.print_list(sources)
-
 print("********* sources list content *********")
 for source in sources:
-    print(str(source))
-
-print("********* sources list content pretty *********")
-for source in sources:
-    print(source.to_str())
+    print(source.to_str(pretty = False))
 
 # for each journal, get all URLs on the front page
 # then decide which ones are URLs of articles

@@ -84,17 +84,20 @@ Added support for Python3 static typing features, with custom types and options.
 
 ### Wed 16th June 2021
 
-Droped WSL for VirtualBox. Installed Ubuntu20.04 and fixed some problems with VirtualBox.
+DroPped WSL for VirtualBox. Installed Ubuntu20.04 and fixed some problems with VirtualBox.
 
 * ?: Still can't know why the multi-screen support of VB fails... ?
 
+Continued to work on library foundations, with OOP, serialization, unit testing. Basic unit testing is to be finish tomorrow.
 
 * [X] Fix error at creation of `data.Source` objects
 * [X] Added `str` conversion support
+* [X] Added `dict` conversion support
 * [X] Modify the input from CSV (currently working on it)
-* [ ] URGENT: Add git to VScode !
-* [ ] Add color support for `data.Source` `str` conversion
-* [ ] Implement Unit Tests
+* [X] URGENT: Add git to VScode !
+* [X] Fix object instantiation
+* [X] Add color support for `data.Source` `str` conversion
+* [ ] Implement Unit Tests (Working on it, see [unittest doc](https://docs.python.org/3/library/unittest.html#unittest.TestLoader.discover) and [StackOverflow](https://stackoverflow.com/questions/1896918/running-unittest-with-typical-test-directory-structure).
 * [ ] Complete Article class
 * [ ] Add a write to file function, don't use semaphore for now
 * [ ] Use hash-map to create a list of ongoing Articles inside he Source object
@@ -102,12 +105,6 @@ Droped WSL for VirtualBox. Installed Ubuntu20.04 and fixed some problems with Vi
 * [ ] Test recurrent scrapping
 * [ ] Test threads and concurent writing to a file with semaphores
 * [ ] Perform integration of threads into Source object
-
-
-
-
-
-
 
 
 

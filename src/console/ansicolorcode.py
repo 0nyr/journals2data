@@ -16,3 +16,7 @@ class ANSIColorCode(Enum):
     FAILED_C  = "197" 
     MISSED_C  = "208" 
     DEBUG_C  = "227"
+
+    # json
+    KEY_C = "38"
+    VALUE_C = "173"
