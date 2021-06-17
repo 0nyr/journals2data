@@ -1,1 +1,1 @@
-from .scraper import ArticleScraperWithDownload
+from .articlescraperwithdownload import ArticleScraperWithDownload

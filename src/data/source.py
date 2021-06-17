@@ -1,7 +1,9 @@
 import typing
+from typing import List
 import json
 
-import  console
+import console
+from .article import Article
 
 
 class Source:
@@ -12,21 +14,31 @@ class Source:
     output_filepath: str = None
 
     DEFAULT_OUTPUT_FILEPATH: str = "out/out.json"
+
+    # list of ongoing article urls to Article
+    articles: List[Article] = None
     
     def __init__(
         self, 
         url: str, 
         language: str, 
         scrap_frequency: str, 
-        output_filepath: typing.Optional[str]=None
+        output_filepath: typing.Optional[str]=None,
+        articles: typing.Optional[List[Article]]=None
     ):
         self.url = url
         self.language = language
         self.scrap_frequency = scrap_frequency
+
         if(output_filepath == None):
             self.output_filepath = self.DEFAULT_OUTPUT_FILEPATH
         else:
             self.output_filepath = output_filepath
+        
+        if(articles == None):
+            self.articles = []
+        else:
+            self.articles = articles
     
     def __str__(self) -> str:
         return self.to_str(

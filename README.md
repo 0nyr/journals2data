@@ -97,7 +97,7 @@ Continued to work on library foundations, with OOP, serialization, unit testing.
 * [X] URGENT: Add git to VScode !
 * [X] Fix object instantiation
 * [X] Add color support for `data.Source` `str` conversion
-* [ ] Implement Unit Tests (Working on it, see [unittest doc](https://docs.python.org/3/library/unittest.html#unittest.TestLoader.discover) and [StackOverflow](https://stackoverflow.com/questions/1896918/running-unittest-with-typical-test-directory-structure).
+* [X] Implement Unit Tests (Working on it, see [unittest doc](https://docs.python.org/3/library/unittest.html#unittest.TestLoader.discover) and [StackOverflow](https://stackoverflow.com/questions/1896918/running-unittest-with-typical-test-directory-structure).
 * [ ] Complete Article class
 * [ ] Add a write to file function, don't use semaphore for now
 * [ ] Use hash-map to create a list of ongoing Articles inside he Source object
@@ -108,17 +108,22 @@ Continued to work on library foundations, with OOP, serialization, unit testing.
 
 ### Thu 17 June 2021
 
+Fixed several problems with uniitest. Now the basis is properly working for anyone wanting to implement Unit tests.
 
-* [ ] Implement Unit Tests (Working on it, see [unittest doc](https://docs.python.org/3/library/unittest.html#unittest.TestLoader.discover) and [StackOverflow](https://stackoverflow.com/questions/1896918/running-unittest-with-typical-test-directory-structure).
-* [ ] Complete Article class
-* [ ] Add a write to file function, don't use semaphore for now
-* [ ] Use hash-map to create a list of ongoing Articles inside he Source object
-* [ ] Try article scraping to a file
+Finished the basis data structure for data of the program.
+
+Started working on Newspaper3K scrapper refactoring as well as data extraction from web pages.
+
+* [X] Implement Unit Tests (Working on it, see [unittest doc](https://docs.python.org/3/library/unittest.html#unittest.TestLoader.discover) and [StackOverflow](https://stackoverflow.com/questions/1896918/running-unittest-with-typical-test-directory-structure).
+* [X] Complete Article class
+* [X] Add a write to file function, don't use semaphore for now
+* [X] ~~Use hash-map to create a list of ongoing Articles inside the Source object~~. Used `list` instead because we will need to iterate over its elements to see which articles have disappeared.
+* [X] Install Newspaper3k and Unidecode
+* [ ] Fix circular import errors due to type hinting. Chech [that fix](https://adamj.eu/tech/2021/05/13/python-type-hints-how-to-fix-circular-imports/) (WIP)
+* [ ] Try article scraping to a file (WIP)
 * [ ] Try link extraction, create link extraction module
 * [ ] Try recurrent scrapping
 * [ ] Try threads and concurent writing to a file with semaphores
 * [ ] Perform integration of threads into Source object
-
-
 
 end

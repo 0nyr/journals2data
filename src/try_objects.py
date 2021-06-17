@@ -55,10 +55,23 @@ utils.print_pretty_json(article_dict_casted)
 
 
 # check Article writing to a file
-# TODO: finish testing
 test_article.save_to_file()
 
 
 # check Article creation from URL
-test_source_url: str = "https://finance.yahoo.com/"
-test_url: str = "https://eu.usatoday.com/story/news/world/2021/06/14/vladimir-putin-refuses-guarantee-alexei-navalnys-safety-prison/7682827002/"
+scrap_test_source: data.Source = data.Source(
+    "https://eu.usatoday.com/",
+    "en",
+    "20",
+)
+scrap_test_article: data.Article = data.Article(
+    scrap_test_source,
+    "https://eu.usatoday.com/story/news/world/2021/06/14/vladimir-putin-refuses-guarantee-alexei-navalnys-safety-prison/7682827002/",
+)
+console.println_debug("****** data.Article before scraping")
+print(scrap_test_article.to_str())
+scrap_test_article.scrap()
+console.println_debug("****** data.Article after scraping")
+print(scrap_test_article.to_str())
+
+

@@ -30,8 +30,8 @@ def write_in_csv(data: dict, csv_file_name: str):
 
         writer.writerow([data["date"], data["status"]])
 
-def scrap_url_frequency(url: str, scrap_frequency: int, LIMIT_TEST: bool = false):
-    # TODO
+#def scrap_url_frequency(url: str, scrap_frequency: int, LIMIT_TEST: bool = false):
+    # TODO: try it for real
 
 
 # test_scraper

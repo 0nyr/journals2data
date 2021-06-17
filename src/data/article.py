@@ -2,9 +2,11 @@ import typing
 import json
 import console
 import os
+import datetime
 
 from .source import Source
 import utils
+import scraper
 
 
 class Article():
@@ -20,14 +22,15 @@ class Article():
     title_from_source: str = None
     title_from_page: str = None
     full_text: str = None
+    publish_date: str = None
 
     # WARN: default arguments must be at the end
     def __init__(
         self,
         source: Source,
         url: str,
-        title: str,
-        full_text: str,
+        title: typing.Optional[str]=None,
+        full_text: typing.Optional[str]=None,
         timestamp_start: typing.Optional[str]=None,
         timestamp_end: typing.Optional[str]=None,
         title_from_source: typing.Optional[str]=None,
@@ -43,6 +46,8 @@ class Article():
         # from Source object
         self.language = source.language
         self.url_source = source.url
+
+        self.publish_date = None
     
     def __str__(self) -> str:
         return self.to_str(
@@ -142,7 +147,10 @@ class Article():
             "title_from_page", str(self.title_from_page)
         )
         to_string += __pretty_color_line(
-            "full_text", str(self.full_text), ""
+            "full_text", str(self.full_text)
+        )
+        to_string += __pretty_color_line(
+            "publish_date", str(self.publish_date), ""
         ) # WARN: no end comma for last JSON element
         to_string += "}"
 
@@ -191,3 +199,34 @@ class Article():
 
             file.seek(0)
             file.writelines(lines)
+    
+    def scrap(self) -> typing.Optional[Article]:
+        """
+        This function is used to scrap content from the web
+        of the Article.
+        It retuns itself if the scraping was successful.
+        It returns None if the article is no more available online.
+        """
+        try:
+            article_scraper: scraper.ArticleScraperWithDownload = scraper.ArticleScraperWithDownload(self.url)
+            article_scraper.preprocessAndExtraction()
+
+            self.title_from_page = article_scraper.article.title
+            self.full_text = article_scraper.article.text
+            self.publish_date = article_scraper.article.publish_date
+
+            # log first scraping instant as self.timestamp_start
+            if(self.timestamp_start == None or self.timestamp_start == ""):
+                self.timestamp_start = datetime.datetime("%S_%M_%H_%d_%m_%Y")
+            
+            return self
+        except Exception as e:
+            print(e) # TODO: only temporary print
+
+            # define this moment as the final timestamp for scraping
+            self.timestamp_end = datetime.datetime("%S_%M_%H_%d_%m_%Y")
+
+            # save the Article
+            self.save_to_file()
+            return None
+

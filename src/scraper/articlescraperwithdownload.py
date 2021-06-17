@@ -1,20 +1,35 @@
-from newspaper import Article
+import newspaper
 import re
 import requests
 import unicodedata
 import unidecode
 
-headers = {'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64; rv:74.0) Gecko/20100101 Firefox/74.0','X-JAVASCRIPT-ENABLED':'true','Accept-Encoding':'br, gzip, deflate','Referer':'www.google.fr','Accept':'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8'}
+headers = {
+    'User-Agent': """
+        Mozilla/5.0 (X11; Linux x86_64; rv:74.0) 
+        Gecko/20100101 Firefox/74.0
+    """,
+    'X-JAVASCRIPT-ENABLED': 'true',
+    'Accept-Encoding': 'br, gzip, deflate',
+    'Referer': 'www.google.fr',
+    'Accept': """
+        text/html,application/xhtml+xml,
+        application/xml;q=0.9,image/webp,*/*;q=0.8
+    """
+}
 
 
 class ArticleScraperWithDownload:
-    
 
-    def __init__(self, url):
+    url: str = None
+    article: newspaper.Article = None
+    return_code: int = None
+
+    def __init__(self, url: str):
         self.url = url
-        # Create the Article class then download the article page from the url
+        # Create the newspaper.Article class then download the article page from the url
         self.return_code = 1  # OK
-        self.article = Article(url)
+        self.article = newspaper.Article(url)
         response = requests.get(url, headers=headers)
 
         #print(response.status_code)
@@ -41,9 +56,6 @@ class ArticleScraperWithDownload:
 
         # Emulate the download method by directly putting the response content extracted before
         self.article.download(response.content)
-        self.article_title = ""
-        self.article_date = ""
-        self.article_text = ""
 
     def cleanurl(self, url_text_to_clean):
         result_url = url_text_to_clean
@@ -54,9 +66,11 @@ class ArticleScraperWithDownload:
         return result_url
 
     def preprocessAndExtraction(self):
-        """This function does the article scrapping with preprocessing while downloading the article
+        """
+        This function does the article scrapping with preprocessing while downloading the article
         Requires an Internet connection. It returns a string which contains the scrapped article , using the
-        Newspaper3k library"""
+        Newspaper3k library
+        """
 
         # Preprocess the html code by removing the "q" tag and all tags about any table
         htmlCode = self.article.html
@@ -82,11 +96,6 @@ class ArticleScraperWithDownload:
 		# Let Newspaper3k parses the article
         self.article.parse()
 
-
-
-        self.article_title = self.article.title
-        self.article_date = self.article.publish_date
-        self.article_text = self.article.text
         #text = unidecode.unidecode(self.article_text)
 
         #à regarder encore
