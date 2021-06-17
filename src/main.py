@@ -22,21 +22,6 @@ if DEBUG:
     )
 
 
-test_source: data.Source = data.Source('a', 'b', "c", None)
-print("***************** __str__ ")
-print(str(test_source))
-print("***************** to_str")
-print(test_source.to_str())
-
-print("****** Source to Dict")
-source_json: str = str(test_source)
-source_dict: dict = json.loads(source_json)
-utils.print_pretty_json(source_dict)
-# test casting
-print("****** Source to Dict casting")
-souce_dict_casted: dict = test_source.to_dict()
-utils.print_pretty_json(souce_dict_casted)
-
 
 # get sources from config data
 config_file_path: str = "conf/config.csv"

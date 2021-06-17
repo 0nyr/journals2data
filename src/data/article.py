@@ -2,12 +2,14 @@ import typing
 import json
 import console
 
+from .source import Source
+
 
 class Article():
 
     url: str = None
-    url_source: str = None
-    language: str = None
+    # TODO: Select between architecture and implement them
+    source: Source = None
     timestamp_start: str = None
     timestamp_end: str = None
     title_from_link: str = None
@@ -18,8 +20,7 @@ class Article():
     def __init__(
         self,
         url: str,
-        url_source: str,
-        language: str,
+        source: Source,
         title: str,
         full_text: str,
         timestamp_start: typing.Optional[str]=None,
@@ -95,8 +96,8 @@ class Article():
             the pros of using a function here.
             """
             # standardize behaviour around None / empty str
-            if(value == "" or value == None):
-                value = "None"
+            if(value == "None" or value == "" or value == None):
+                value = "null"
             
             line: str = "%s%s\"%s\"%s: %s\"%s\"%s%s%s" % (
                 spaces,
@@ -140,3 +141,17 @@ class Article():
         to_string += "}"
 
         return to_string
+    
+    def save_to_file(self):
+        """
+        This function is responsible for saving the object as 
+        a JSON object.
+
+        TODO: Add verification that the object is not already
+        in the file.
+        TODO: While implementing threading, make sure no concurrent
+        writing can occur.
+        """
+        with open(path, encoding = 'utf-8', mode = 'r') as file:
+            file.write()
+            # TODO: write to file

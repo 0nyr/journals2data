@@ -110,7 +110,7 @@ Continued to work on library foundations, with OOP, serialization, unit testing.
 
 
 * [X] Implement Unit Tests (Working on it, see [unittest doc](https://docs.python.org/3/library/unittest.html#unittest.TestLoader.discover) and [StackOverflow](https://stackoverflow.com/questions/1896918/running-unittest-with-typical-test-directory-structure).
-* [ ] Complete Article class
+* [X] Complete Article class
 * [ ] Add a write to file function, don't use semaphore for now
 * [ ] Use hash-map to create a list of ongoing Articles inside he Source object
 * [ ] Try article scraping to a file

@@ -83,8 +83,9 @@ class Source:
             the pros of using a function here.
             """
             # standardize behaviour around None / empty str
-            if(value == "" or value == None):
-                value = "None"
+            #    + GeekForGeeks: https://www.geeksforgeeks.org/reading-and-writing-json-to-a-file-in-python/ 
+            if(value == "None" or value == "" or value == None):
+                value = "null"
             
             line: str = "%s%s\"%s\"%s: %s\"%s\"%s%s%s" % (
                 spaces,
