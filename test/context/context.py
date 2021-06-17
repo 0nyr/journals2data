@@ -1,3 +1,6 @@
+# this file is necessary to give TestCase access to src/ modules
+#    + GitHub example: https://github.com/PhatSriwichai/python-unittest-example/blob/master/tests/mock_test.py 
+
 import sys
 import os
 

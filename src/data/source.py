@@ -1,8 +1,4 @@
 import typing
-from typing import Dict
-
-Source = typing.NewType('Source', Dict[str, str])
-
 import json
 
 import  console

@@ -1,6 +1,8 @@
 """Universal launcher for unit tests"""
 
+# this is a launcher file for unit tests
 # run tests: python3 test/run.py -vvv
+#    + GitHub example: https://github.com/nettle/bazel-python-unittest 
 
 import argparse
 import logging
