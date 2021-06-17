@@ -21,7 +21,7 @@ if DEBUG:
         "Python Current Working directory = " + str(os.getcwd())
     )
 
-# TODO: Move that into unit tests
+
 test_source: data.Source = data.Source('a', 'b', "c", None)
 print("***************** __str__ ")
 print(str(test_source))
@@ -36,6 +36,7 @@ utils.print_pretty_json(source_dict)
 print("****** Source to Dict casting")
 souce_dict_casted: dict = test_source.to_dict()
 utils.print_pretty_json(souce_dict_casted)
+
 
 # get sources from config data
 config_file_path: str = "conf/config.csv"
