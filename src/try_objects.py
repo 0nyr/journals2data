@@ -30,8 +30,8 @@ utils.print_pretty_json(source_dict_casted)
 # check data.Article conversion to str
 console.println_debug("****** data.Article.__str__() ")
 test_article: data.Article = data.Article(
-    "https://www.test.com/test.html",
     test_source,
+    "https://www.test.com/test.html",
     "Test",
     "This is just a simple test.",
     dt.datetime.now().strftime("%S_%M_%H_%d_%m_%Y"),
@@ -56,7 +56,7 @@ utils.print_pretty_json(article_dict_casted)
 
 # check Article writing to a file
 # TODO: finish testing
-
+test_article.save_to_file()
 
 
 # check Article creation from URL

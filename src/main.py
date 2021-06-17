@@ -1,5 +1,5 @@
 __title__ = "journals2data"
-__author__ = "onyr, Elöd Egyed-Zsigmond"
+__author__ = "onyr"
 
 import os
 import csv

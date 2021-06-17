@@ -10,6 +10,8 @@ class Source:
     language: str = None
     scrap_frequency: int = None
     output_filepath: str = None
+
+    DEFAULT_OUTPUT_FILEPATH: str = "out/out.json"
     
     def __init__(
         self, 
@@ -21,7 +23,10 @@ class Source:
         self.url = url
         self.language = language
         self.scrap_frequency = scrap_frequency
-        self.output_filepath = output_filepath
+        if(output_filepath == None):
+            self.output_filepath = self.DEFAULT_OUTPUT_FILEPATH
+        else:
+            self.output_filepath = output_filepath
     
     def __str__(self) -> str:
         return self.to_str(

@@ -1,41 +1,48 @@
 import typing
 import json
 import console
+import os
 
 from .source import Source
+import utils
 
 
 class Article():
 
-    url: str = None
-    # TODO: Select between architecture and implement them
     source: Source = None
+
+    # to be save
+    url: str = None
+    url_source: str = None
+    language: str = None
     timestamp_start: str = None
     timestamp_end: str = None
-    title_from_link: str = None
-    title: str = None
+    title_from_source: str = None
+    title_from_page: str = None
     full_text: str = None
 
     # WARN: default arguments must be at the end
     def __init__(
         self,
-        url: str,
         source: Source,
+        url: str,
         title: str,
         full_text: str,
         timestamp_start: typing.Optional[str]=None,
         timestamp_end: typing.Optional[str]=None,
-        title_from_link: typing.Optional[str]=None,
+        title_from_source: typing.Optional[str]=None,
     ):
-        self,
+        self.source = source
         self.url = url
-        self.url_source = url_source
-        self.language = language
         self.title = title
         self.full_text = full_text
         self.timestamp_start = timestamp_start
         self.timestamp_end = timestamp_end
-        self.title_from_link = title_from_link
+        self.title_from_source = title_from_source
+
+        # from Source object
+        self.language = source.language
+        self.url_source = source.url
     
     def __str__(self) -> str:
         return self.to_str(
@@ -68,8 +75,7 @@ class Article():
         if(pretty):
             for i in range(nb_spaces):
                 spaces += " "
-        
-        # color support for terminals
+        print
         reset: str = ""
         key_color: str = ""
         value_color: str = ""
@@ -130,10 +136,10 @@ class Article():
             "timestamp_end", str(self.timestamp_end)
         )
         to_string += __pretty_color_line(
-            "title_from_link", str(self.title_from_link)
+            "title_from_source", str(self.title_from_source)
         )
         to_string += __pretty_color_line(
-            "title", str(self.title)
+            "title_from_page", str(self.title_from_page)
         )
         to_string += __pretty_color_line(
             "full_text", str(self.full_text), ""
@@ -152,6 +158,36 @@ class Article():
         TODO: While implementing threading, make sure no concurrent
         writing can occur.
         """
-        with open(path, encoding = 'utf-8', mode = 'r') as file:
-            file.write()
-            # TODO: write to file
+        filepath: str = self.source.output_filepath
+        endl: str = "\r\n"
+
+        # if file does not exist, create one with empty JSON list
+        if(os.path.exists(filepath) == False):
+            with open(
+                filepath, encoding = 'utf-8', mode = 'w'
+            ) as file:
+                file.write(
+                    "[" + endl + "]"
+                )
+
+        with open(
+            filepath, encoding = 'utf-8', mode = 'r+'
+        ) as file:
+            lines: List[str] = file.readlines()
+            nb_of_lines: int = len(lines)
+
+            # insert line at a line before the last one
+            #    + StackOverflow: https://stackoverflow.com/questions/1325905/inserting-line-at-specified-position-of-a-text-file 
+            spaces: str = "    "
+            lines.insert(nb_of_lines - 1, spaces + str(self) + endl)
+
+            # check if preceding line needs a ',' at its end
+            line_before_insertion: str = lines[nb_of_lines - 2]
+            if(
+                line_before_insertion[:1] != '[' and 
+                line_before_insertion[:1] != ']'
+            ):
+                lines[nb_of_lines - 2] = line_before_insertion.strip('\n') + "," + endl
+
+            file.seek(0)
+            file.writelines(lines)
