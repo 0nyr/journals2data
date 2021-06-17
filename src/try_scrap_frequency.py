@@ -34,7 +34,7 @@ def scrap_url_frequency(url: str, scrap_frequency: int, LIMIT_TEST: bool = false
     # TODO
 
 
-
+# test_scraper
 
 
 def scrap_urls(urls: list):

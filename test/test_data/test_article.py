@@ -1,5 +1,8 @@
 import unittest
 
+# personal imports
+from context import src
+
 import data
 
 class TestSource(unittest.TestCase):
@@ -14,6 +17,7 @@ class TestSource(unittest.TestCase):
         self.assertEqual(
             str(test_source), expected_str
         )
+    
     
 
 if __name__ == '__main__':
