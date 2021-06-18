@@ -23,9 +23,14 @@ def println_debug(message: str):
     println_fg_color(message, ANSIColorCode.DEBUG_C)
 
 def println_ctrl_sequence(message: str, ctrlSequence: Union[ANSICtrlSequence, str]):
+    """
+    This function is use with  terminals to print the message
+    with colors specified by a, ANSI control sequence that 
+    can be either a str or a console.ANSICtrlSequence object.
+    """
     #print("type ctrlSequence = ", type(ctrlSequence))
     if type(ctrlSequence) == ANSICtrlSequence:
-        ctrlSequenceStr = ctrlSequence.value
+        ctrlSequenceStr: str = ctrlSequence.value
     else:
         ctrlSequenceStr = ctrlSequence
     

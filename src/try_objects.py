@@ -58,7 +58,7 @@ utils.print_pretty_json(article_dict_casted)
 test_article.save_to_file()
 
 
-# check Article creation from URL
+# check Article creation and scraping from real URL
 scrap_test_source: data.Source = data.Source(
     "https://eu.usatoday.com/",
     "en",

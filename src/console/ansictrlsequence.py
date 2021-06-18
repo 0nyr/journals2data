@@ -2,6 +2,7 @@
 from enum import Enum
 
 class ANSICtrlSequence(Enum):
+
     # basic control sequences
     RESET = "\033[m" 
 

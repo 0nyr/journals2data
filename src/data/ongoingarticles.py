@@ -1,13 +1,12 @@
 # this file is necessary to avoid cross imports 
 # and "partially initialised module error
-import typing
 from typing import List
 
 from .article import Article
 
 class OngoingArticles:
 
-    articles: List[Article] = None
+    articles: List[Article]
 
     def __init__(self):
         self.articles = []

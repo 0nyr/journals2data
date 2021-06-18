@@ -126,4 +126,17 @@ Started working on Newspaper3K scrapper refactoring as well as data extraction f
 * [ ] Try threads and concurent writing to a file with semaphores
 * [ ] Perform integration of threads into Source object
 
+### Fri 18 June 2021
+
+Updated VSCode with `Pylance` to ensure strongly typechecking, but many errors need to be corrected. Some are clearly not simple like the Enum variable attribute strong enforced typing to int. I had to open a [StackOverflow](https://stackoverflow.com/questions/68032592/python-enum-strongly-type-the-value-attribute-to-be-str-or-a-custom-type).
+
+* [ ] Fix circular import errors due to type hinting. Chech [that fix](https://adamj.eu/tech/2021/05/13/python-type-hints-how-to-fix-circular-imports/)
+* [ ] Fix Enum value attribute type error (WIP). Watch [my StackOverflow question](https://stackoverflow.com/questions/68032592/python-enum-strongly-type-the-value-attribute-to-be-str-or-a-custom-type) for an answer.
+* [ ] Try article scraping to a file (WIP)
+* [ ] Update to Python 3.9
+* [ ] Try link extraction, create link extraction module
+* [ ] Try recurrent scrapping
+* [ ] Try threads and concurent writing to a file with semaphores
+* [ ] Perform integration of threads into Source object
+
 end

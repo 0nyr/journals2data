@@ -1,36 +1,38 @@
 import typing
-from typing import List
+from typing import List, Dict, TYPE_CHECKING
 import json
 
 import console
-from .article import Article
+# avoid circular import for type checking
+if TYPE_CHECKING:
+    from .article import Article
 
 
 class Source:
 
-    url: str = None
-    language: str = None
-    scrap_frequency: int = None
-    output_filepath: str = None
+    url: str
+    language: str
+    scrap_frequency: str
+    output_filepath: str
 
     DEFAULT_OUTPUT_FILEPATH: str = "out/out.json"
 
     # list of ongoing article urls to Article
-    articles: List[Article] = None
+    articles: typing.Optional[List[Article]]
     
     def __init__(
         self, 
         url: str, 
         language: str, 
         scrap_frequency: str, 
-        output_filepath: typing.Optional[str]=None,
-        articles: typing.Optional[List[Article]]=None
+        output_filepath: typing.Optional[str],
+        articles: typing.Optional[List[Article]]
     ):
         self.url = url
         self.language = language
         self.scrap_frequency = scrap_frequency
 
-        if(output_filepath == None):
+        if(output_filepath == None or output_filepath == ""):
             self.output_filepath = self.DEFAULT_OUTPUT_FILEPATH
         else:
             self.output_filepath = output_filepath
@@ -47,7 +49,7 @@ class Source:
         )
     
     # dict convertion: https://stackoverflow.com/questions/35282222/in-python-how-do-i-cast-a-class-object-to-a-dict/35282286#35282286 
-    def to_dict(self) -> dict:
+    def to_dict(self) -> Dict[str, str]:
         json_str: str = str(self)
         return json.loads(json_str)
 
@@ -70,7 +72,9 @@ class Source:
 
         spaces: str = ""
         if(pretty):
-            for i in range(nb_spaces):
+            # _ stands for unused variable
+            #    + StackOverflow: https://stackoverflow.com/questions/5477134/how-can-i-get-around-declaring-an-unused-variable-in-a-for-loop 
+            for _ in range(nb_spaces):
                 spaces += " "
         
         # color support for terminals
@@ -119,8 +123,12 @@ class Source:
         
         to_string: str = ""
         to_string += "{" + endl
-        to_string += __pretty_color_line("url", str(self.url))
-        to_string += __pretty_color_line("language", str(self.language))
+        to_string += __pretty_color_line(
+            "url", str(self.url)
+        )
+        to_string += __pretty_color_line(
+            "language", str(self.language)
+        )
         to_string += __pretty_color_line(
             "scrap_frequency", str(self.scrap_frequency)
         )

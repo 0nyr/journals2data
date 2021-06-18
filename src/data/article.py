@@ -1,28 +1,28 @@
 import typing
+from typing import Dict, List
 import json
 import console
 import os
 import datetime
 
 from .source import Source
-import utils
 import scraper
 
 
 class Article():
 
-    source: Source = None
+    source: Source
 
     # to be save
-    url: str = None
-    url_source: str = None
-    language: str = None
-    timestamp_start: str = None
-    timestamp_end: str = None
-    title_from_source: str = None
-    title_from_page: str = None
-    full_text: str = None
-    publish_date: str = None
+    url: str
+    url_source: str
+    language: str
+    timestamp_start: typing.Optional[str]
+    timestamp_end: typing.Optional[str]
+    title_from_source: typing.Optional[str]
+    title_from_page: typing.Optional[str]
+    full_text: typing.Optional[str]
+    publish_date: typing.Optional[str]
 
     # WARN: default arguments must be at the end
     def __init__(
@@ -55,7 +55,7 @@ class Article():
             colors = False
         )
     
-    def to_dict(self) -> dict:
+    def to_dict(self) -> Dict[str, str]:
         json_str: str = str(self)
         return json.loads(json_str)
     
@@ -78,7 +78,7 @@ class Article():
 
         spaces: str = ""
         if(pretty):
-            for i in range(nb_spaces):
+            for _ in range(nb_spaces):
                 spaces += " "
         print
         reset: str = ""

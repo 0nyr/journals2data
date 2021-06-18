@@ -1,6 +1,6 @@
 import json
 import csv
-from typing import Any, List
+from typing import Any, List, Dict
 
 # json manipulations
 def json_file_to_data(json_file_path: str):
@@ -11,7 +11,7 @@ def json_file_to_data(json_file_path: str):
         data = json.load(json_file)
     return data
 
-def print_pretty_json(json_data: dict):
+def print_pretty_json(json_data: Dict[Any, Any]):
     """
     Print a python json object (dict) prettified
     """
@@ -19,7 +19,7 @@ def print_pretty_json(json_data: dict):
     print(json_formatted_str)
 
 # csv manipulations
-def write_in_csv(data: dict, csv_file_name: str):
+def write_in_csv(data: Dict[Any, Any], csv_file_name: str):
     """
     Write a dictionary of URLs to a CSV file with provided name
     """

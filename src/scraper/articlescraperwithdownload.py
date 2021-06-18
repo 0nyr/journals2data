@@ -3,6 +3,7 @@ import re
 import requests
 import unicodedata
 import unidecode
+from typing import Union
 
 headers = {
     'User-Agent': """
@@ -21,15 +22,16 @@ headers = {
 
 class ArticleScraperWithDownload:
 
-    url: str = None
-    article: newspaper.Article = None
-    return_code: int = None
+    url: str
+    article: newspaper.Article
+    article_text: str
+    return_code: Union[int, str]
 
     def __init__(self, url: str):
         self.url = url
         # Create the newspaper.Article class then download the article page from the url
         self.return_code = 1  # OK
-        self.article = newspaper.Article(url)
+        self.article = newspahtmlCodeer.Article(url)
         response = requests.get(url, headers=headers)
 
         #print(response.status_code)
@@ -57,8 +59,8 @@ class ArticleScraperWithDownload:
         # Emulate the download method by directly putting the response content extracted before
         self.article.download(response.content)
 
-    def cleanurl(self, url_text_to_clean):
-        result_url = url_text_to_clean
+    def cleanurl(self, url_text_to_clean: str):
+        result_url: str = url_text_to_clean
         if ("://" in url_text_to_clean):
             result_url = str(url_text_to_clean).partition("://")[2]
         if ("www." in url_text_to_clean):
@@ -73,7 +75,7 @@ class ArticleScraperWithDownload:
         """
 
         # Preprocess the html code by removing the "q" tag and all tags about any table
-        htmlCode = self.article.html
+        htmlCode: str = self.article.html
 
         htmlCode = htmlCode.replace("<q>", '')
         htmlCode = htmlCode.replace("</q>", '')
@@ -99,6 +101,7 @@ class ArticleScraperWithDownload:
         #text = unidecode.unidecode(self.article_text)
 
         #à regarder encore
+        self.article_text = self.article.text
         text = unicodedata.normalize('NFKC', self.article_text).encode('utf-8', 'ignore')
         self.article_text = text.decode("utf-8")
 
