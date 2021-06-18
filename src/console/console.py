@@ -7,7 +7,9 @@ from console.ansictrlsequence import ANSICtrlSequence
 # python enum : https://docs.python.org/3/library/enum.html 
 # python typing : https://docs.python.org/3/library/typing.html 
 
-def println_fg_color(message: str, colorCode: ANSIColorCode):
+def println_fg_color(
+    message: str, colorCode: ANSIColorCode
+) -> None:
     ctrlSequence: str = "%s%s%sm" % (
         ANSIString.ESC.value,
         ANSIString.FG_256.value,
@@ -19,10 +21,12 @@ def println_fg_color(message: str, colorCode: ANSIColorCode):
         ANSICtrlSequence.RESET.value
     ))
 
-def println_debug(message: str):
+def println_debug(message: str) -> None:
     println_fg_color(message, ANSIColorCode.DEBUG_C)
 
-def println_ctrl_sequence(message: str, ctrlSequence: Union[ANSICtrlSequence, str]):
+def println_ctrl_sequence(
+    message: str, ctrlSequence: Union[ANSICtrlSequence, str]
+) -> None:
     """
     This function is use with  terminals to print the message
     with colors specified by a, ANSI control sequence that 

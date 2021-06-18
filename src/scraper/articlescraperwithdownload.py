@@ -2,7 +2,7 @@ import newspaper
 import re
 import requests
 import unicodedata
-import unidecode
+#import unidecode
 from typing import Union
 
 headers = {
@@ -31,7 +31,7 @@ class ArticleScraperWithDownload:
         self.url = url
         # Create the newspaper.Article class then download the article page from the url
         self.return_code = 1  # OK
-        self.article = newspahtmlCodeer.Article(url)
+        self.article = newspaper.Article(url)
         response = requests.get(url, headers=headers)
 
         #print(response.status_code)

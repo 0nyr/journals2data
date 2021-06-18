@@ -25,14 +25,18 @@ class Source:
         url: str, 
         language: str, 
         scrap_frequency: str, 
-        output_filepath: typing.Optional[str],
-        articles: typing.Optional[List[Article]]
+        output_filepath: str = "",
+        articles: typing.Optional[List[Article]] = None
     ):
         self.url = url
         self.language = language
         self.scrap_frequency = scrap_frequency
 
-        if(output_filepath == None or output_filepath == ""):
+        if(
+            output_filepath == "" or
+            output_filepath == "null" or
+            output_filepath == "None"
+        ):
             self.output_filepath = self.DEFAULT_OUTPUT_FILEPATH
         else:
             self.output_filepath = output_filepath

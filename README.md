@@ -133,10 +133,11 @@ Updated VSCode with `Pylance` to ensure strongly typechecking, but many errors n
 * [ ] Fix circular import errors due to type hinting. Chech [that fix](https://adamj.eu/tech/2021/05/13/python-type-hints-how-to-fix-circular-imports/)
 * [ ] Fix Enum value attribute type error (WIP). Watch [my StackOverflow question](https://stackoverflow.com/questions/68032592/python-enum-strongly-type-the-value-attribute-to-be-str-or-a-custom-type) for an answer.
 * [ ] Try article scraping to a file (WIP)
-* [ ] Update to Python 3.9
+* [ ] Update to Python 3.10 ir later to remove type errors like [How do I type hint a method with the type of the enclosing class?](https://stackoverflow.com/questions/33533148/how-do-i-type-hint-a-method-with-the-type-of-the-enclosing-class).
 * [ ] Try link extraction, create link extraction module
 * [ ] Try recurrent scrapping
 * [ ] Try threads and concurent writing to a file with semaphores
 * [ ] Perform integration of threads into Source object
+
 
 end

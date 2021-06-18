@@ -42,6 +42,7 @@ def load_config(path: str) -> List[data.Source]:
             line_data: List[str] = list(line.split(";"))
             try:
                 new_source: data.Source = data.Source(
+                    # TODO: correct declaration
                     line_data[0],
                     line_data[1],
                     line_data[2],

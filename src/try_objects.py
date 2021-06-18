@@ -9,7 +9,7 @@ import data
 
 
 # check data.Source conversion to str
-test_source: data.Source = data.Source('a', 'b', "c", None)
+test_source: data.Source = data.Source('a', 'b', "c")
 console.println_debug("****** data.Source.__str__() ")
 print(str(test_source))
 console.println_debug("******* data.Source.to_str() ")
@@ -62,7 +62,7 @@ test_article.save_to_file()
 scrap_test_source: data.Source = data.Source(
     "https://eu.usatoday.com/",
     "en",
-    "20",
+    "20"
 )
 scrap_test_article: data.Article = data.Article(
     scrap_test_source,
@@ -74,4 +74,4 @@ scrap_test_article.scrap()
 console.println_debug("****** data.Article after scraping")
 print(scrap_test_article.to_str())
 
-
+# TODO: install latest version of Python, because of strong typing pb
