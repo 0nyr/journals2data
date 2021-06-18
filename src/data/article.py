@@ -48,6 +48,7 @@ class Article():
         self.url_source = source.url
 
         self.publish_date = None
+        self.title_from_page = None
     
     def __str__(self) -> str:
         return self.to_str(
@@ -200,7 +201,8 @@ class Article():
             file.seek(0)
             file.writelines(lines)
     
-    def scrap(self) -> typing.Optional[Article]:
+    # type: -> typing.Optional[Article]
+    def scrap(self):
         """
         This function is used to scrap content from the web
         of the Article.
@@ -217,14 +219,14 @@ class Article():
 
             # log first scraping instant as self.timestamp_start
             if(self.timestamp_start == None or self.timestamp_start == ""):
-                self.timestamp_start = str(datetime.datetime("%S_%M_%H_%d_%m_%Y"))
+                self.timestamp_start = datetime.datetime.now().strftime("%S_%M_%H_%d_%m_%Y")
             
             return self
         except Exception as e:
             print(e) # TODO: only temporary print
 
             # define this moment as the final timestamp for scraping
-            self.timestamp_end = str(datetime.datetime("%S_%M_%H_%d_%m_%Y"))
+            self.timestamp_end = datetime.datetime.now().strftime("%S_%M_%H_%d_%m_%Y")
 
             # save the Article
             self.save_to_file()

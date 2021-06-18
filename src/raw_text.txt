@@ -1,0 +1,51 @@
+Once you get a handle on the terminology, it may be easier to understand how cryptocurrency works.
+
+With so much going on in the world, it's easy to wonder if cryptocurrency feels like too steep a learning curve. A lot of the confusion with crypto is most likely due to the use of words that many of us have never heard.
+
+Here, we seek to describe some of the most commonly used cryptocurrency terms. That way, if you're starting out and want a foundation upon which to build, you have a basic glossary under your belt.
+1. Address
+
+An address refers to a specific destination on the network where cryptocurrency is sent. It's like a bank account that holds only cryptocurrency. Each address is used once and is intended to offer a unique, highly-secure place to hold crypto assets.
+
+Each address consists of a unique set of alphanumeric characters. Once cryptocurrency has been sent from one party to another, the recipient uses that precise set of alphanumeric characters to prove that the cryptocurrency belongs to them and to receive the transaction.
+2. Bitcoin
+
+Bitcoin is a digital payment system that allows secure peer-to-peer transactions.
+
+Unlike other payment methods (like Venmo or PayPal) that rely on traditional banking systems, Bitcoin is decentralized. What this means is that any two people located anywhere in the world can exchange digital funds. It also means that each transaction is logged on a blockchain (much like a bank ledger) and distributed across the entire network of cryptocurrency users.
+
+This distribution protects transactions by making each one transparent. It also cuts out third parties, like banks, companies, and countries. No one controls the Bitcoin network other than the participants. And because it isn't necessary to purchase an entire Bitcoin, anyone can become part of the network by buying a fraction of a coin.
+3. Blockchain
+
+Rather than being managed centrally (like a central bank that manages U.S. currency), cryptocurrency is managed by a global peer-to-peer network. Blockchain refers to the digital ledger used to store all cryptocurrency transactions. According to Blockgeeks, the best way to understand blockchain is to imagine a spreadsheet that is duplicated thousands of times and sent to a network of different computers. All cryptocurrency transactions that take place are shared and continually reconciled. That means that there is no centralized database that a hacker can corrupt, and all records are public.
+4. Cryptocurrency
+
+The word cryptocurrency refers to digital or virtual money. It exists solely in electronic form and cannot be carried around like dollar bills or coins. Think of it this way: "crypto" refers to data encryption. "currency" is a medium of exchange (like dollars, pounds, or euros). Like the typical money we're accustomed to, cryptocurrency can be exchanged for goods and services. One primary difference is that cryptocurrency is encrypted to ensure that each transaction is secure. Examples of cryptocurrency include:
+
+    Bitcoin
+    Ethereum
+    Dogecoin
+
+5. Fiat
+
+Fiat currency is government backed but not backed by an asset (like gold). In the U.S., the dollars we carry are fiat currency. Their value is based solely upon our belief that the U.S. government can back them.
+6. Gas
+
+The gas price is the fee you pay to make a transaction on the blockchain. It covers the cost of paying a "miner" to search out and receive crypto on your behalf. The size of the fee is based on how quickly you want the transaction to be completed.
+7. Mining
+
+Mining is the process used when new Bitcoins are entered into circulation. This process requires powerful computers that can solve mathematical puzzles and are able to create a new block on the blockchain. It also involves adding safety measures to protect the transaction.
+8. Satoshi Nakamoto
+
+No one, outside the inventor or inventors, knows who is responsible for inventing Bitcoin. Satoshi Nakamoto is the pseudonym used to refer to the inventor.
+9. Wallet
+
+A crypto wallet is where all your cryptocurrency coins are stored. The purpose of a wallet is to protect your digital currency. Security is so tight that you lose all access to your cryptocurrency if you ever lose or forget your password. The entire point of cryptocurrency is security without centralization, according to Slate. The only way to provide that security is to make individual users responsible for their passwords.
+
+There are two main types of crypto wallets -- hot and cold. A hot wallet is connected to the internet. It makes online trades convenient, but is far less secure than a cold wallet. A cold wallet is more like a safe, kept offline in a secure spot that only you can access. It's less convenient than a hot wallet when it comes time to make purchases or trades, but infinitely more secure.
+10. Whale
+
+The most valuable cryptocurrency addresses are referred to as "whales." A whale is an investor (or group of investors) powerful enough to influence the value of a coin. Let's say a group of whales gets together and decides to sell their Bitcoin at the same time. Naturally, the value of the coins would fall immediately following the mass sell-off. The whales could then take their profits and buy up more coins at a bargain basement price. Anyone can become a whale, although whales are typically large hedge and investment funds.
+
+Top credit card wipes out interest
+If you have credit card debt, transferring it to this top balance transfer card can allow you to pay 0% interest for a whopping 18 months! That's one reason our experts rate this card as a top pick to help get control of your debt. It'll allow you to pay 0% interest on both balance transfers and new purchases during the promotional period, and you'll pay no annual fee. Read our full review for free and apply in just two minutes. We’re firm believers in the Golden Rule, which is why editorial opinions are ours alone and have not been previously reviewed, approved, or endorsed by included advertisers. The Ascent does not cover all offers on the market. Editorial content from The Ascent is separate from The Motley Fool editorial content and is created by a different analyst team.Dana George has no position in any of the stocks mentioned. The Motley Fool owns shares of and recommends Bitcoin and PayPal Holdings. The Motley Fool recommends the following options: long January 2022 $75 calls on PayPal Holdings. The Motley Fool has a disclosure policy.

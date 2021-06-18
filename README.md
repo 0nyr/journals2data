@@ -8,13 +8,6 @@
 
 [Google doc report](https://docs.google.com/document/d/1Puyytyf1mq6PpvFar1PQ_91NqK7eE1bbRsUNZP1BROA/edit#)
 
-### TODOs
-
-* [X] Understand how to read a CSV file and convert it to a dict/json object.
-* [ ] Understand and fix module error: ModuleNotFoundError: No module named 'scraper.scraper'
-* [X] Install Newpaper3k
-* [ ] Test Newspaper3k with Elöd code.
-
 ## Objectif
 
 Development of a deployable Python library allowing the use of online  scraping functions at regular intervals, through the use of pre-trained models.
@@ -128,16 +121,40 @@ Started working on Newspaper3K scrapper refactoring as well as data extraction f
 
 ### Fri 18 June 2021
 
-Updated VSCode with `Pylance` to ensure strongly typechecking, but many errors need to be corrected. Some are clearly not simple like the Enum variable attribute strong enforced typing to int. I had to open a [StackOverflow](https://stackoverflow.com/questions/68032592/python-enum-strongly-type-the-value-attribute-to-be-str-or-a-custom-type).
+Updated VSCode with `Pylance` to ensure strong type-checking, but many errors need to be corrected. Some are clearly not simple like the Enum variable attribute strong enforced typing to int. I had to open a [StackOverflow](https://stackoverflow.com/questions/68032592/python-enum-strongly-type-the-value-attribute-to-be-str-or-a-custom-type). Too complex for now. I leave problems there for now.
 
-* [ ] Fix circular import errors due to type hinting. Chech [that fix](https://adamj.eu/tech/2021/05/13/python-type-hints-how-to-fix-circular-imports/)
-* [ ] Fix Enum value attribute type error (WIP). Watch [my StackOverflow question](https://stackoverflow.com/questions/68032592/python-enum-strongly-type-the-value-attribute-to-be-str-or-a-custom-type) for an answer.
+New Python version do not correctly detect packages. Need to fix that too.
+
+I implemented a script to check the relevance of scraping results given by Newspaper3K. `script_test_n3k.py` uses N3K to scrap a list of articles. I made by hand a list of the expected result. Then it computes the distance in characters between the two strings and compute a score for each scraped article.
+
+> WARN: The `nltk.edit_distance()` function is really slow.
+
+The relevance of the score needs to be relativized since it's quite long even for a human to get a better understanding of the difference between the manual and N3K scraping result.
+
+> NB: Manually scraped raw full_text cannot be put into a JSON since JSON does not support the """ feature for multi-line strings.
+>
+> And with a CSV, need to clean the output of any ";" symbol.
+>
+> The best is to stay with python multi-line """ strings.
+
+In the near future, a good idea would be to perform a similar test with BeautifulSoup and Selenium text extraction if such a process is possible. The objective is to detect the difference and understand which solution give the best score, and what actually happen in details.
+
+* [X] ~~Update to Python 3.10~~ to remove type errors like [How do I type hint a method with the type of the enclosing class?](https://stackoverflow.com/questions/33533148/how-do-i-type-hint-a-method-with-the-type-of-the-enclosing-class). Only update to Python3.9.5 since Python3.10 is not currently fully released.
+* [X] Evaluate manually newspaper3k scraping against human manual scraping.
+* [X] Added several execution files from `__pycache__` to `.gitignore`.
+* [ ] Fix Python3.9 broken import. Watch [here](https://www.liquidweb.com/kb/how-to-install-and-update-python-to-3-9-in-ubuntu/) for PATH manipulations and other configs to edit.
+* [ ] Fix circular import errors due to type hinting. Chech [that fix](https://adamj.eu/tech/2021/05/13/python-type-hints-how-to-fix-circular-imports/). It did not worked?! (WIP)
+* [ ] Fix Enum value attribute type error. Watch [my StackOverflow question](https://stackoverflow.com/questions/68032592/python-enum-strongly-type-the-value-attribute-to-be-str-or-a-custom-type) for an answer. Waiting for an answer. (WIP)
 * [ ] Try article scraping to a file (WIP)
-* [ ] Update to Python 3.10 ir later to remove type errors like [How do I type hint a method with the type of the enclosing class?](https://stackoverflow.com/questions/33533148/how-do-i-type-hint-a-method-with-the-type-of-the-enclosing-class).
+* [ ] Install Selenium and get Geckodriver [here for Geckodriver instructions](https://www.selenium.dev/documentation/en/webdriver/driver_requirements/).
+* [ ] Test Selenium full-text extraction
+* [ ] Score Selenium full-text extraction
+* [ ] Install BeautifulSoup
+* [ ] Test BeautifulSoup full-text extraction
+* [ ] Score BeautifulSoup full-text extraction
 * [ ] Try link extraction, create link extraction module
 * [ ] Try recurrent scrapping
-* [ ] Try threads and concurent writing to a file with semaphores
+* [ ] Try threads and concurrent writing to a file with semaphores.
 * [ ] Perform integration of threads into Source object
-
 
 end

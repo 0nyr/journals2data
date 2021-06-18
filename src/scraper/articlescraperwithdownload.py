@@ -1,10 +1,14 @@
-import newspaper
 import re
 import requests
 import unicodedata
 #import unidecode
 from typing import Union
 
+import newspaper
+import nltk
+
+# FIXME: error: 
+# Invalid return character or leading space in header: User-Agent
 headers = {
     'User-Agent': """
         Mozilla/5.0 (X11; Linux x86_64; rv:74.0) 
@@ -18,6 +22,7 @@ headers = {
         application/xml;q=0.9,image/webp,*/*;q=0.8
     """
 }
+headers = {'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64; rv:74.0) Gecko/20100101 Firefox/74.0','X-JAVASCRIPT-ENABLED':'true','Accept-Encoding':'br, gzip, deflate','Referer':'www.google.fr','Accept':'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8'}
 
 
 class ArticleScraperWithDownload:
@@ -66,6 +71,10 @@ class ArticleScraperWithDownload:
         if ("www." in url_text_to_clean):
             result_url = str(url_text_to_clean).partition("www.")[2]
         return result_url
+    
+    def get_raw_html_from_selenium() -> str:
+        ...
+
 
     def preprocessAndExtraction(self):
         """

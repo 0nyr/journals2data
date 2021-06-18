@@ -4,8 +4,8 @@ import json
 
 import console
 # avoid circular import for type checking
-if TYPE_CHECKING:
-    from .article import Article
+#if TYPE_CHECKING:
+#    from .article import Article
 
 
 class Source:
@@ -18,15 +18,15 @@ class Source:
     DEFAULT_OUTPUT_FILEPATH: str = "out/out.json"
 
     # list of ongoing article urls to Article
-    articles: typing.Optional[List[Article]]
+    #articles: typing.Optional[List[Article]]
     
     def __init__(
         self, 
         url: str, 
         language: str, 
-        scrap_frequency: str, 
+        scrap_frequency: str = "",
         output_filepath: str = "",
-        articles: typing.Optional[List[Article]] = None
+        #articles: typing.Optional[List[Article]] = None
     ):
         self.url = url
         self.language = language
@@ -41,10 +41,10 @@ class Source:
         else:
             self.output_filepath = output_filepath
         
-        if(articles == None):
-            self.articles = []
-        else:
-            self.articles = articles
+        #if(articles == None):
+        #    self.articles = []
+        #else:
+        #    self.articles = articles
     
     def __str__(self) -> str:
         return self.to_str(

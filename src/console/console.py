@@ -1,8 +1,8 @@
 from typing import Union
 
-from console.ansicolorcode import ANSIColorCode
-from console.ansistring import ANSIString
-from console.ansictrlsequence import ANSICtrlSequence
+from .ansicolorcode import ANSIColorCode
+from .ansistring import ANSIString
+from .ansictrlsequence import ANSICtrlSequence
 
 # python enum : https://docs.python.org/3/library/enum.html 
 # python typing : https://docs.python.org/3/library/typing.html 
