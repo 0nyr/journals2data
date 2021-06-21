@@ -181,4 +181,11 @@ After some testing, the use of `selenium` degrades a bit the performance of `new
 
 > scikit learn -> arbre de décision
 
+Notes for URL extraction
+
+[scikit RandomForestClassifier](https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.RandomForestClassifier.html)
+
+[Stacking Classifiers for higher predictive performance | towards datascience](https://towardsdatascience.com/stacking-classifiers-for-higher-predictive-performance-566f963e4840)
+
+
 end
