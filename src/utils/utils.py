@@ -18,6 +18,14 @@ def print_pretty_json(json_data: Dict[Any, Any]):
     json_formatted_str: str = json.dumps(json_data, indent=4)
     print(json_formatted_str)
 
+def save_json_to_file(json_data, filepath: str):
+    # serialization
+    json_str: str = json.dumps(json_data, indent=4)
+
+    # saving to file
+    with open(filepath, "w") as file:
+        file.write(json_str)
+
 # csv manipulations
 def write_in_csv(data: Dict[Any, Any], csv_file_name: str):
     """
