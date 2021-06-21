@@ -8,18 +8,6 @@
 
 [Google doc report](https://docs.google.com/document/d/1Puyytyf1mq6PpvFar1PQ_91NqK7eE1bbRsUNZP1BROA/edit#)
 
-##### selenium
-
-[selenium doc](https://www.selenium.dev/documentation/en/) 
-
-##### beautifulsoup
-
-[beautifulsoup doc](https://www.crummy.com/software/BeautifulSoup/bs4/doc/#)
-
-
-
-
-
 ## Objectif
 
 Development of a deployable Python library allowing the use of online  scraping functions at regular intervals, through the use of pre-trained models.
@@ -171,22 +159,26 @@ In the near future, a good idea would be to perform a similar test with Beautifu
 
 ### Mon 21 June 2021
 
-Last week, I tested the HTML extraction and parsing of `newspaper3k`. I'm now going to repeat the same test with `selenium` and `BeautifulSoup` to see how it compares to other libraries.
+Last week, I tested the HTML extraction and parsing of `newspaper3k`. I'm now going to repeat the same test with `selenium` and `newspaper3` to see how it compares to other libraries.
 
-* [ ] Fix Python3.9 broken import. Watch [here](https://www.liquidweb.com/kb/how-to-install-and-update-python-to-3-9-in-ubuntu/) for PATH manipulations and other configs to edit.
-* [ ] Fix circular import errors due to type hinting. Chech [that fix](https://adamj.eu/tech/2021/05/13/python-type-hints-how-to-fix-circular-imports/). It did not worked?! (WIP)
+After some testing, the use of `selenium` degrades a bit the performance of `newspaper3`. Actually, the `newspaper3k` is not built for parsing raw html from another source than `request`! The only way to bypass that is a dirty fix I made, using `article.download` there replacing `article.html` with the raw html from `selenium` but its far from perfect.
+
+
+* [X] Fix Python3.9 broken import. Watch [here](https://www.liquidweb.com/kb/how-to-install-and-update-python-to-3-9-in-ubuntu/) for PATH manipulations and other configs to edit.
+* [X] ~~Fix circular import errors due to type hinting. Chech [that fix](https://adamj.eu/tech/2021/05/13/python-type-hints-how-to-fix-circular-imports/). It did not worked?! (WIP)~~ Feature for upcoming Python3.10
 * [ ] Fix Enum value attribute type error. Watch [my StackOverflow question](https://stackoverflow.com/questions/68032592/python-enum-strongly-type-the-value-attribute-to-be-str-or-a-custom-type) for an answer. Waiting for an answer. (WIP)
-* [ ] Try article scraping to a file (WIP)
+* [X] Try article scraping to a file (WIP)
 * [X] Install Selenium and get Geckodriver [here for Geckodriver instructions](https://www.selenium.dev/documentation/en/webdriver/driver_requirements/).
-* [ ] Fix DeprecationWarning: use service_log_path instead of log_path
-* [ ] Fix DeprecationWarning: use options instead of firefox_optionsTest Selenium full-text extraction
-* [ ] Score Selenium full-text extraction
-* [ ] Install BeautifulSoup
+* [X] Test Selenium raw_html extraction
+* [X] Score Selenium full-text extraction
+* [X] Install BeautifulSoup
 * [ ] Test BeautifulSoup full-text extraction
 * [ ] Score BeautifulSoup full-text extraction
 * [ ] Try link extraction, create link extraction module
 * [ ] Try recurrent scrapping
 * [ ] Try threads and concurrent writing to a file with semaphores.
 * [ ] Perform integration of threads into Source object
+
+> scikit learn -> arbre de décision
 
 end
