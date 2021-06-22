@@ -38,6 +38,11 @@ A big JSON file containing unique scraped articles with metadata and full text.
 
 ## Notes
 
+##### long strings in json file
+
+On JSON files with long string, use `ALT`+`Z` to change between word vrap mode or not. The long string can either be displayed entirely or be troncated only visualy by VSCode and ended with `...`.
+
+
 ## Work logs
 
 ### Mon 14th June 2021
@@ -163,7 +168,6 @@ Last week, I tested the HTML extraction and parsing of `newspaper3k`. I'm now go
 
 After some testing, the use of `selenium` degrades a bit the performance of `newspaper3`. Actually, the `newspaper3k` is not built for parsing raw html from another source than `request`! The only way to bypass that is a dirty fix I made, using `article.download` there replacing `article.html` with the raw html from `selenium` but its far from perfect.
 
-
 * [X] Fix Python3.9 broken import. Watch [here](https://www.liquidweb.com/kb/how-to-install-and-update-python-to-3-9-in-ubuntu/) for PATH manipulations and other configs to edit.
 * [X] ~~Fix circular import errors due to type hinting. Chech [that fix](https://adamj.eu/tech/2021/05/13/python-type-hints-how-to-fix-circular-imports/). It did not worked?! (WIP)~~ Feature for upcoming Python3.10
 * [ ] Fix Enum value attribute type error. Watch [my StackOverflow question](https://stackoverflow.com/questions/68032592/python-enum-strongly-type-the-value-attribute-to-be-str-or-a-custom-type) for an answer. Waiting for an answer. (WIP)
@@ -186,6 +190,5 @@ Notes for URL extraction
 [scikit RandomForestClassifier](https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.RandomForestClassifier.html)
 
 [Stacking Classifiers for higher predictive performance | towards datascience](https://towardsdatascience.com/stacking-classifiers-for-higher-predictive-performance-566f963e4840)
-
 
 end

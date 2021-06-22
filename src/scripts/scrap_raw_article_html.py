@@ -762,7 +762,11 @@ try:
         url = element["url"]
 
         brower.get(url)
-        raw_html = brower.page_source
+        raw_html: str = brower.page_source
+
+        # filter layer
+        raw_html.replace("\"", "'") # replace " with '
+
         element["html"] = raw_html
 
     # write to file

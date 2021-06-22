@@ -75,6 +75,7 @@ for element in urls:
 
     # FIXME: You must `download()` an article first! 
     manual = element["manual"]
+    manual.replace("\"", "'") # raplace " with '
     if(VERBOSE):
         console.println_debug("*** manual")
         print("\"manual\": " + manual)
