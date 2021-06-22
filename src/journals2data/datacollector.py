@@ -77,7 +77,7 @@ class DataCollector:
         # TODO: finish function and processes
         for source_scraper in self.source_scrapers:
             # use a SourceScraper object to scrap URLs
-            source_scraper.scrap_all_urls(brower)
+            source_scraper.scrap_all_urls()
 
 
 

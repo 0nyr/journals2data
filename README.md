@@ -42,10 +42,6 @@ A big JSON file containing unique scraped articles with metadata and full text.
 
 On JSON files with long string, use `ALT`+`Z` to change between word vrap mode or not. The long string can either be displayed entirely or be troncated only visualy by VSCode and ended with `...`.
 
-## Tests
-
-* [ ] I have added `benchmarks.py`, `newspaper.py` and `data/` from the unit test suite of `newspaper3k`. These files need to be revamped and modified so as to run with the global test suite of the project.
-
 
 ## Work logs
 
@@ -197,8 +193,6 @@ Notes for URL extraction
 
 ### Tue 22 June 2021
 
-Objective: integrate automated URL extraction to the library.
-
 I am conducting further investigations on the results of newspaper3k parsing. I have understood how to pass direct html to it.
 
 Using selenium increases the results of parsing (with corrected test).
@@ -209,6 +203,7 @@ Using selenium increases the results of parsing (with corrected test).
 
 Low score investigations:
 
+[https://www.dailymail.co.uk/news/article-9700729/Double-jabbed-Brits-able-abroad-nearly-170-countries-month.html](https://www.dailymail.co.uk/news/article-9700729/Double-jabbed-Brits-able-abroad-nearly-170-countries-month.html)
 
 From a manual review, it appears that the article was updated, hence the texte has changed and the score between what I had scrapped some days ago and what selenium got is different. This was a false positive.
 
@@ -217,5 +212,20 @@ For [https://finance.yahoo.com/news/stock-market-news-live-updates-june-14-2021-
 Example of message:
 
 "Yahoo fait partie de Verizon Media.\n\nEn cliquant sur \u00ab Tout accepter \u00bb, vous consentez \u00e0 ce que Verizon Media et ses partenaires stockent et/ou acc\u00e8dent \u00e0 des informations sur votre appareil par l\u2019interm\u00e9diaire de cookies et technologies similaires, et traitent vos donn\u00e9es personnelles, afin d\u2019afficher des publicit\u00e9s et contenus personnalis\u00e9s, mesurer les performances des publicit\u00e9s et contenus, analyser les audiences et d\u00e9velopper les services.\n\nDonn\u00e9es personnelles pouvant \u00eatre utilis\u00e9es\n\nInformations relatives \u00e0 votre compte, \u00e0 votre appareil et \u00e0 votre connexion internet, y compris votre adresse IP\n\nInformations relatives \u00e0 votre navigation et historique de recherche lors de l\u2019utilisation des sites web et applications de Verizon Media\n\nLocalisation pr\u00e9cise\n\nEn cliquant sur \u00ab Tout refuser \u00bb, vous refusez tous les cookies et technologies similaires dits non-essentiels mais Verizon Media continuera \u00e0 utiliser des cookies et technologies similaires exempt\u00e9s du consentement. Vous pouvez s\u00e9lectionner l\u2019option \u00ab Personnaliser mes choix \u00bb afin de g\u00e9rer vos pr\u00e9f\u00e9rences.\n\nPour en savoir plus sur la fa\u00e7on dont nous utilisons vos informations, veuillez consulter notre Politique relative \u00e0 la vie priv\u00e9e et notre Politique en mati\u00e8re de cookies. Vous pouvez modifier vos choix \u00e0 tout moment en consultant Vos param\u00e8tres de vie priv\u00e9e.",
+
+I have then heavily revamped the library class and file structure so as to go towards a releasable library. I defined several new object and am now working on the URL scraping from source.
+
+I have concerns around async scraping as well as performance and scheduling. For now, I still rely on `request` and not `selenium` but when time will come, I will need to know how to make all these calls asynchronous.
+
+Need to finish the class `SourceScraper` and test the obtained results.
+
+* [ ] ~~Score BeautifulSoup full-text extraction~~ Not made for that. It's just a library to transform HTML into a graph usable in Python.
+* [X] Revamp library classes and scripts
+* [X] Create base for link extraction.
+* [ ] Fix errors of `SourceScraper` and test if it's working with integration with other higherchy objects. (WIP)
+* [ ] Try link extraction, create link extraction module
+* [ ] Try recurrent scrapping
+* [ ] Try threads and concurrent writing to a file with semaphores.
+* [ ] Perform integration of threads into Source object
 
 end
