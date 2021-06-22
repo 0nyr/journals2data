@@ -42,6 +42,10 @@ A big JSON file containing unique scraped articles with metadata and full text.
 
 On JSON files with long string, use `ALT`+`Z` to change between word vrap mode or not. The long string can either be displayed entirely or be troncated only visualy by VSCode and ended with `...`.
 
+## Tests
+
+* [ ] I have added `benchmarks.py`, `newspaper.py` and `data/` from the unit test suite of `newspaper3k`. These files need to be revamped and modified so as to run with the global test suite of the project.
+
 
 ## Work logs
 

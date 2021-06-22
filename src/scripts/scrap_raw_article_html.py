@@ -526,9 +526,18 @@ urls = [
     {
         "url": "https://www.dailymail.co.uk/news/article-9700729/Double-jabbed-Brits-able-abroad-nearly-170-countries-month.html",
         "manual": """
-        Double-jabbed British holidaymakers could be given the green light to fly to nearly 170 countries from next month under new government plans.
+        Questions are being asked over how Border Force will deal with policing double-jabbed Brits should amber list countries open up. 
+        
+        British holidaymakers who have received both doses of the Covid-19 vaccine could be given the green light to fly to nearly 170 countries from next month under new government plans. 
 
-        Those who are fully vaccinated will provide evidence via the NHS app at border controls and then be able to enjoy trips to amber list nations without having to isolate for 10 days upon returning home.
+        The Home Office has insisted that it has already 'taken steps to reduce wait times for those entering the country' by upgrading e-gates and improving technology. 
+
+        But critics have warned that there could be queues of up to seven hours as flight capacities increase and Border Force officials struggle to check travellers' evidence of vaccination. 
+        British tourists at Portgual's Faro Airport as they were forced to interrupt their holidays in the Algarve to return home earlier this month
+
+        British tourists at Portgual's Faro Airport as they were forced to interrupt their holidays in the Algarve to return home earlier this month 
+
+        Those who are fully vaccinated will need provide evidence via the NHS app at border controls and then be able to enjoy trips to amber list nations without having to isolate for 10 days upon returning home.
 
         Huge numbers of tourists had to scramble home from Portugal earlier this month in order to beat the quarantine deadline when it was dramatically taken off the green list.
 
@@ -538,20 +547,40 @@ urls = [
 
         The idea would see travellers obliged to take several PCR tests on their return, but if they come back negative, they won't have to remain stuck in their homes like under current rules.
 
-        However, questions may be asked over the Border Force's ability to cope with such a large number of travellers after an incident in April, when travel was largely restricted, which saw a passenger collapse while waiting seven hours in Heathrow's overwhelmed passport control. 
+        However it remains to be seen whether the Border Force will be able to cope with such a large number of travellers.
 
-        British tourists at Portgual's Faro Airport as they were forced to interrupt their holidays in the Algarve to return home earlier this month 
+        The under-fire agency was widely criticised over chaotic scenes at Heathrow earlier this year - when travel was heavily-restricted - when passengers had to queue for up to seven hours to get through passport control and at least one passenger collapsed.
 
-        Woman collapses at Heathrow border control after queuing for hours
+        Last month, one Border Force worker told the Guardian that the situation in airports was only set to worsen unless the government were able to ease the workload.  
+
+        'Normally a Brit arriving at passport control would clear immigration in 30 seconds but the current requirements to manually check Covid-19 testing paperwork and quarantine requirements mean that each person is taking 15 minutes to process,' the worker, who wished to stay anonymous, said. 
+
+        'Everyone is back at work– including formally shielding staff – but the truth is that there simply isn't the capacity for staff to carry out the checks demanded by the government.
+
+        'Flights are currently running at around 15% of normal capacity. If they return to anywhere near their normal level, and the processes remain as they are, it's going to be a very frustrating summer of long, four- to six-hour waits,' he said.   
+
         Footage posted online in April shows a woman lying on the floor of Heathrow Airport being tended to by staff - as many more passengers wait to be cleared through the border
 
-        The Prime Minister's official spokesman insisted then that Border Force had the 'right level' of staff despite complaints and chaotic scenes when the unnamed woman appeared unconscious on the floor of UK arrivals. 
+        The video's uploader claims the woman had collapsed following a seven-hour wait for entry clearance
 
-        At the time, it was understood only a maximum of 20 of the 40 passport control desks at Heathrow Terminal 2 have been manned because of social distancing. 
+        Footage posted online in April shows a woman lying on the floor of Heathrow Airport being tended to by staff - as many more passengers wait to be cleared through the border
+        The agency insisted last week that it has taken steps to reduce wait times for those entering the country, including upgrading e-gates and improving technology at the border
 
-        Staff have also been in small bubbles because of Covid-19, preventing groups being deployed when the border becomes busy.
+        The agency insisted last week that it has taken steps to reduce wait times for those entering the country, including upgrading e-gates and improving technology at the border
 
-        The Home Office has been approached for comment on how it will cope with potentially millions of Britons flying to and from amber list countries from next month.   
+        However, it insisted last week that it has taken steps to reduce wait times for those entering the country, including upgrading e-gates and improving technology at the border. 
+
+        The agency suggested widespread reports of the extent of the delays included 'misleading claims' that they were down to a lack of resource and inadequate staffing levels.
+
+        It claims that improvements to border technology means it has now more than halved the time it takes to check passenger locator forms to two minutes when scanning a passport. It could previously take up to six minutes.
+
+        Border Force also said it had upgraded e-gates at Terminals 2 and 5 at Heathrow and at Gatwick, while there are plans for even more, to speed up processing of passengers returning from green or amber list countries.    
+
+        A Government spokesperson said: 'To protect the public and the UK's vaccine rollout, as international travel resumes the Government will maintain its enhanced borders regime, which include 100% checks and traffic light system for international travel.
+
+        'While we do this, wait times are likely to be longer and we will do all we can to smooth the process, including the roll-out of our e-Gate upgrade programme during the summer and deploying additional Border Force officers.
+
+        'Arrangements for queues and the management of returning passengers are the responsibility of the relevant airport, which we expect to be done in a COVID-secure way.'
 
         Treasury Secretary Jesse Norman yesterday hinted proposals are in motion, saying: 'We don't want to get left behind by countries which may be adopting a two-jab approach if it can be done safely, carefully and securely.'
 
@@ -587,6 +616,12 @@ urls = [
 
         'I have no faith in (Boris) Johnson's government on any of these issues, having completely mismanaged the original lockdowns last year and the reopening now.'
 
+        The Prime Minister's official spokesman insisted during the April disruption that Border Force had the 'right level' of staff despite complaints and chaotic scenes when the unnamed woman appeared unconscious on the floor of UK arrivals. 
+
+        At the time, it was understood only a maximum of 20 of the 40 passport control desks at Heathrow Terminal 2 have been manned because of social distancing.
+
+        Staff have also been in small bubbles because of Covid-19, preventing groups being deployed when the border becomes busy.
+
         Following the chaos in April, No 10 pushed the blame on passengers, saying people should only travel when 'absolutely necessary' and suggested not enough travellers were filling in their forms correctly or pre-booking tests.
 
         The Prime Minister's official spokesman said: 'At this stage with where we are on our road map in this global pandemic, people should not be travelling unless absolutely necessary.
@@ -602,58 +637,7 @@ urls = [
         Unions claimed Heathrow could use all passport control desks if they had installed screens surrounding each booth, rather than the front-facing ones they chose. 
 
         But they also blamed passengers for failing to fill in the right forms with birder staff they are seeing large numbers of people using fake Covid test certificates that are not properly checked by airlines.
-        Top European resorts including Spain and Turkey are 'unlikely to be added to the green list before August' 
-
-        Top European resorts are unlikely to be added to the green list 'before August', foreign tourism chiefs have reportedly been told, leaving millions of Britons facing another summer without a holiday abroad.
-
-        UK ambassadors are said to have warned foreign tourism bosses that the return of British travellers to traditional holiday hot-spots such as Spain and Turkey will be pushed back until later this summer.
-
-        It comes as holiday firm TUI announced yesterday that it was axing more of its trips to top European holiday destinations up until July.
-
-        And one travel expert warned that July was now being regarded as a 'white-wash' for industry bosses.
-
-        Despite this, some firms are reporting a spike in demand for flights to Gibraltar, Israel and Iceland - which are all currently on the UK's green list. 
-
-        The latest travel set-back will be a particular blow to traditional holiday destinations - including the likes of Portugal, Greece France - which are currently on the UK's amber list.
-
-        Toni Mayor, head of the Hosbec association of Valencia region hoteliers, said he did not expect to see the bulk of UK tourism take off until August, according to the Telegraph.
-
-        His comments come after a meeting with Hugh Elliott, who has been the UK's Ambassador to Spain and non-resident Ambassador to Andorra since 2019.
-
-        Meanwhile, tourism chiefs in Turkey are also understood to have received a similar message, after a meeting with UK Foreign Office officials, the Telegraph adds.
-
-        The news has sparked concern within the industry. Some now fear July - one of the busiest and most profitable months of the summer holiday season - will now be a blow-out for the travel industy.
-
-        Travel expert Paul Charles, CEO of the PC Agency, said travel firms have already written off July as a return for summer holidays.
-
-        ‘July is a white-wash,’ he told MailOnline.
-
-        ‘Most firms are now looking beyond that, so it will be August that they will be looking at for the restart.’
-
-        Mr Charles said the decision to push back green-listing countries such as Greece, Spain and Portugal at one of the busiest points of the summer holiday season could result in ‘billions of pounds in losses’ for the industry.
-
-        He said: ‘The travel industry does around half of its business in summer.
-
-        ‘So I would say the losses will run into the billions, when you take into account refunds and loss of sales. You’ve also got the cost of moving the planes to be parked and the cost of staff and running the business itself.’
-
-        Mr Charles called on the Government to set a firm date for the full return of international travel.
-
-        ‘They have set July 19 as the date for ending of domestic restrictions, the Government needs to set a date, perhaps July 31, when travel will be restored.
-
-        ‘It needs to give confidence in the sector or there will be more companies that go under and job losses.’
-
-        Meanwhile, figures from Skyscanner, and reported in the Times, show how holidaymakers are rushing to book flights to holiday destinations on the green list.
-
-        Flights to Gibraltar have seen a 115 per cent increase in seats sold at the beginning of July, compared to the previous week.
-
-        EasyJet, Wizz Air, British Airways and Eastern Airways have all reportedly put on extra flights to Gibraltar to meet the demand.
-
-        There has also been a 40 per cent increase in demand for flights to Iceland.
-
-        Both are currently on the UK's travel green list, meaning tourists can return from these countries without having to quarantine.
-
-        Those returning from amber list countries, such as Portugal, Spain, Greece and America, all face a 10-day period of self-isolation and two negative PCR-tests on arrival in the UK.
-        """
+                """
     },
     {
         "url": "https://edition.cnn.com/2021/06/18/middleeast/iran-election-voting-intl/index.html",
@@ -765,12 +749,14 @@ try:
         raw_html: str = brower.page_source
 
         # filter layer
-        raw_html.replace("\"", "'") # replace " with '
+        raw_html = raw_html.replace("\"", "'") # replace " with '
+        manual = element["manual"].replace("\"", "'")
 
         element["html"] = raw_html
+        element["manual"] = manual
 
     # write to file
-    utils.save_json_to_file(urls, "./res/raw_html_articles/articles.json")
+    utils.save_json_to_file(urls, "./res/raw_html_articles/articles_clean.json")
 
 finally:
     try:

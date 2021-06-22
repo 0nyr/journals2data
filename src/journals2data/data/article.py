@@ -12,6 +12,7 @@ import journals2data as j2d
 class Article():
 
     source: Source
+    raw_html: str
 
     # to be save
     url: str

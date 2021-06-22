@@ -77,8 +77,7 @@ class ArticleScraperWithDownload:
         else:
             # FIXME: modify newspaper3k to be able to create articles without 
             # download but by passing to it raw html instead
-            self.article.download() # useless since we will replace html after
-            self.article.html = raw_html
+            self.article.download(raw_html)
 
     def cleanurl(self, url_text_to_clean: str):
         result_url: str = url_text_to_clean

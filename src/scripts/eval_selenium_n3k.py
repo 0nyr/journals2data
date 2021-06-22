@@ -30,11 +30,11 @@ VERBOSE: bool = False
 
 # data inputs
 urls = utils.json_file_to_data(
-    "./res/raw_html_articles/articles.json"
+    "./res/raw_html_articles/articles_clean.json"
 )
 
 # data outputs
-results_outfile_path = "./out/scripts/test_selenium_n3k.json"
+results_outfile_path = "./out/scripts/test_selenium_n3k_3.json"
 results = {
     "execution_time": "null",
     "avg_relative_diff": "null",
@@ -73,23 +73,15 @@ for element in urls:
         console.println_debug("*** n3k")
         print("\"n3k\": " + n3k)
 
-    # FIXME: You must `download()` an article first! 
+    # FIXED: Article.download() takes optional param for raw html
     manual = element["manual"]
-    manual.replace("\"", "'") # raplace " with '
     if(VERBOSE):
         console.println_debug("*** manual")
         print("\"manual\": " + manual)
 
     #distance calculation
     distance=nltk.edit_distance(n3k , manual)
-
-    console.println_debug("****** distance")
-    print("distance = " + str(distance))
-
     maxlen = max(len(n3k), len(manual))
-
-    console.println_debug("****** maxlen")
-    print("maxlen = " + str(maxlen))
 
     relative_diff = (float(maxlen - distance)/float(maxlen))*100
     relative_diffs.append(relative_diff)
@@ -99,6 +91,7 @@ for element in urls:
 
     # add to results
     article_results = {}
+    article_results["url"] = element["url"]
     article_results["n3k"] = n3k
     article_results["manual"] = manual
     article_results["maxlen"] = maxlen
