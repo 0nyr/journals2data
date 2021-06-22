@@ -1,3 +1,7 @@
+import os
+print(
+    "Python Current Working directory = " + str(os.getcwd())
+)
 
 # run at ".." level
 from context import get_python_run_context

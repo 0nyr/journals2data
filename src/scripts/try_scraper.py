@@ -1,6 +1,10 @@
 # test file
 
-import scraper
+# run at ".." level
+from context import get_python_run_context
+get_python_run_context()
+
+from journals2data import scraper
 
 
 

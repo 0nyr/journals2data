@@ -1,15 +1,21 @@
-# this is a manual script test of N3k with distance comparison score using NLTK
+# this is a manual script test of N3k alone with distance 
+# comparison score using NLTK
+# NB: obsolete, now we use selenium for raw html scraping 
 
 # measure execution time
 #    + https://datatofish.com/measure-time-to-run-python-script/ 
 import time
 start_time = time.time()
 
+# run at ".." level
+from context import get_python_run_context
+get_python_run_context()
+
 import nltk
 
-import data
-import utils
-import console
+from journals2data import data
+from journals2data import utils
+from journals2data import console
 
 VERBOSE:bool = False
 

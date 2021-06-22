@@ -1,16 +1,17 @@
 __title__ = "journals2data"
 __author__ = "onyr"
 
+# run at ".." level
+from context import get_python_run_context
+get_python_run_context()
+
 import os
-import csv
 from typing import Any, List
 
-import json
-
 # personal imports
-import utils
-import console
-import data
+from journals2data import data
+from journals2data import console
+from journals2data import utils
 
 
 # debugging

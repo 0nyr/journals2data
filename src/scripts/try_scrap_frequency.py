@@ -1,9 +1,14 @@
 # this file is used to test the scrap-frequency feature
+
+# run at ".." level
+from context import get_python_run_context
+get_python_run_context()
+
+
 import time
 import datetime as dt
 
-import scraper
-
+from journals2data import scraper
 
 # variables
 DEBUG: bool = True

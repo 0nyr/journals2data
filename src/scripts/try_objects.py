@@ -1,10 +1,16 @@
+# manual testing of journals2data objects
+
+# run at ".." level
+from context import get_python_run_context
+get_python_run_context()
+
 import json
 import datetime as dt
 
 # personal imports
-import utils
-import console
-import data
+from journals2data import utils
+from journals2data import console
+from journals2data import data
 
 
 

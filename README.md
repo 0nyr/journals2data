@@ -195,4 +195,27 @@ Notes for URL extraction
 
 [Stacking Classifiers for higher predictive performance | towards datascience](https://towardsdatascience.com/stacking-classifiers-for-higher-predictive-performance-566f963e4840)
 
+### Tue 22 June 2021
+
+Objective: integrate automated URL extraction to the library.
+
+I am conducting further investigations on the results of newspaper3k parsing. I have understood how to pass direct html to it.
+
+Using selenium increases the results of parsing (with corrected test).
+
+* Good 9/11 = 81%
+* Bad 2/11 = 18%
+* No result with score < 10%
+
+Low score investigations:
+
+
+From a manual review, it appears that the article was updated, hence the texte has changed and the score between what I had scrapped some days ago and what selenium got is different. This was a false positive.
+
+For [https://finance.yahoo.com/news/stock-market-news-live-updates-june-14-2021-113039717.html](https://finance.yahoo.com/news/stock-market-news-live-updates-june-14-2021-113039717.html) and [https://www.express.co.uk/life-style/health/1451538/coronavirus-uk-update-vaccine-symptom-sneezing](https://www.express.co.uk/life-style/health/1451538/coronavirus-uk-update-vaccine-symptom-sneezing), the problem is that the obtained results are actually RGPD/cooky policy information popups! We need a way to detect/bypass that sort of message.
+
+Example of message:
+
+"Yahoo fait partie de Verizon Media.\n\nEn cliquant sur \u00ab Tout accepter \u00bb, vous consentez \u00e0 ce que Verizon Media et ses partenaires stockent et/ou acc\u00e8dent \u00e0 des informations sur votre appareil par l\u2019interm\u00e9diaire de cookies et technologies similaires, et traitent vos donn\u00e9es personnelles, afin d\u2019afficher des publicit\u00e9s et contenus personnalis\u00e9s, mesurer les performances des publicit\u00e9s et contenus, analyser les audiences et d\u00e9velopper les services.\n\nDonn\u00e9es personnelles pouvant \u00eatre utilis\u00e9es\n\nInformations relatives \u00e0 votre compte, \u00e0 votre appareil et \u00e0 votre connexion internet, y compris votre adresse IP\n\nInformations relatives \u00e0 votre navigation et historique de recherche lors de l\u2019utilisation des sites web et applications de Verizon Media\n\nLocalisation pr\u00e9cise\n\nEn cliquant sur \u00ab Tout refuser \u00bb, vous refusez tous les cookies et technologies similaires dits non-essentiels mais Verizon Media continuera \u00e0 utiliser des cookies et technologies similaires exempt\u00e9s du consentement. Vous pouvez s\u00e9lectionner l\u2019option \u00ab Personnaliser mes choix \u00bb afin de g\u00e9rer vos pr\u00e9f\u00e9rences.\n\nPour en savoir plus sur la fa\u00e7on dont nous utilisons vos informations, veuillez consulter notre Politique relative \u00e0 la vie priv\u00e9e et notre Politique en mati\u00e8re de cookies. Vous pouvez modifier vos choix \u00e0 tout moment en consultant Vos param\u00e8tres de vie priv\u00e9e.",
+
 end
