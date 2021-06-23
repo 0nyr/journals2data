@@ -1,5 +1,5 @@
-from hashlib import new
 from typing import List, Any
+import typing
 
 from selenium import webdriver
 from selenium.webdriver.firefox.options import Options
@@ -8,12 +8,15 @@ from urllib.parse import urlparse, urljoin
 from bs4 import BeautifulSoup
 
 import requests
-import json
+
+import sys
+import logging
+logging.basicConfig(stream=sys.stdout, level=logging.INFO)
 
 from journals2data import data
 from journals2data import utils
 from journals2data import console
-from journals2data.utils.timeout import timeout
+from journals2data import exception
 
 class SourceScraper:
 
@@ -46,7 +49,6 @@ class SourceScraper:
                     "source URL: " + self.source.url
             )
 
-
     # web scraping functions
     def __is_valid(self, url: str):
         """
@@ -63,26 +65,36 @@ class SourceScraper:
         to the same website.
         """
         frontpage_urls: List[data.FrontpageURL] = []
-        # all URLs of `url`
-        urls = set()
+        urls = set() # all URLs of `url`
+
         # domain name of the URL without the protocol
         domain_name = urlparse(url).netloc
 
-        #@timeout(60) # FIXME: fix error
-        def __get_page_content(utl_to_scrap: str) -> bytes:
-            """
-            Get page content from given URL to scrap.
-            """
-            import time
-            limit = 60 # in seconds
-            timeout = limit + time.time()
-
-            # TODO: run process in another thread
-
+        # get raw data from source frontpage, with timeout
+        @utils.syncTimeout(30)
+        def __get_page_content(
+            utl_to_scrap: str
+        ) -> typing.Optional[bytes]:
             return requests.get(utl_to_scrap).content
 
-        soup = BeautifulSoup(__get_page_content(url), "html.parser")
+        # handle timeout exception
+        try:
+            page_bytes = __get_page_content(url)
+        except exception.Timeout as ex:
+            logging.warning(
+                """
+                Source frontpage scraping for raw URL aborted 
+                due to timeout. Concerned source URL: 
+                """ + 
+                self.source.url
+            )
+            # timeout limit reached, no URL can be retrieve, return empty
+            return frontpage_urls
+        
+        # parse raw data with BeautifulSoup
+        soup = BeautifulSoup(page_bytes, "html.parser")
 
+        # extract URLs and title info from related <a> tags
         for a_tag in soup.findAll("a"):
             href = a_tag.attrs.get("href")
             if href == "" or href is None:
@@ -127,7 +139,9 @@ class SourceScraper:
             )
             frontpage_urls.append(new_frontpage_url)
 
-            if utils.Global.VERBOSE:
+            if(utils.Global.VERBOSE == utils.VerboseLevel.NO_COLOR):
+                print(str(new_frontpage_url))
+            elif(utils.Global.VERBOSE == utils.VerboseLevel.COLOR):
                 print(new_frontpage_url.to_str(pretty=False))
 
         return frontpage_urls
