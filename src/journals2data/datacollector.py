@@ -49,6 +49,7 @@ class DataCollector:
         """
         For each source in parallel:
             + 1) get all URLs from source
+                source_scraper.scrap_all_urls()
             + 2) keep already known article URLs, 
             BONUS: compter la durée de vie du lien
             Si trop long, se poser des questions
@@ -79,3 +80,4 @@ class DataCollector:
         for source_scraper in self.source_scrapers:
             # use a SourceScraper object to scrap URLs
             source_scraper.scrap_all_urls()
+            source_scraper.keep_known_url()

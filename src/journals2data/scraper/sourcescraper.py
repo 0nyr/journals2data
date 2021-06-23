@@ -21,8 +21,14 @@ from journals2data import exception
 class SourceScraper:
 
     source: data.Source
-    known_article_urls: List[str]
-    raw_urls: List[data.FrontpageURL] # TODO: tmp, check real data structure
+
+    last_known_urls_map: data.MapURL2URLInfo # URLs scraoed from last scraping
+    article_urls_for_scraping: data.MapURL2URLInfo # URLs to scrap this time
+
+    raw_frontpage_urls: data.MapURL2URLInfo
+
+    # TODO: replace raw_urls with raw_frontpage_urls
+    raw_urls: List[data.FrontpageURL]
 
     def __init__(
         self,
@@ -43,7 +49,7 @@ class SourceScraper:
         # add previous code for URL recuperation using request
         self.raw_urls = self.__get_all_website_links(self.source.url)
 
-        if utils.Global.VERBOSE:
+        if(utils.Global.VERBOSE == utils.VerboseLevel.COLOR):
             console.println_debug(
                 "raw_urls type: " + str(type(self.raw_urls)) + \
                     "source URL: " + self.source.url
@@ -145,3 +151,13 @@ class SourceScraper:
                 print(new_frontpage_url.to_str(pretty=False))
 
         return frontpage_urls
+    
+    def keep_known_urls(self):
+        """
+        Keep already known article URLs
+
+            + 1) Iterate through keys (URL strings) of raw_frontpage_urls
+            + 2) Check if they are present inside last_known_urls_map
+            + 3) If present, add current pair to article_urls_for_scraping
+        """
+        # TODO: finish function

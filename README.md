@@ -229,15 +229,21 @@ Need to finish the class `SourceScraper` and test the obtained results.
 
 ### Wed 23 June 2021
 
-Working on URL scraping integration. Worked a lot on the creation of a decorator for timeout, so as to fix the blocked raw URL scraper.
+Working on URL scraping integration. Successful test of raw URL scraping from source with timeout implemented. Added timeout decorator based on UNIX `ALRM` signal from the `signal` module.
 
-* [X] Fix errors of `SourceScraper` and test if it's working with integration with other higherchy objects. (WIP)
-* [X] Learn the Logging module use. See [logging doc](https://docs.python.org/3/howto/logging.html). Added Verbosity level in global parameters.
-* [X] Add a scraping timeout error and timeout decorator.
-* [X] modify raw URL scraping from source frontpage accordingly so as to handle
+Tomorrow: To finish, refactor code with new datastructure based on maps (dict) of url strings with URLInfo object. Then finish step 2 keep_known_urls.
+
+* [X] Fix errors of `SourceScraper` and test if it's working with integration with other higherchy objects.
+* [X] Learn the Logging module use.
+* [X] Add exception module.
+* [X] Add timeout decorator.
+* [X] Modify URL scraping from source frontpage with timeout.
+* [X] Test URL scraping with timeout.
+* [ ] Add datastructure for URL parsing. (WIP)
 * [ ] Try link extraction, create link extraction module
 * [ ] Try recurrent scrapping
 * [ ] Try threads and concurrent writing to a file with semaphores.
 * [ ] Perform integration of threads into Source object
+
 
 end
