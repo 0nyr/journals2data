@@ -10,6 +10,7 @@ from selenium.webdriver.firefox.options import Options
 from journals2data import data
 from journals2data import scraper
 from journals2data import exception
+from journals2data import console
 from .configuration import DataCollectorConfiguration
 
 class DataCollector:
@@ -35,7 +36,7 @@ class DataCollector:
                 """
             )
         
-        # create scrapers
+        # create source scrapers
         self.source_scrapers = []
         for source in self.sources:
             source_scraper: scraper.SourceScraper = scraper.SourceScraper(
@@ -78,7 +79,3 @@ class DataCollector:
         for source_scraper in self.source_scrapers:
             # use a SourceScraper object to scrap URLs
             source_scraper.scrap_all_urls()
-
-
-
-    

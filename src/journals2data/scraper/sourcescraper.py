@@ -1,16 +1,25 @@
+from hashlib import new
 from typing import List, Any
 
 from selenium import webdriver
 from selenium.webdriver.firefox.options import Options
 
+from urllib.parse import urlparse, urljoin
+from bs4 import BeautifulSoup
+
+import requests
+import json
+
 from journals2data import data
 from journals2data import utils
+from journals2data import console
+from journals2data.utils.timeout import timeout
 
 class SourceScraper:
 
     source: data.Source
     known_article_urls: List[str]
-    raw_urls: Any #: List[str] # TODO: tmp, check real data structure
+    raw_urls: List[data.FrontpageURL] # TODO: tmp, check real data structure
 
     def __init__(
         self,
@@ -18,7 +27,9 @@ class SourceScraper:
     ):  
         self.source = source
 
+        # default values
         self.known_article_url = []
+        self.raw_urls = []
     
     def scrap_all_urls(self):
         """
@@ -29,6 +40,13 @@ class SourceScraper:
         # add previous code for URL recuperation using request
         self.raw_urls = self.__get_all_website_links(self.source.url)
 
+        if utils.Global.VERBOSE:
+            console.println_debug(
+                "raw_urls type: " + str(type(self.raw_urls)) + \
+                    "source URL: " + self.source.url
+            )
+
+
     # web scraping functions
     def __is_valid(self, url: str):
         """
@@ -37,16 +55,34 @@ class SourceScraper:
         parsed = urlparse(url)
         return bool(parsed.netloc) and bool(parsed.scheme)
 
-    def __get_all_website_links(self, url: str):
+    def __get_all_website_links(
+            self, url: str
+        ) -> List[data.FrontpageURL]:
         """
-        Returns all URLs that is found on `url` in which it belongs to the same website
+        Returns all URLs that is found on `url` in which it belongs 
+        to the same website.
         """
-        internal_urls = {}
+        frontpage_urls: List[data.FrontpageURL] = []
         # all URLs of `url`
         urls = set()
         # domain name of the URL without the protocol
         domain_name = urlparse(url).netloc
-        soup = BeautifulSoup(requests.get(url).content, "html.parser")
+
+        #@timeout(60) # FIXME: fix error
+        def __get_page_content(utl_to_scrap: str) -> bytes:
+            """
+            Get page content from given URL to scrap.
+            """
+            import time
+            limit = 60 # in seconds
+            timeout = limit + time.time()
+
+            # TODO: run process in another thread
+
+            return requests.get(utl_to_scrap).content
+
+        soup = BeautifulSoup(__get_page_content(url), "html.parser")
+
         for a_tag in soup.findAll("a"):
             href = a_tag.attrs.get("href")
             if href == "" or href is None:
@@ -54,18 +90,22 @@ class SourceScraper:
             href = urljoin(url, href)
             parsed_href = urlparse(href)
             if parsed_href.query !='':
-                href = parsed_href.scheme + "://" + parsed_href.netloc + parsed_href.path + '?'+ parsed_href.query  
+                href = parsed_href.scheme + "://" + \
+                    parsed_href.netloc + parsed_href.path + \
+                    '?'+ parsed_href.query 
             else:
-                href = parsed_href.scheme + "://" + parsed_href.netloc + parsed_href.path
+                href = parsed_href.scheme + "://" + \
+                    parsed_href.netloc + parsed_href.path
 
                     
             if not self.__is_valid(href):
             # not a valid URL 
-                continue   
-                
-            if href in internal_urls:
-                # already in the set
                 continue
+
+            for frontpage_url in frontpage_urls:
+                if frontpage_url.url == href:
+                    # already in the set
+                    continue
             
             if domain_name not in href:
                 # external link
@@ -79,7 +119,15 @@ class SourceScraper:
             title = title.replace("\t", "")
             if title == "" or title is None:
                 continue
-            internal_urls[title] = href
-            print(title + ";" + href + ";")
 
-        return internal_urls
+            # build return object
+            new_frontpage_url: data.FrontpageURL = data.FrontpageURL(
+                url=href,
+                title_from_a_tag=title
+            )
+            frontpage_urls.append(new_frontpage_url)
+
+            if utils.Global.VERBOSE:
+                print(new_frontpage_url.to_str(pretty=False))
+
+        return frontpage_urls

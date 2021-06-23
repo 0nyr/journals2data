@@ -1,2 +1,3 @@
 from .utils import *
-from .global import Global
+from .globalvar import Global
+from .timeout import timeout

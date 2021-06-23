@@ -6,6 +6,7 @@ import datetime
 
 from .source import Source
 from journals2data import scraper
+from journals2data import console
 import journals2data as j2d
 
 
@@ -87,7 +88,7 @@ class Article():
         key_color: str = ""
         value_color: str = ""
         if(colors):
-            reset: str = j2d.console.ANSICtrlSequence.RESET.value
+            reset: str = console.ANSICtrlSequence.RESET.value
             key_color: str = "%s%s%sm" % (
                 console.ANSIString.ESC.value,
                 console.ANSIString.FG_256.value,

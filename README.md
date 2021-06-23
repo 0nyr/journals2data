@@ -42,7 +42,6 @@ A big JSON file containing unique scraped articles with metadata and full text.
 
 On JSON files with long string, use `ALT`+`Z` to change between word vrap mode or not. The long string can either be displayed entirely or be troncated only visualy by VSCode and ended with `...`.
 
-
 ## Work logs
 
 ### Mon 14th June 2021
@@ -219,7 +218,7 @@ I have concerns around async scraping as well as performance and scheduling. For
 
 Need to finish the class `SourceScraper` and test the obtained results.
 
-* [ ] ~~Score BeautifulSoup full-text extraction~~ Not made for that. It's just a library to transform HTML into a graph usable in Python.
+* [X] ~~Score BeautifulSoup full-text extraction~~ Not made for that. It's just a library to transform HTML into a graph usable in Python.
 * [X] Revamp library classes and scripts
 * [X] Create base for link extraction.
 * [ ] Fix errors of `SourceScraper` and test if it's working with integration with other higherchy objects. (WIP)
@@ -227,5 +226,18 @@ Need to finish the class `SourceScraper` and test the obtained results.
 * [ ] Try recurrent scrapping
 * [ ] Try threads and concurrent writing to a file with semaphores.
 * [ ] Perform integration of threads into Source object
+
+### Wed 23 June 2021
+
+Working on URL scraping integration.
+
+
+* [X] Fix errors of `SourceScraper` and test if it's working with integration with other higherchy objects. (WIP)
+* [ ] Add a scraping timeout error and modify URL scraping from source frontpage accordingly.
+* [ ] Try link extraction, create link extraction module
+* [ ] Try recurrent scrapping
+* [ ] Try threads and concurrent writing to a file with semaphores.
+* [ ] Perform integration of threads into Source object
+
 
 end

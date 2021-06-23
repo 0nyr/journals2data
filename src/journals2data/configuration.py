@@ -4,17 +4,16 @@ import typing
 from typing import List
 
 from journals2data import data
+from journals2data import console
 
 class DataCollectorConfiguration:
-
-    # URL;language;scrap-frequency;output_filepath
 
     DEFAULT_CONFIG_CSV_FILEPATH: str = "./conf/config.csv"
 
     config_file_type: str
     config_filepath: str
 
-    def __init(
+    def __init__(
         self,
         config_file_type: str = "csv",
         config_filepath: str = ""

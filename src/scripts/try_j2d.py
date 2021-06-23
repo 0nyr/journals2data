@@ -22,6 +22,7 @@ if utils.Global.DEBUG:
     )
 
 
+
 # test journals2data
 collector = journals2data.DataCollector()
 collector.scrap()
