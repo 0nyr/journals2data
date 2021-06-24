@@ -87,14 +87,14 @@ DroPped WSL for VirtualBox. Installed Ubuntu20.04 and fixed some problems with V
 
 Continued to work on library foundations, with OOP, serialization, unit testing. Basic unit testing is to be finish tomorrow.
 
-* [X] Fix error at creation of `data.Source` objects
-* [X] Added `str` conversion support
-* [X] Added `dict` conversion support
+* [X] Fix error at creation of`data.Source` objects
+* [X] Added`str` conversion support
+* [X] Added`dict` conversion support
 * [X] Modify the input from CSV (currently working on it)
 * [X] URGENT: Add git to VScode !
 * [X] Fix object instantiation
-* [X] Add color support for `data.Source` `str` conversion
-* [X] Implement Unit Tests (Working on it, see [unittest doc](https://docs.python.org/3/library/unittest.html#unittest.TestLoader.discover) and [StackOverflow](https://stackoverflow.com/questions/1896918/running-unittest-with-typical-test-directory-structure).
+* [X] Add color support for`data.Sourcestr` conversion
+* [X] Implement Unit Tests (Working on it, see[unittest doc](https://docs.python.org/3/library/unittest.html#unittest.TestLoader.discover) and[StackOverflow](https://stackoverflow.com/questions/1896918/running-unittest-with-typical-test-directory-structure).
 * [ ] Complete Article class
 * [ ] Add a write to file function, don't use semaphore for now
 * [ ] Use hash-map to create a list of ongoing Articles inside he Source object
@@ -111,12 +111,12 @@ Finished the basis data structure for data of the program.
 
 Started working on Newspaper3K scrapper refactoring as well as data extraction from web pages.
 
-* [X] Implement Unit Tests (Working on it, see [unittest doc](https://docs.python.org/3/library/unittest.html#unittest.TestLoader.discover) and [StackOverflow](https://stackoverflow.com/questions/1896918/running-unittest-with-typical-test-directory-structure).
+* [X] Implement Unit Tests (Working on it, see[unittest doc](https://docs.python.org/3/library/unittest.html#unittest.TestLoader.discover) and[StackOverflow](https://stackoverflow.com/questions/1896918/running-unittest-with-typical-test-directory-structure).
 * [X] Complete Article class
 * [X] Add a write to file function, don't use semaphore for now
-* [X] ~~Use hash-map to create a list of ongoing Articles inside the Source object~~. Used `list` instead because we will need to iterate over its elements to see which articles have disappeared.
+* [X]~~Use hash-map to create a list of ongoing Articles inside the Source object~~. Used`list` instead because we will need to iterate over its elements to see which articles have disappeared.
 * [X] Install Newspaper3k and Unidecode
-* [ ] Fix circular import errors due to type hinting. Chech [that fix](https://adamj.eu/tech/2021/05/13/python-type-hints-how-to-fix-circular-imports/) (WIP)
+* [ ] Fix circular import errors due to type hinting. Chech[that fix](https://adamj.eu/tech/2021/05/13/python-type-hints-how-to-fix-circular-imports/) (WIP)
 * [ ] Try article scraping to a file (WIP)
 * [ ] Try link extraction, create link extraction module
 * [ ] Try recurrent scrapping
@@ -143,14 +143,14 @@ The relevance of the score needs to be relativized since it's quite long even fo
 
 In the near future, a good idea would be to perform a similar test with BeautifulSoup and Selenium text extraction if such a process is possible. The objective is to detect the difference and understand which solution give the best score, and what actually happen in details.
 
-* [X] ~~Update to Python 3.10~~ to remove type errors like [How do I type hint a method with the type of the enclosing class?](https://stackoverflow.com/questions/33533148/how-do-i-type-hint-a-method-with-the-type-of-the-enclosing-class). Only update to Python3.9.5 since Python3.10 is not currently fully released.
+* [X]~~Update to Python 3.10~~ to remove type errors like[How do I type hint a method with the type of the enclosing class?](https://stackoverflow.com/questions/33533148/how-do-i-type-hint-a-method-with-the-type-of-the-enclosing-class). Only update to Python3.9.5 since Python3.10 is not currently fully released.
 * [X] Evaluate manually newspaper3k scraping against human manual scraping.
-* [X] Added several execution files from `__pycache__` to `.gitignore`.
-* [ ] Fix Python3.9 broken import. Watch [here](https://www.liquidweb.com/kb/how-to-install-and-update-python-to-3-9-in-ubuntu/) for PATH manipulations and other configs to edit.
-* [ ] Fix circular import errors due to type hinting. Chech [that fix](https://adamj.eu/tech/2021/05/13/python-type-hints-how-to-fix-circular-imports/). It did not worked?! (WIP)
-* [ ] Fix Enum value attribute type error. Watch [my StackOverflow question](https://stackoverflow.com/questions/68032592/python-enum-strongly-type-the-value-attribute-to-be-str-or-a-custom-type) for an answer. Waiting for an answer. (WIP)
+* [X] Added several execution files from`__pycache__` to`.gitignore`.
+* [ ] Fix Python3.9 broken import. Watch[here](https://www.liquidweb.com/kb/how-to-install-and-update-python-to-3-9-in-ubuntu/) for PATH manipulations and other configs to edit.
+* [ ] Fix circular import errors due to type hinting. Chech[that fix](https://adamj.eu/tech/2021/05/13/python-type-hints-how-to-fix-circular-imports/). It did not worked?! (WIP)
+* [ ] Fix Enum value attribute type error. Watch[my StackOverflow question](https://stackoverflow.com/questions/68032592/python-enum-strongly-type-the-value-attribute-to-be-str-or-a-custom-type) for an answer. Waiting for an answer. (WIP)
 * [ ] Try article scraping to a file (WIP)
-* [ ] Install Selenium and get Geckodriver [here for Geckodriver instructions](https://www.selenium.dev/documentation/en/webdriver/driver_requirements/).
+* [ ] Install Selenium and get Geckodriver[here for Geckodriver instructions](https://www.selenium.dev/documentation/en/webdriver/driver_requirements/).
 * [ ] Test Selenium full-text extraction
 * [ ] Score Selenium full-text extraction
 * [ ] Install BeautifulSoup
@@ -167,11 +167,11 @@ Last week, I tested the HTML extraction and parsing of `newspaper3k`. I'm now go
 
 After some testing, the use of `selenium` degrades a bit the performance of `newspaper3`. Actually, the `newspaper3k` is not built for parsing raw html from another source than `request`! The only way to bypass that is a dirty fix I made, using `article.download` there replacing `article.html` with the raw html from `selenium` but its far from perfect.
 
-* [X] Fix Python3.9 broken import. Watch [here](https://www.liquidweb.com/kb/how-to-install-and-update-python-to-3-9-in-ubuntu/) for PATH manipulations and other configs to edit.
-* [X] ~~Fix circular import errors due to type hinting. Chech [that fix](https://adamj.eu/tech/2021/05/13/python-type-hints-how-to-fix-circular-imports/). It did not worked?! (WIP)~~ Feature for upcoming Python3.10
-* [ ] Fix Enum value attribute type error. Watch [my StackOverflow question](https://stackoverflow.com/questions/68032592/python-enum-strongly-type-the-value-attribute-to-be-str-or-a-custom-type) for an answer. Waiting for an answer. (WIP)
+* [X] Fix Python3.9 broken import. Watch[here](https://www.liquidweb.com/kb/how-to-install-and-update-python-to-3-9-in-ubuntu/) for PATH manipulations and other configs to edit.
+* [X]~~Fix circular import errors due to type hinting. Chech [that fix](https://adamj.eu/tech/2021/05/13/python-type-hints-how-to-fix-circular-imports/). It did not worked?! (WIP)~~ Feature for upcoming Python3.10
+* [ ] Fix Enum value attribute type error. Watch[my StackOverflow question](https://stackoverflow.com/questions/68032592/python-enum-strongly-type-the-value-attribute-to-be-str-or-a-custom-type) for an answer. Waiting for an answer. (WIP)
 * [X] Try article scraping to a file (WIP)
-* [X] Install Selenium and get Geckodriver [here for Geckodriver instructions](https://www.selenium.dev/documentation/en/webdriver/driver_requirements/).
+* [X] Install Selenium and get Geckodriver[here for Geckodriver instructions](https://www.selenium.dev/documentation/en/webdriver/driver_requirements/).
 * [X] Test Selenium raw_html extraction
 * [X] Score Selenium full-text extraction
 * [X] Install BeautifulSoup
@@ -218,10 +218,10 @@ I have concerns around async scraping as well as performance and scheduling. For
 
 Need to finish the class `SourceScraper` and test the obtained results.
 
-* [X] ~~Score BeautifulSoup full-text extraction~~ Not made for that. It's just a library to transform HTML into a graph usable in Python.
+* [X]~~Score BeautifulSoup full-text extraction~~ Not made for that. It's just a library to transform HTML into a graph usable in Python.
 * [X] Revamp library classes and scripts
 * [X] Create base for link extraction.
-* [ ] Fix errors of `SourceScraper` and test if it's working with integration with other higherchy objects. (WIP)
+* [ ] Fix errors of`SourceScraper` and test if it's working with integration with other higherchy objects. (WIP)
 * [ ] Try link extraction, create link extraction module
 * [ ] Try recurrent scrapping
 * [ ] Try threads and concurrent writing to a file with semaphores.
@@ -233,7 +233,7 @@ Working on URL scraping integration. Successful test of raw URL scraping from so
 
 Tomorrow: To finish, refactor code with new datastructure based on maps (dict) of url strings with URLInfo object. Then finish step 2 keep_known_urls.
 
-* [X] Fix errors of `SourceScraper` and test if it's working with integration with other higherchy objects.
+* [X] Fix errors of`SourceScraper` and test if it's working with integration with other higherchy objects.
 * [X] Learn the Logging module use.
 * [X] Add exception module.
 * [X] Add timeout decorator.
@@ -244,6 +244,22 @@ Tomorrow: To finish, refactor code with new datastructure based on maps (dict) o
 * [ ] Try recurrent scrapping
 * [ ] Try threads and concurrent writing to a file with semaphores.
 * [ ] Perform integration of threads into Source object
+
+### Thu 24 June 2021
+
+
+### Fri 25 June 2021
+
+* [ ] Install Conda
+* [ ] Settup venv
+* [ ] Settup Python3.9.5
+* [ ] Download dependencies
+* [ ] Settup Git
+* [ ] Setttup VSCode
+
+
+
+
 
 
 end
