@@ -3,20 +3,32 @@ from typing import Dict
 
 import json
 
+import selenium
+from bs4 import BeautifulSoup
+import pandas as pd
+
 from journals2data import console
 
 class FrontpageURL:
 
     url: str
     title_from_a_tag: str
+    scraped_nb_times: int
 
     def __init__(
         self,
         url: str,
         title_from_a_tag: str
     ):
+        """
+        Object that contains the information around a URL 
+        obtained from scraping a source frontpage.
+        """
         self.url = url
         self.title_from_a_tag = title_from_a_tag
+
+        # default init values
+        self.scraped_nb_times = 0
     
     def __str__(self) -> str:
         return self.to_str(
@@ -28,6 +40,10 @@ class FrontpageURL:
     def to_dict(self) -> Dict[str, str]:
         json_str: str = str(self)
         return json.loads(json_str)
+    
+    def to_DataFrame(self) -> pd.DataFrame:
+        # TODO: finish function
+        ...
     
     def to_str(
         self, 
@@ -103,7 +119,10 @@ class FrontpageURL:
             "url", str(self.url)
         )
         to_string += __pretty_color_line(
-            "title_from_a_tag", str(self.title_from_a_tag), ""
+            "title_from_a_tag", str(self.title_from_a_tag)
+        )
+        to_string += __pretty_color_line(
+            "scraped_nb_times", str(self.scraped_nb_times), ""
         ) # WARN: no end comma for last JSON element
         to_string += "}"
 

@@ -14,7 +14,7 @@ class Global:
 
     # testing and debugging
     DEBUG: bool = True
-    VERBOSE: VerboseLevel = VerboseLevel.NO_COLOR
+    VERBOSE: VerboseLevel = VerboseLevel.COLOR
     V_COLOR: bool = True
 
     # timeout

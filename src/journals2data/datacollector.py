@@ -3,6 +3,7 @@
 
 import typing
 from typing import List
+from newspaper import source
 
 from selenium import webdriver
 from selenium.webdriver.firefox.options import Options
@@ -49,14 +50,20 @@ class DataCollector:
         """
         For each source in parallel:
             + 1) get all URLs from source
-                source_scraper.scrap_all_urls()
+                    + source_scraper.scrap_all_urls()
             + 2) keep already known article URLs, 
-            BONUS: compter la durée de vie du lien
-            Si trop long, se poser des questions
+                    + source_scraper.keep_known_urls()
+            BONUS: check lifespan of already known URLS
+            If too long, act accordingly... ?
             remove them from potentially interesting URLs
+                    TODO: not implemented
+                    + source_scraper.url_lifespan_check()
             + 3) save articles whose URLs disappeared
+                    TODO: not implemented
+                    + source_scraper.save_source_articles()
             + 4) determine which ones are potential article URLs
-
+                    TODO: to be finished, crucial
+                    + source_scraper.determine_article_urls()
             + 5) scrap already known URLs and check if content was modified
             + 6) scrap new potential Articles
             + 7) evaluate scraping of URLs (entropy/confidence score)
@@ -80,4 +87,7 @@ class DataCollector:
         for source_scraper in self.source_scrapers:
             # use a SourceScraper object to scrap URLs
             source_scraper.scrap_all_urls()
-            source_scraper.keep_known_url()
+            source_scraper.keep_known_urls()
+            source_scraper.url_lifespan_check()
+            source_scraper.save_source_articles()
+            source_scraper.determine_article_urls()

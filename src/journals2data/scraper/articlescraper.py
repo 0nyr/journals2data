@@ -15,7 +15,7 @@ import data
 
 class ArticleScraper:
 
-    browser = None
+    browser: webdriver.Firefox
 
     def __init__(self, is_browser_headless: bool = True):
         self.is_browser_headless = is_browser_headless
