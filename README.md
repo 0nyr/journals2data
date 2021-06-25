@@ -247,19 +247,59 @@ Tomorrow: To finish, refactor code with new datastructure based on maps (dict) o
 
 ### Thu 24 June 2021
 
+Continuing to work on URL scraping and filtering. I hope to finish the addition of the layer today.
+
+Refactoring with more efficient data-structure based on mappings done and tested.
+
+{"url": "https://www.liberation.fr/economie/medias/cnews-y-aller-ou-pas-20210623_5EVAJPZ365COLEMEKBWNPCKE4A/", "title_from_a_tag": "CNews, y aller ou pas ? Le dilemme des politiques", "scraped_nb_times": "0"}
+
+{"url": "https://www.liberation.fr/mentions-legales/", "title_from_a_tag": "Mentions légales(Opens in new window)", "scraped_nb_times": "0"}
+
+{"url": "https://www.liberation.fr/charte-ethique/", "title_from_a_tag": "Charte éthique(Opens in new window)", "scraped_nb_times": "0"}
+
+{"url": "https://www.liberation.fr/cgvu/", "title_from_a_tag": "CGVU(Opens in new window)", "scraped_nb_times": "0"}
+
+{"url": "https://www.liberation.fr/protection-des-donnees-personnelles/", "title_from_a_tag": "Protection des données personnelles(Opens in new window)", "scraped_nb_times": "0"}
+
+{"url": "https://www.liberation.fr/gestions-des-cookies/", "title_from_a_tag": "Gestion des cookies(Opens in new window)", "scraped_nb_times": "0"}
+
+{"url": "https://www.liberation.fr/licence/", "title_from_a_tag": "Licence(Opens in new window)", "scraped_nb_times": "0"}
+
+raw_frontpage_urls type: <class 'dict'>source URL: https://www.liberation.fr/
+
+Execution time in seconds: 58.23053240776062
+
+I’m now working on the URL decision layer. I had started the integration of the decision layer (BERT…) but due to a power outage, the VM becamed buggy. Firefox and other services mysteriously disappeared despite all our efforts with Cedric to repair the system.
+
+I’m now reinstalling from scratch the VM.
+
+Go thee [https://datumorphism.leima.is/til/programming/python/python-anaconda-install-requirements/](https://datumorphism.leima.is/til/programming/python/python-anaconda-install-requirements/) and finish that.
+
+
+* [X] Add datastructure for URL parsing.
+* [ ] Working on step 4 of source URL scraping. URL evaluation layer in progress (WIP).
+* [ ] Try link extraction, create link extraction module (WIP).
+* [ ] Try recurrent scrapping
+* [ ] Try threads and concurrent writing to a file with semaphores.
+* [ ] Perform integration of threads into Source object
 
 ### Fri 25 June 2021
 
-* [ ] Install Conda
-* [ ] Settup venv
-* [ ] Settup Python3.9.5
-* [ ] Download dependencies
-* [ ] Settup Git
-* [ ] Setttup VSCode
+Worked hard to reinstall everything properly. Now it should be even better than before, with clean separations between Python installations and modules.
 
+Started to work again on URL evaluation layer integration. Dataframe conversion in progress.
 
-
-
-
+* [X] Finish the VM installation. Set up
+* [X] Install Conda
+* [X] Learn to use `conda`. Then set up `venv`
+* [X] Set up Python3.9.5 on `conda`.
+* [X] Download dependencies from `requirements.txt`
+* [X] `Newspaper3K` needs a special installation. Install it with `pip` over `conda` after having installed necessary dependencies.
+* [X] Set up Git
+* [X] Set up GitHub connection over SSH
+* [X] Set up VSCode plugins
+* [X] Set up VSCode over `Python3.9` path resolution.
+* [X] Set up VSCode over `venv`.
+* [ ] Working on step 4 of source URL scraping. URL evaluation layer in progress (WIP).
 
 end
