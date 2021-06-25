@@ -6,6 +6,7 @@ from selenium.webdriver.firefox.options import Options
 
 from urllib.parse import urlparse, urljoin
 from bs4 import BeautifulSoup
+import pandas as pd
 
 import requests
 import json
@@ -33,10 +34,10 @@ class SourceScraper:
     ):  
         self.source = source
 
-        # default values
-        self.last_known_urls = data.MapURLInfo({})
-        self.article_urls_for_scraping = data.MapURLInfo({})
-        self.raw_frontpage_urls = data.MapURLInfo({})
+        # default values    data.MapURLInfo({})
+        self.last_known_urls = data.MapURLInfo()
+        self.article_urls_for_scraping = data.MapURLInfo()
+        self.raw_frontpage_urls = data.MapURLInfo()
     
     def scrap_all_urls(self):
         """
@@ -66,7 +67,7 @@ class SourceScraper:
         Returns all URLs that is found on `url` in which it belongs 
         to the same website.
         """
-        frontpage_urls: data.MapURLInfo = data.MapURLInfo({})
+        frontpage_urls: data.MapURLInfo = data.MapURLInfo()
         urls = set() # all URLs of `url`
 
         # domain name of the URL without the protocol
@@ -195,5 +196,7 @@ class SourceScraper:
         # TODO: finish method
 
         # convert raw_frontpage_urls.values: data.FrontpageURL to pd.DataFrame
+        dframe: pd.DataFrame = self.raw_frontpage_urls.to_DataFrame()
 
-
+        # TODO: for debug purpose only
+        print("dframe = [see below] \r\n", dframe.head(20))

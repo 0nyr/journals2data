@@ -275,7 +275,6 @@ I’m now reinstalling from scratch the VM.
 
 Go thee [https://datumorphism.leima.is/til/programming/python/python-anaconda-install-requirements/](https://datumorphism.leima.is/til/programming/python/python-anaconda-install-requirements/) and finish that.
 
-
 * [X] Add datastructure for URL parsing.
 * [ ] Working on step 4 of source URL scraping. URL evaluation layer in progress (WIP).
 * [ ] Try link extraction, create link extraction module (WIP).
@@ -289,6 +288,8 @@ Worked hard to reinstall everything properly. Now it should be even better than 
 
 Started to work again on URL evaluation layer integration. Dataframe conversion in progress.
 
+Next step is code integration and refactoring of Cedric/5IF code...
+
 * [X] Finish the VM installation. Set up
 * [X] Install Conda
 * [X] Learn to use `conda`. Then set up `venv`
@@ -300,6 +301,7 @@ Started to work again on URL evaluation layer integration. Dataframe conversion 
 * [X] Set up VSCode plugins
 * [X] Set up VSCode over `Python3.9` path resolution.
 * [X] Set up VSCode over `venv`.
+* [X] Finish `MapURLInfo` conversion to `pd.DataFrame`.
 * [ ] Working on step 4 of source URL scraping. URL evaluation layer in progress (WIP).
 
 end
