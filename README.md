@@ -40,7 +40,7 @@ A big JSON file containing unique scraped articles with metadata and full text.
 
 ### conda
 
-`source /home/onyr/Downloads/yes/bin/activate`:
+`source /home/onyr/Downloads/yes/bin/activate`: 
 
 `conda activate venv1`: activate `venv1` virtual environment.
 
@@ -59,12 +59,6 @@ Collecting packaging
 ```
 
 `conda -V`: display the version of `conda` installed.
-
-### modules to be installed with pip
-
-`~/Downloads/yes/envs/venv1/bin/pip3 install backpack`
-
-`~/Downloads/yes/envs/venv1/bin/pip3 install transformers`
 
 
 ## Notes
@@ -345,13 +339,11 @@ Git Large File Storage (LFS) replaces large files such as audio samples, videos,
 
 Actually, GitHub do not like large files at all so I have moved the BERT models elsewhere.
 
-Working on code integration, but it's heavy and dirty.
+Many questions about code integration. Need to speak to Cedric. About distinction between DOM and title attribute, the use of some libraries. The meaning of obtained results and many more. I integrated its code, though not tested yet. 
 
 * [X] Added data structure for Article - URL scraping.
 * [ ] ~~Manage large files with Git LFS~~ just use another directory.
-* [X] Download `transformers` and `tensorflow`, `scikit-learn`.
-* [ ] FIX: from build_xpath import to_xpath # FIXME: which module ?
-* [ ] What is DBScan for ?
+* [ ] Download `transformers` and `tensorflow`.
 * [ ] Working on step 4 of source URL scraping. URL evaluation layer in progress (WIP).
 * [ ] Step 6 crucial. Implement raw article scaping first
 * [ ] Step 6 bis: implement an evaluation score or entropy so as to have some confidence or not on the result of the scraping.
