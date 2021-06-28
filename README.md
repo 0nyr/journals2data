@@ -306,6 +306,17 @@ Next step is code integration and refactoring of Cedric/5IF code...
 
 ### Mon 28 June 2021
 
+Added BERT models  from Cedric.
+
+A word about Git LFS (see [here](https://git-lfs.github.com/)):
+
+Git Large File Storage (LFS) replaces large files such as audio samples, videos, datasets, and graphics with text pointers inside Git, while storing the file contents on a remote server like GitHub.com or GitHub Enterprise.
+
+Actually, GitHub do not like large files at all so I have moved the BERT models elsewhere.
+
+* [X] Added data structure for Article - URL scraping.
+* [ ] Manage large files with Git LFS
+* [ ] Download `transformers` and `tensorflow`.
 * [ ] Working on step 4 of source URL scraping. URL evaluation layer in progress (WIP).
 * [ ] Step 6 crucial. Implement raw article scaping first
 * [ ] Step 6 bis: implement an evaluation score or entropy so as to have some confidence or not on the result of the scraping.
