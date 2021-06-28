@@ -10,14 +10,21 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.wait import WebDriverWait
 
-import console
-import data
+from journals2data import data
+from journals2data import console
 
 class ArticleScraper:
 
+    article: data.Article
+
     browser: webdriver.Firefox
 
-    def __init__(self, is_browser_headless: bool = True):
+    def __init__(
+        self, 
+        article: data.Article,
+        is_browser_headless: bool = True
+    ):
+        self.article = article
         self.is_browser_headless = is_browser_headless
         if is_browser_headless:
             fireFoxOptions = webdriver.FirefoxOptions()

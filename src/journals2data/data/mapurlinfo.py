@@ -6,23 +6,22 @@ from typing import Dict
 
 import pandas as pd
 
-"""
-This type represents a mapping of key:value pairs
-between a URL string as key and a FrontpageURL as value.
-The idea is to be able to check at no cost that a specific
-URL string is present inside or not, and if so, to be able
-to retreive its informations contained inside a 
-FrontpageURL object at no cost.
-"""
 typing.NewType('MapURLInfo', Dict[str, FrontpageURL])
 
 class MapURLInfo(dict):
 
     def __init__(self):
+        """
+        This type represents a mapping of key:value pairs
+        between a URL string as key and a FrontpageURL as value.
+        The idea is to be able to check at no cost that a specific
+        URL string is present inside or not, and if so, to be able
+        to retreive its informations contained inside a 
+        FrontpageURL object at no cost.
+        """
         self = dict()
 
     def to_DataFrame(self) -> pd.DataFrame:
-            # TODO: finish function
             dframe: pd.DataFrame = pd.DataFrame(data = {
                 "url": [],
                 "title_from_a_tag": [],

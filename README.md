@@ -304,4 +304,11 @@ Next step is code integration and refactoring of Cedric/5IF code...
 * [X] Finish `MapURLInfo` conversion to `pd.DataFrame`.
 * [ ] Working on step 4 of source URL scraping. URL evaluation layer in progress (WIP).
 
+### Mon 28 June 2021
+
+* [ ] Working on step 4 of source URL scraping. URL evaluation layer in progress (WIP).
+* [ ] Step 6 crucial. Implement raw article scaping first
+* [ ] Step 6 bis: implement an evaluation score or entropy so as to have some confidence or not on the result of the scraping.
+* [ ] Finish step 5. Implement comparison score between previous and current raw scraping result and parsed scraping result.
+
 end

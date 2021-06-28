@@ -19,14 +19,19 @@ from journals2data import data
 from journals2data import utils
 from journals2data import console
 from journals2data import exception
+from .articlescraper import ArticleScraper
+from .mapurlarticlescraper import MapURLArticleScraper
 
 class SourceScraper:
 
     source: data.Source
 
-    last_known_urls: data.MapURLInfo # URLs scraoed from last scraping
-    article_urls_for_scraping: data.MapURLInfo # URLs to scrap this time
+    last_known_urls: data.MapURLInfo # URLs scraped from last scraping
+    known_article_url_for_rescraping: data.MapURLInfo # scrap to check if modified
+    potential_article_urls_for_scraping: data.MapURLInfo # URLs to scrap this time
     raw_frontpage_urls: data.MapURLInfo
+
+    article_scrapers: MapURLArticleScraper # current and past article scrapers
 
     def __init__(
         self,
@@ -44,12 +49,16 @@ class SourceScraper:
         Get all URLs from sources:
             + 1) retrieve all URLs str from source
         """
-        self.raw_frontpage_urls = self.__get_all_website_links(self.source.url)
+        self.raw_frontpage_urls = self.__get_all_website_links(
+            self.source.url
+        )
 
         if(utils.Global.VERBOSE == utils.VerboseLevel.COLOR):
             console.println_debug(
-                "raw_frontpage_urls type: " + str(type(self.raw_frontpage_urls)) + \
-                    "source URL: " + self.source.url
+                "raw_frontpage_urls type: " + str(
+                    type(self.raw_frontpage_urls)
+                ) + 
+                "source URL: " + self.source.url
             )
 
     # web scraping functions
@@ -160,10 +169,12 @@ class SourceScraper:
         for url in self.raw_frontpage_urls:
             # check if url key is present in self.last_known_urls
             if url in self.last_known_urls:
-                # adding pair to self.article_urls_for_scraping
-                self.article_urls_for_scraping[url] = self.raw_frontpage_urls[url]
-                # remove pair from self.last_known_urls, what remains will be saved after
-
+                # transfer pair to self.known_article_url_for_rescraping
+                self.known_article_url_for_rescraping[
+                    url] = self.raw_frontpage_urls.pop(url)
+                # and removes pair from self.last_known_urls, 
+                # what remains will be saved after inside save_source_articles()
+                del self.last_known_urls[url] # FIXME: not sure it will works
 
     def url_lifespan_check(self):
         """
@@ -171,14 +182,14 @@ class SourceScraper:
         If too long, act accordingly... ?
         remove them from potentially interesting URLs
         """
-        # TODO: do something on self.article_urls_for_scraping
+        # TODO: do something on self.known_article_urls_for_rescraping
         ...
     
     def save_source_articles(self):
         """
         Save articles whose URLs disappeared.
         """
-        # TODO: do something with self.source articles so as to save
+        # TODO: do something with self.last_known_urls so as to save
         # the articles whose URLs are still inside self.last_known_urls
         ...
     
@@ -200,3 +211,50 @@ class SourceScraper:
 
         # TODO: for debug purpose only
         print("dframe = [see below] \r\n", dframe.head(20))
+
+
+
+
+
+
+
+        
+    
+    def scrap_known_url_articles(self):
+        """
+        Scrap URLs that have already been scraped in the passed and check
+        if they were modified or not!
+        """
+        for url in self.known_article_url_for_rescraping:
+            article_scraper: ArticleScraper = self.article_scrapers[url]
+            # TODO: finish function
+            # rescrap article and check if content was modified
+            ...
+    
+    def scrap_new_potential_articles(self):
+        """
+        Scrap URLs that were not already known as articles but that
+        have been marked as potential articles.
+        Create an ArticleScraper for each of the URLs and launch 
+        scraping process.
+        NB: There is an evaluation of the article scraping score. If too bad,
+        the newly created ArticleScraper is not added to 
+        self.article_scrapers.
+        """
+        for url in self.potential_article_urls_for_scraping:
+            article: data.Article = data.Article(
+                self.source,
+                url
+            )
+            article_scraper: ArticleScraper = ArticleScraper(
+                article
+            )
+            # call scraping steps
+            # check scraping score
+            #    if scraping score good enough, 
+            #    add article_scraper to self.article_scrapers
+
+
+
+
+

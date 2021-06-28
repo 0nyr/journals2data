@@ -65,8 +65,12 @@ class DataCollector:
                     TODO: to be finished, crucial
                     + source_scraper.determine_article_urls()
             + 5) scrap already known URLs and check if content was modified
+                    TODO: to be finished, crucial
+                    + source_scraper.scrap_known_url_articles()
             + 6) scrap new potential Articles
-            + 7) evaluate scraping of URLs (entropy/confidence score)
+            and evaluate scraping of URLs (entropy/confidence score)
+                    TODO: to be finished, crucial
+                    + source_scraper.scrap_new_potential_articles()
 
             FIXME: Not async, needed for schedule and improved performance
             FIXME: not scheduled !!!
@@ -91,3 +95,5 @@ class DataCollector:
             source_scraper.url_lifespan_check()
             source_scraper.save_source_articles()
             source_scraper.determine_article_urls()
+            source_scraper.scrap_known_url_articles()
+            source_scraper.scrap_new_potential_articles()
