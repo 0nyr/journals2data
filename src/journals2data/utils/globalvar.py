@@ -1,6 +1,8 @@
 # class for global variables and parameters
 # WARN: apparently, "global.py" is a bad name for a file
 
+from typing import Dict
+
 from enum import Enum
 
 class VerboseLevel(Enum):
@@ -19,3 +21,10 @@ class Global:
 
     # timeout
     DEFAULT_TIMEOUT: int = 60
+
+    # BERT models
+    BASE_BERT_MODEL_BASEPATH: str = "/home/onyr/Documents/code/models/"
+    BERT_LANGUAGE_DIRS: Dict[str, str] = {}
+    BERT_LANGUAGE_DIRS["en"] = "BERT_classifier_en/"
+    BERT_LANGUAGE_DIRS["fr"] = "BERT_classifier_fr/"
+

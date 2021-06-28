@@ -13,6 +13,7 @@ class Source:
 
     url: str
     language: str
+    html: str
     scrap_frequency: str
     output_filepath: str
 
@@ -25,12 +26,14 @@ class Source:
         self, 
         url: str, 
         language: str, 
+        html: str = "",
         scrap_frequency: str = "",
         output_filepath: str = "",
         #articles: typing.Optional[List[Article]] = None
     ):
         self.url = url
         self.language = language
+        self.html = html
         self.scrap_frequency = scrap_frequency
 
         if(
@@ -46,6 +49,9 @@ class Source:
         #    self.articles = []
         #else:
         #    self.articles = articles
+    
+    def set_html(self, html: str):
+        self.html = html
     
     def __str__(self) -> str:
         return self.to_str(

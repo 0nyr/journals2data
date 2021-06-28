@@ -2,6 +2,11 @@ import datetime as dt
 from urllib.parse import urlparse, urljoin
 import pandas as pd
 
+import transformers
+from transformers import DistilBertTokenizerFast
+from transformers import TFDistilBertForSequenceClassification
+import tensorflow as tf
+
 def find_all_links(args, url, rss, model, driver):
     """
     Returns all the URLs that are found on this website
@@ -25,6 +30,7 @@ def find_all_links(args, url, rss, model, driver):
     # TODO: start integration from here
     dict_df = pd.DataFrame(set(pair_dict.items()), columns=['title', 'content'])
 
+    # retreive link and title 
     dict_df['link'] = dict_df['content'].apply(lambda x: x[0])
     dict_df['DOM'] = dict_df['content'].apply(lambda x: x[1])
     dict_df = dict_df.drop('content', axis=1)

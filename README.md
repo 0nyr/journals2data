@@ -36,6 +36,37 @@ inside `conf/`, a .csv file with a list of source URLs, language and scraping fr
 
 A big JSON file containing unique scraped articles with metadata and full text.
 
+## commands
+
+### conda
+
+`source /home/onyr/Downloads/yes/bin/activate`:
+
+`conda activate venv1`: activate `venv1` virtual environment.
+
+`conda install <package>`: install a package into a conda environment. Make sure to be inside the right environment.
+
+`conda list`: list installed packaged.
+
+`~/Downloads/yes/envs/venv1/bin/pip3 install <package_name>`: install a package using pip from virtual environment. Ex:
+
+```shell
+(venv1) onyr@laerys:~/Documents/code/python/scripts/requests$ ~/Downloads/yes/envs/venv1/bin/pip3 install transformers
+Collecting transformers
+  Downloading transformers-4.8.1-py3-none-any.whl (2.5 MB)
+     |████████████████████████████████| 2.5 MB 7.5 MB/s 
+Collecting packaging
+```
+
+`conda -V`: display the version of `conda` installed.
+
+### modules to be installed with pip
+
+`~/Downloads/yes/envs/venv1/bin/pip3 install backpack`
+
+`~/Downloads/yes/envs/venv1/bin/pip3 install transformers`
+
+
 ## Notes
 
 ##### long strings in json file
@@ -314,9 +345,13 @@ Git Large File Storage (LFS) replaces large files such as audio samples, videos,
 
 Actually, GitHub do not like large files at all so I have moved the BERT models elsewhere.
 
+Working on code integration, but it's heavy and dirty.
+
 * [X] Added data structure for Article - URL scraping.
-* [ ] Manage large files with Git LFS
-* [ ] Download `transformers` and `tensorflow`.
+* [ ] ~~Manage large files with Git LFS~~ just use another directory.
+* [X] Download `transformers` and `tensorflow`, `scikit-learn`.
+* [ ] FIX: from build_xpath import to_xpath # FIXME: which module ?
+* [ ] What is DBScan for ?
 * [ ] Working on step 4 of source URL scraping. URL evaluation layer in progress (WIP).
 * [ ] Step 6 crucial. Implement raw article scaping first
 * [ ] Step 6 bis: implement an evaluation score or entropy so as to have some confidence or not on the result of the scraping.
