@@ -40,7 +40,7 @@ A big JSON file containing unique scraped articles with metadata and full text.
 
 ### conda
 
-`source /home/onyr/Downloads/yes/bin/activate`: 
+`source /home/onyr/Downloads/yes/bin/activate`:
 
 `conda activate venv1`: activate `venv1` virtual environment.
 
@@ -59,7 +59,6 @@ Collecting packaging
 ```
 
 `conda -V`: display the version of `conda` installed.
-
 
 ## Notes
 
@@ -339,7 +338,7 @@ Git Large File Storage (LFS) replaces large files such as audio samples, videos,
 
 Actually, GitHub do not like large files at all so I have moved the BERT models elsewhere.
 
-Many questions about code integration. Need to speak to Cedric. About distinction between DOM and title attribute, the use of some libraries. The meaning of obtained results and many more. I integrated its code, though not tested yet. 
+Many questions about code integration. Need to speak to Cedric. About distinction between DOM and title attribute, the use of some libraries. The meaning of obtained results and many more. I integrated its code, though not tested yet.
 
 * [X] Added data structure for Article - URL scraping.
 * [X] ~~Manage large files with Git LFS~~ just use another directory.
@@ -351,9 +350,15 @@ Many questions about code integration. Need to speak to Cedric. About distinctio
 
 ### Tue 29 June 2021
 
-Hope to finalise Cedric code integration.
+Hope to finalise Cedric code integration...
 
-`sudo apt install nvidia-cuda-toolkit`
+Spent the morning trying to understand and fix the legacy code for BERT models.
+
+Spent some time on useless CUDA updating. See [here](https://docs.nvidia.com/cuda/cuda-installation-guide-linux/index.html#post-installation-actions) for full installation tutorial. Get package from [here](https://developer.nvidia.com/cuda-downloads?target_os=Linux&target_arch=x86_64&Distribution=Ubuntu&target_version=20.04&target_type=deb_network) and follow carefully the instructions. But useless as explained [here](https://stackoverflow.com/questions/67568713/is-there-any-problem-if-install-different-version-of-cuda-toolkit-and-pytorch) for PyTorch.
+
+Removed this: `"python.pythonPath": "/usr/bin/python3.9",`.
+
+Spent the day in module import hell. Nothings works. Tried with different virtual environments and python versions.
 
 ```shell
 (venv1) onyr@laerys:~/Documents/code/python/journals2data$ nvcc --version
@@ -364,5 +369,14 @@ Cuda compilation tools, release 10.1, V10.1.243
 
 ```
 
+Finally, I have tried to create a new clean virtual environment. I reinstalled every modules with pip as explained by one of the researchers nearby.
 
-end
+`torch` installed nicely... but now my python code don't even wants to launch. I get stuck on another mysterious error...
+
+```shell
+(venv3.8) onyr@laerys:~/Documents/code/python$ python3 /home/onyr/Documents/code/python/journals2data/src/scripts/try_j2d.py
+Illegal instruction (core dumped)
+
+```
+
+I don't understand why ? Everything seems to be fine...

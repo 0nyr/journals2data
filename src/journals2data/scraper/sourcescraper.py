@@ -13,6 +13,7 @@ import tensorflow as tf
 import numpy as np
 from lxml import html
 from sklearn.cluster import DBSCAN
+import torch
 
 
 import requests
@@ -274,15 +275,16 @@ class SourceScraper:
             "title": title_link_df["title_from_a_tag"]
         })
 
-        # Load text classification model
-        loaded_model = TFDistilBertForSequenceClassification.from_pretrained(model)
-        tokenizer = DistilBertTokenizerFast.from_pretrained('distilbert-base-uncased')
-
 
         def predict_title_class(title):
             # predict_input = tokenizer.encode(title, truncation=True, padding=True, return_tensors="tf")
             # tf_output = loaded_model.predict(predict_input)[0]
             # tf_prediction = tf.nn.softmax(tf_output, axis=1).numpy()[0]
+            # Load text classification model
+            
+            loaded_model = TFDistilBertForSequenceClassification.from_pretrained(model)
+            tokenizer = DistilBertTokenizerFast.from_pretrained('distilbert-base-uncased')
+
             inputs = tokenizer(title, return_tensors="pt")
             labels = torch.tensor([1]).unsqueeze(0)
             outputs = loaded_model(**inputs, labels=labels)
