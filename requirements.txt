@@ -4,5 +4,6 @@ newspaper3k>=0.2.8
 selenium>=3.141.0
 urllib3>=1.26.5
 nltk
-tensorflow
+tensorflow==2.4.1
 scikit-learn
+pytorch torchvision torchaudio cudatoolkit=10.2 -c pytorch

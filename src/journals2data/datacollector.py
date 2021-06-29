@@ -83,7 +83,8 @@ class DataCollector:
 
         brower = webdriver.Firefox(
             options = firefox_options,
-            service_log_path="./logs/geckodriver.log"
+            #service_log_path="./logs/geckodriver.log"
+            service_log_path="/home/onyr/Documents/code/python/journals2data/logs/geckodriver.log"
         )
 
 

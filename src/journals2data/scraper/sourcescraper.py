@@ -12,12 +12,11 @@ from transformers import TFDistilBertForSequenceClassification
 import tensorflow as tf
 import numpy as np
 from lxml import html
-from backpack import get_bagpack, get_attribute_list
-from build_xpath import to_xpath # FIXME: which module ?
 from sklearn.cluster import DBSCAN
 
 
 import requests
+import re
 import json
 import datetime as dt
 
@@ -31,6 +30,8 @@ from journals2data import console
 from journals2data import exception
 from .articlescraper import ArticleScraper
 from .mapurlarticlescraper import MapURLArticleScraper
+from .backpack import get_bagpack, get_attribute_list
+from .build_xpath import to_xpath
 
 class SourceScraper:
 
@@ -239,69 +240,72 @@ class SourceScraper:
         loaded_model = TFDistilBertForSequenceClassification.from_pretrained(model_dirpath)
         tokenizer = DistilBertTokenizerFast.from_pretrained('distilbert-base-uncased')
 
-        # parse links
-        result_df: pd.DataFrame = self.__find_all_links(
+        # parse links through BERT & DOM layer
+        result_df: pd.DataFrame = self.__link_prediction_BERT_DOM_layer(
             dframe,
             model_dirpath
         )
         print("result_df = [see below] \r\n", result_df.head(20))
 
+        # parse links through heuristics layer
+        # TODO: complete heuristics
+
+        # decision tree based on previous results
+        # adding relevant URL to the self.potential_article_urls_for_scraping
+        # TODO: complete decision tree
 
 
-    def __find_all_links(
+    def __link_prediction_BERT_DOM_layer(
         self, 
         title_link_df: pd.DataFrame, 
         model: str
     ):
         """
-        Returns all the URLs that are found on this website
+        Apply the simple 4 words heuristics, BERT and DOM
+        determination algorithms so as to get a score of 
+        prediction for a link to be an article or not.
         """
         date_hour = list()
         now = dt.datetime.now()
 
         ## For each <a> element, retrieve Text & Link
-        dict_df = pd.DataFrame(data = {
+        dframe = pd.DataFrame(data = {
             "link": title_link_df["url"],
-            "DOM": title_link_df["title_from_a_tag"]
+            "title": title_link_df["title_from_a_tag"]
         })
-        # FIXME: not sure of the initialisation of title and DOM...
-
-
-        dict_df = dict_df.drop('content', axis=1)
-
-        title_columns = dict_df.iloc[:, 0]
 
         # Load text classification model
         loaded_model = TFDistilBertForSequenceClassification.from_pretrained(model)
         tokenizer = DistilBertTokenizerFast.from_pretrained('distilbert-base-uncased')
 
-        model_results = []
 
-        # For each test sentence related to a link, apply the classifier and get a score from 0 to 1
-        for index, row in dict_df.iterrows():
-            test_sentence = row['title']
-            predict_input = tokenizer.encode(test_sentence, truncation=True, padding=True, return_tensors="tf")
-            tf_output = loaded_model.predict(predict_input)[0]
-            tf_prediction = tf.nn.softmax(tf_output, axis=1).numpy()[0]
-            model_results.append(tf_prediction[1])
+        def predict_title_class(title):
+            # predict_input = tokenizer.encode(title, truncation=True, padding=True, return_tensors="tf")
+            # tf_output = loaded_model.predict(predict_input)[0]
+            # tf_prediction = tf.nn.softmax(tf_output, axis=1).numpy()[0]
+            inputs = tokenizer(title, return_tensors="pt")
+            labels = torch.tensor([1]).unsqueeze(0)
+            outputs = loaded_model(**inputs, labels=labels)
 
-        # Remove all links where N_words < 4
-        for index, title in enumerate(title_columns):
+            return tf_prediction[1]
+
+        dframe['prediction'] = dframe["title"].apply(predict_title_class)
+
+        def apply_4_words_heuristic(title, prediction):
             if (len(title.split()) < 4):
-                model_results[index] = 0
+                return 0
+            else:
+                return prediction
 
-        dict_df['prediction'] = model_results
+        dframe['prediction'] = dframe.apply(lambda x: apply_4_words_heuristic(x.title, x.prediction), axis=1)
 
+        # positive selection for clustering based on threshold
         threshold = 0.01
-        # selecting rows based on condition
-        rslt_df = dict_df[dict_df['prediction'] >= threshold]
-
+        rslt_df = dframe[dframe['prediction'] >= threshold]
         rslt_df = rslt_df.drop(['prediction'], axis=1)
-        print(rslt_df)
 
         # get html tree
-
-        tree = html.fromstring(_html)
+        tree = html.fromstring(self.source.html)
 
         a_dom = []
 
@@ -384,7 +388,6 @@ class SourceScraper:
 
         for i in range(0, nb_cluster):
             print(b_w[list_simplified[i]])
-
             print("\n")
 
         # BUILD XPATH EXPRESSION
@@ -430,13 +433,12 @@ class SourceScraper:
             liste_dom.append(html.tostring(a_dom))
             date_hour.append(now.strftime("%d/%m/%Y %H:%M:%S"))
 
-        result = pd.DataFrame({'URL': liste_href, 'DOM': liste_dom})
-        result['DOM'] = result['DOM'].apply(lambda x: x.decode('utf-8'))
+        result = pd.DataFrame({'URL': liste_href})
 
         true_name = list()
         for link in result['URL']:
-            if not dict_df.loc[dict_df['link'] == link, 'title'].empty:
-                title = dict_df.loc[dict_df['link'] == link, 'title'].iloc[0]
+            if not dframe.loc[dframe['link'] == link, 'title'].empty:
+                title = dframe.loc[dframe['link'] == link, 'title'].iloc[0]
             else:
                 title = ''
             true_name.append(title)
@@ -444,26 +446,16 @@ class SourceScraper:
         result['title'] = true_name
 
         # display links
-
-        result = pd.merge(dict_df[['link', 'title', 'DOM', 'prediction']].rename(columns={'link': 'URL'}), result,
+        result = pd.merge(dframe[['link', 'title', 'prediction']].rename(columns={'link': 'URL'}), result,
                         on=['URL', 'title'], how='left',
                         indicator='predicted_class')
 
-        result['DOM'] = np.where(result.predicted_class == 'both', result.DOM_y, result.DOM_x)
         result['predicted_class'] = np.where(result.predicted_class == 'both', 1, 0)
-
-        result['annotated_class'] = ''
-
-        # Pre-annotate links as positive links if matching the RSS feed
-        if not pd.isnull(rss):
-            d = feedparser.parse(rss)
-            rss_links = [entry.link for entry in d.entries]
-            result['annotated_class'] = result['URL'].apply(lambda x: '1' if x in rss_links else '')
 
         date_time = now.strftime("%d/%m/%Y %H:%M:%S")
         result['datetime'] = date_time
 
-        columns = ['datetime', 'title', 'URL', 'DOM', 'predicted_class', 'annotated_class']
+        columns = ['datetime', 'title', 'URL', 'predicted_class']
 
         return result[columns]
     

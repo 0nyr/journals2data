@@ -342,11 +342,27 @@ Actually, GitHub do not like large files at all so I have moved the BERT models 
 Many questions about code integration. Need to speak to Cedric. About distinction between DOM and title attribute, the use of some libraries. The meaning of obtained results and many more. I integrated its code, though not tested yet. 
 
 * [X] Added data structure for Article - URL scraping.
-* [ ] ~~Manage large files with Git LFS~~ just use another directory.
-* [ ] Download `transformers` and `tensorflow`.
+* [X] ~~Manage large files with Git LFS~~ just use another directory.
+* [X] Download `transformers` and `tensorflow`.
 * [ ] Working on step 4 of source URL scraping. URL evaluation layer in progress (WIP).
 * [ ] Step 6 crucial. Implement raw article scaping first
 * [ ] Step 6 bis: implement an evaluation score or entropy so as to have some confidence or not on the result of the scraping.
 * [ ] Finish step 5. Implement comparison score between previous and current raw scraping result and parsed scraping result.
+
+### Tue 29 June 2021
+
+Hope to finalise Cedric code integration.
+
+`sudo apt install nvidia-cuda-toolkit`
+
+```shell
+(venv1) onyr@laerys:~/Documents/code/python/journals2data$ nvcc --version
+nvcc: NVIDIA (R) Cuda compiler driver
+Copyright (c) 2005-2019 NVIDIA Corporation
+Built on Sun_Jul_28_19:07:16_PDT_2019
+Cuda compilation tools, release 10.1, V10.1.243
+
+```
+
 
 end
