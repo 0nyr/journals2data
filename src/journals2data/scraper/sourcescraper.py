@@ -194,7 +194,8 @@ class SourceScraper:
         """
         # TODO: do something with self.last_known_urls so as to save
         # the articles whose URLs are still inside self.last_known_urls
-        ...
+        # do something with self.article_scrapers 
+        #    self.article_scrapers...article.save_to_file()
     
     def determine_article_urls(self):
         """
@@ -365,6 +366,7 @@ class SourceScraper:
         If too bad, the newly created ArticleScraper is not added to 
         self.article_scrapers.
         """
+
         for url in self.potential_article_urls_for_scraping:
             article: data.Article = data.Article(
                 self.source,
@@ -378,7 +380,7 @@ class SourceScraper:
             #    if scraping score good enough, 
             #    add article_scraper to self.article_scrapers
             # TODO: complete function
-            
+
 
 
 
