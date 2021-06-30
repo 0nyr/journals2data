@@ -310,7 +310,8 @@ class SourceScraper:
                 if path == "":
                     continue
 
-                a_dom = a_dom + tree.xpath('//a[contains(@href, "' + path + '")]/..')
+                a_dom = a_dom + tree.xpath('//a[contains(@href, "' + 
+                    path + '")]/..')
 
             dom_list = []
 
@@ -407,12 +408,18 @@ class SourceScraper:
 
                 text = a_dom.text_content()
 
+                if(len(text.split()) <= 4):
+                    continue  # skip
+            
+                if(href == None or href == ""):
+                    continue
+
                 # Handle limit case :if href starts with //domain_name
-                if (href is not None and href[:2]) == '//':
+                if(href[:2]) == '//':
                     href = href[2:]
                     href = href[href.find('/'):]
 
-                if (href is not None and href[0] == '/'):
+                if(href[0] == '/'):
                     href = self.source.url + href
 
                 _urlparse = urlparse(href)
@@ -440,11 +447,16 @@ class SourceScraper:
             result['title'] = true_name
 
             # merge DOM URL results with dframe 
-            merged_df = pd.merge(dataframe[['link', 'title', 'BERT']].rename(columns={'link': 'URL'}), result,
-                            on=['URL', 'title'], how='left',
-                            indicator='predicted_class')
+            merged_df = pd.merge(
+                dataframe[['link', 'title', 'BERT']].rename(columns={'link': 'URL'}), 
+                result,
+                on=['URL', 'title'], 
+                how='left',
+                indicator="predicted_class"
+            )
+            print("merged_df columns = ", list(dframe))
 
-            merged_df['predicted_class'] = np.where(result.predicted_class == 'both', 1, 0)
+            merged_df["predicted_class"] = np.where(merged_df["predicted_class"] == 'both', 1, 0)
 
             return merged_df
         
