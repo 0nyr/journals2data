@@ -41,3 +41,5 @@ class ArticleScraper:
         
         # get page
         self.browser.get(url)
+        
+
