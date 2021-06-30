@@ -1,5 +1,6 @@
 from typing import List, Any
 import typing
+from pandas.core.reshape.merge import merge
 
 from selenium import webdriver
 from selenium.webdriver.firefox.options import Options
@@ -13,7 +14,7 @@ import tensorflow as tf
 import numpy as np
 from lxml import html
 from sklearn.cluster import DBSCAN
-import torch
+#import torch
 
 
 import requests
@@ -234,233 +235,257 @@ class SourceScraper:
         # TODO: for debug purpose only
         print("dframe = [see below] \r\n", dframe.head(20))
 
-
-        # get model_path depending on the language
-        model_dirpath: str = utils.Global.BASE_BERT_MODEL_BASEPATH + \
-            utils.Global.BERT_LANGUAGE_DIRS[self.source.language]
-        loaded_model = TFDistilBertForSequenceClassification.from_pretrained(model_dirpath)
-        tokenizer = DistilBertTokenizerFast.from_pretrained('distilbert-base-uncased')
-
-        # parse links through BERT & DOM layer
-        result_df: pd.DataFrame = self.__link_prediction_BERT_DOM_layer(
-            dframe,
-            model_dirpath
-        )
+        # parse links through BERT, DOM and heuristics layers
+        result_df: pd.DataFrame = self.__link_prediction_layers(dframe)
         print("result_df = [see below] \r\n", result_df.head(20))
-
-        # parse links through heuristics layer
-        # TODO: complete heuristics
 
         # decision tree based on previous results
         # adding relevant URL to the self.potential_article_urls_for_scraping
         # TODO: complete decision tree
 
 
-    def __link_prediction_BERT_DOM_layer(
+    def __link_prediction_layers(
         self, 
-        title_link_df: pd.DataFrame, 
-        model: str
-    ):
+        title_link_df: pd.DataFrame
+    ) -> pd.DataFrame:
         """
-        Apply the simple 4 words heuristics, BERT and DOM
-        determination algorithms so as to get a score of 
+        Apply BERT, DOM and the heuristic
+        determination algorithms so as to get a multiple scores of 
         prediction for a link to be an article or not.
         """
-        date_hour = list()
-        now = dt.datetime.now()
+        # pandas printing options
+        pd.set_option('display.max_columns', None)
+        pd.set_option('display.width', None)
+        pd.set_option('display.max_colwidth', None)
 
-        ## For each <a> element, retrieve Text & Link
         dframe = pd.DataFrame(data = {
             "link": title_link_df["url"],
-            "title": title_link_df["title_from_a_tag"]
+            "title": title_link_df["title_from_a_tag"],
+            "scrap": title_link_df["scraped_nb_times"]
         })
+        print("dframe base = [see below] \r\n", dframe.head(10))
+
+        # [BERT] apply BERT prediction layer
+        def apply_BERT_prediction(dataframe: pd.DataFrame) -> pd.DataFrame:
+            """
+            NOTE: test
+            Apply BERT prediction layer based on BERT classifier.
+            WARN: For now, it's fake code 
+            TODO: finish function with real Torch and BERT
+            """
+            import random
+            dataframe['BERT'] = 0 # add column for results
+            dataframe['BERT'] = dataframe.apply(
+                lambda x: random.random(), axis=1
+            ) # add a column for results
+
+            return dataframe
+
+        dframe = apply_BERT_prediction(dframe)
+        print("dframe columns = ", list(dframe))
+        print(
+            "dframe after apply_BERT_prediction = [see below] \r\n", 
+            dframe.head(10)
+        )
+
+        # [DOM] apply DOM prediction layer
+        def apply_DOM_prediction(dataframe: pd.DataFrame) -> pd.DataFrame:
+            """
+            Apply DOM prediction layer with xpath expressions.
+            """
+            # positive selection for clustering based on threshold
+            threshold: float = 0.01
+            rslt_df = dataframe[dataframe['BERT'] >= threshold]
+            rslt_df.rename(columns={"A": "a", "B": "c"})
+            rslt_df = rslt_df.drop(['BERT'], axis=1)
+
+            # get html tree
+            tree = html.fromstring(self.source.html)
+
+            a_dom = []
+
+            for link in rslt_df['link']:
+                path = urlparse(link).path
+
+                if path == "":
+                    continue
+
+                a_dom = a_dom + tree.xpath('//a[contains(@href, "' + path + '")]/..')
+
+            dom_list = []
+
+            for a in a_dom:
+
+                if a is None:
+                    continue
+                if a[0].tag != "a":
+                    continue
+
+                dom_list.append(a)
+
+            # build backpack (WSJTheme--headline--unZqjb45 	attribute=class 	count=1)
+            bagpack = get_bagpack(dom_list)
+
+            print(bagpack)
+
+            # build attribute list (WSJTheme--headline--unZqjb45 	attribute=class 	count>1)
+            liste_dom = get_attribute_list(dom_list, bagpack)
+
+            ### CLUSTERING ###
+
+            bag_of_words = []
+            list_of_vectors = []
+
+            # create bag of words
+            for _, dom_df in liste_dom:
+                for i in range(dom_df.count()['tag']):
+                    ref = dom_df['tag'][i] + "." + str(dom_df['parent'][i]) + "." + dom_df['attribute'][i] + "=" + \
+                        dom_df['value'][i]
+                    bag_of_words.append(ref)
+
+            bag_of_words = set(bag_of_words)
+
+            # create vectors
+            for _, dom_df in liste_dom:
+                ref = ""
+                for i in range(dom_df.count()['tag']):
+                    ref += dom_df['tag'][i] + "." + str(dom_df['parent'][i]) + "." + dom_df['attribute'][i] + "=" + \
+                        dom_df['value'][i] + " "
+
+                vector = []
+                for w in bag_of_words:
+                    vector.append(ref.split().count(w))
+
+                list_of_vectors.append(vector)
+
+            ## PREDICTION ##
+            X = np.array(list_of_vectors)
+            db = DBSCAN(eps=0.5, min_samples=2, metric='cosine').fit(X)  # use cosine similarity to compute the distance
+
+            db.fit(X)
+            y_pred = db.fit_predict(X)
+
+            ## CLUSTERS ##
+            nb_cluster = y_pred.max() + 1
+            print("Nb clusters: " + str(nb_cluster))
+
+            threshold = 0.75  ## add to args
+            list_simplified = []
+
+            for i in range(0, nb_cluster):
+                cl_vectors = X[y_pred == i]
+                mean = cl_vectors.mean(axis=0)
+
+                cl_simplified = np.array((mean > threshold) == True)
+                list_simplified.append(cl_simplified)
+
+            b_w = np.array(list(bag_of_words))
+
+            for i in range(0, nb_cluster):
+                print(b_w[list_simplified[i]])
+                print("\n")
+
+            # BUILD XPATH EXPRESSION
+            xpath_list = to_xpath(nb_cluster, b_w, list_simplified)
+
+            # FIND THE CORRECT LINKS
+            _dom = []
+            liste_href = []
+            liste_dom = []
+            ns = {"re": "http://exslt.org/regular-expressions"}
+
+            for xpath in xpath_list:
+                try:
+                    _dom = _dom + tree.xpath(xpath, namespaces=ns)
+                    print("expression validated: {}".format(xpath))
+                except:
+                    print("Invalid expression: {}".format(xpath))
 
 
-        def predict_title_class(title):
-            # predict_input = tokenizer.encode(title, truncation=True, padding=True, return_tensors="tf")
-            # tf_output = loaded_model.predict(predict_input)[0]
-            # tf_prediction = tf.nn.softmax(tf_output, axis=1).numpy()[0]
-            # Load text classification model
-            
-            loaded_model = TFDistilBertForSequenceClassification.from_pretrained(model)
-            tokenizer = DistilBertTokenizerFast.from_pretrained('distilbert-base-uncased')
+            for a_dom in _dom:
+                href = a_dom.get('href')
 
-            inputs = tokenizer(title, return_tensors="pt")
-            labels = torch.tensor([1]).unsqueeze(0)
-            outputs = loaded_model(**inputs, labels=labels)
+                text = a_dom.text_content()
 
-            return tf_prediction[1]
+                # Handle limit case :if href starts with //domain_name
+                if (href is not None and href[:2]) == '//':
+                    href = href[2:]
+                    href = href[href.find('/'):]
 
-        dframe['prediction'] = dframe["title"].apply(predict_title_class)
+                if (href is not None and href[0] == '/'):
+                    href = self.source.url + href
 
-        def apply_4_words_heuristic(title, prediction):
-            if (len(title.split()) < 4):
-                return 0
-            else:
-                return prediction
+                _urlparse = urlparse(href)
 
-        dframe['prediction'] = dframe.apply(lambda x: apply_4_words_heuristic(x.title, x.prediction), axis=1)
+                # Filter by extension
+                find = re.search(r"\.(jpg|jpeg|svg|xml)$", _urlparse.path)
 
-        # positive selection for clustering based on threshold
-        threshold = 0.01
-        rslt_df = dframe[dframe['prediction'] >= threshold]
-        rslt_df = rslt_df.drop(['prediction'], axis=1)
+                if (find is not None):
+                    continue  # skip
 
-        # get html tree
-        tree = html.fromstring(self.source.html)
+                # Remove get parameters?
+                liste_href.append(href)
+                liste_dom.append(html.tostring(a_dom))
 
-        a_dom = []
+            result = pd.DataFrame({'URL': liste_href})
 
-        for link in rslt_df['link']:
-            path = urlparse(link).path
+            true_name = list()
+            for link in result['URL']:
+                if not dataframe.loc[dataframe['link'] == link, 'title'].empty:
+                    title = dataframe.loc[dataframe['link'] == link, 'title'].iloc[0]
+                else:
+                    title = ''
+                true_name.append(title)
 
-            if path == "":
-                continue
+            result['title'] = true_name
 
-            a_dom = a_dom + tree.xpath('//a[contains(@href, "' + path + '")]/..')
+            # merge DOM URL results with dframe 
+            merged_df = pd.merge(dataframe[['link', 'title', 'BERT']].rename(columns={'link': 'URL'}), result,
+                            on=['URL', 'title'], how='left',
+                            indicator='predicted_class')
 
-        dom_list = []
+            merged_df['predicted_class'] = np.where(result.predicted_class == 'both', 1, 0)
 
-        for a in a_dom:
+            return merged_df
+        
+        dframe = apply_DOM_prediction(dframe)
+        print(
+            "dframe after apply_DOM_prediction = [see below] \r\n", 
+            dframe.head(10)
+        )
 
-            if a is None:
-                continue
-            if a[0].tag != "a":
-                continue
+        # [h0] apply 4 words on title heuristic 
+        def apply_title_word_count_heuristic(dataframe: pd.DataFrame) -> pd.DataFrame:
 
-            dom_list.append(a)
+            def heuristic_0(title):
+                if (len(title.split()) < 4):
+                    return 0 # not a good link
+                else:
+                    return 1
 
-        # build backpack (WSJTheme--headline--unZqjb45 	attribute=class 	count=1)
-        bagpack = get_bagpack(dom_list)
+            dataframe['h0'] = dataframe.apply(
+                lambda x: heuristic_0(x.title), axis=1
+            )
 
-        print(bagpack)
+            return dataframe
 
-        # build attribute list (WSJTheme--headline--unZqjb45 	attribute=class 	count>1)
-        liste_dom = get_attribute_list(dom_list, bagpack)
+        dframe = apply_title_word_count_heuristic(dframe)
+        print(
+            "dframe after apply_title_word_count_heuristic = [see below]\r\n", 
+            dframe.head(20)
+        )
 
-        ### CLUSTERING ###
+        # [h1] apply h1 heuristic
+        def apply_heuristic_h1(dataframe: pd.DataFrame) -> pd.DataFrame:
+            ...
 
-        bag_of_words = []
-        list_of_vectors = []
-
-        # create bag of words
-        for _, dom_df in liste_dom:
-            for i in range(dom_df.count()['tag']):
-                ref = dom_df['tag'][i] + "." + str(dom_df['parent'][i]) + "." + dom_df['attribute'][i] + "=" + \
-                    dom_df['value'][i]
-                bag_of_words.append(ref)
-
-        bag_of_words = set(bag_of_words)
-
-        # create vectors
-        for _, dom_df in liste_dom:
-            ref = ""
-            for i in range(dom_df.count()['tag']):
-                ref += dom_df['tag'][i] + "." + str(dom_df['parent'][i]) + "." + dom_df['attribute'][i] + "=" + \
-                    dom_df['value'][i] + " "
-
-            vector = []
-            for w in bag_of_words:
-                vector.append(ref.split().count(w))
-
-            list_of_vectors.append(vector)
-
-        ## PREDICTION ##
-        X = np.array(list_of_vectors)
-        db = DBSCAN(eps=0.5, min_samples=2, metric='cosine').fit(X)  # use cosine similarity to compute the distance
-
-        db.fit(X)
-        y_pred = db.fit_predict(X)
-
-        ## CLUSTERS ##
-        nb_cluster = y_pred.max() + 1
-        print("Nb clusters: " + str(nb_cluster))
-
-        threshold = 0.75  ## add to args
-        list_simplified = []
-
-        for i in range(0, nb_cluster):
-            cl_vectors = X[y_pred == i]
-            mean = cl_vectors.mean(axis=0)
-
-            cl_simplified = np.array((mean > threshold) == True)
-            list_simplified.append(cl_simplified)
-
-        b_w = np.array(list(bag_of_words))
-
-        for i in range(0, nb_cluster):
-            print(b_w[list_simplified[i]])
-            print("\n")
-
-        # BUILD XPATH EXPRESSION
-        xpath_list = to_xpath(nb_cluster, b_w, list_simplified)
-
-        # FIND THE CORRECT LINKS
-        _dom = []
-        liste_href = []
-        liste_dom = []
-        ns = {"re": "http://exslt.org/regular-expressions"}
-
-        for xpath in xpath_list:
-            try:
-                _dom = _dom + tree.xpath(xpath, namespaces=ns)
-                print("expression validated: {}".format(xpath))
-            except:
-                print("Invalid expression: {}".format(xpath))
+        # TODO: integrate other heuristics...
 
 
-        for a_dom in _dom:
-            href = a_dom.get('href')
+        return dframe
+        
 
-            text = a_dom.text_content()
 
-            # Handle limit case :if href starts with //domain_name
-            if (href is not None and href[:2]) == '//':
-                href = href[2:]
-                href = href[href.find('/'):]
-
-            if (href is not None and href[0] == '/'):
-                href = input + href
-
-            _urlparse = urlparse(href)
-
-            # Filter by extension
-            find = re.search(r"\.(jpg|jpeg|svg|xml)$", _urlparse.path)
-
-            if (find is not None):
-                continue  # skip
-
-            # Remove get parameters?
-            liste_href.append(href)
-            liste_dom.append(html.tostring(a_dom))
-            date_hour.append(now.strftime("%d/%m/%Y %H:%M:%S"))
-
-        result = pd.DataFrame({'URL': liste_href})
-
-        true_name = list()
-        for link in result['URL']:
-            if not dframe.loc[dframe['link'] == link, 'title'].empty:
-                title = dframe.loc[dframe['link'] == link, 'title'].iloc[0]
-            else:
-                title = ''
-            true_name.append(title)
-
-        result['title'] = true_name
-
-        # display links
-        result = pd.merge(dframe[['link', 'title', 'prediction']].rename(columns={'link': 'URL'}), result,
-                        on=['URL', 'title'], how='left',
-                        indicator='predicted_class')
-
-        result['predicted_class'] = np.where(result.predicted_class == 'both', 1, 0)
-
-        date_time = now.strftime("%d/%m/%Y %H:%M:%S")
-        result['datetime'] = date_time
-
-        columns = ['datetime', 'title', 'URL', 'predicted_class']
-
-        return result[columns]
-    
     def scrap_known_url_articles(self):
         """
         Scrap URLs that have already been scraped in the passed and check

@@ -40,6 +40,8 @@ A big JSON file containing unique scraped articles with metadata and full text.
 
 ### conda
 
+> NB: [activate conda venv in VSCode](https://medium.com/@udiyosovzon/how-to-activate-conda-environment-in-vs-code-ce599497f20d).
+
 `source /home/onyr/Downloads/yes/bin/activate`:
 
 `conda activate venv1`: activate `venv1` virtual environment.
