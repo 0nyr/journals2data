@@ -10,7 +10,7 @@ class DataCollectorConfiguration:
 
     # WARN: for debug purpose
     #DEFAULT_CONFIG_CSV_FILEPATH: str = "./conf/config.csv"
-    DEFAULT_CONFIG_CSV_FILEPATH: str = "/home/onyr/Documents/code/python/journals2data/src/journals2data/conf/config.csv"
+    DEFAULT_CONFIG_CSV_FILEPATH: str = "/home/onyr/Documents/code/python/journals2data/src/journals2data/input/config.csv"
 
     config_file_type: str
     config_filepath: str

@@ -24,7 +24,7 @@ if utils.Global.DEBUG:
 
 
 # test journals2data
-collector = journals2data.DataCollector()
+collector = journals2data.Journals2Data()
 collector.scrap()
 
 

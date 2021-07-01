@@ -1,6 +1,8 @@
 import typing
+from typing import Union
 import datetime
 import re
+import logging
 
 from selenium.common.exceptions import WebDriverException
 from selenium import webdriver
@@ -15,11 +17,35 @@ import unicodedata
 from journals2data import data
 from journals2data import console
 
+from enum import Enum
+
+class ScrapingResultFlag(Enum):
+
+    SUCCESS = 0
+    RAW_SCRAPING_FAILED = 1
+
+class ScrapingResult():
+
+    flag: ScrapingResultFlag
+    score: float
+
+    def __init__(self, result_flag, score: float = 0):
+        """
+        This is a return object for the ArticleScraper.scrap()
+        method. It contains a ScrapingResultFlag and a score.
+        NOTE: In case of error, score == 0.
+        """
+        self.flag = result_flag
+        self.score = score
+
+
 class ArticleScraper:
 
     article: data.Article
     is_browser_headless: bool
-    
+
+    # flags
+    rescraping: bool
 
     def __init__(
         self, 
@@ -29,7 +55,12 @@ class ArticleScraper:
         self.article = article
         self.is_browser_headless = is_browser_headless
 
-    def scrap(self, raw_html: str = "") -> typing.Optional[data.Article]:
+        # default flag init
+        self.rescraping = False
+
+    def scrap(
+        self, raw_html: str = "", rescrap: bool = False
+    ) -> ScrapingResult:
         """
         This function is used to scrap content from the web
         of the Article using selenium.
@@ -37,7 +68,12 @@ class ArticleScraper:
         It retuns itself if the scraping was successful.
         It returns None if the article is no more available online.
         FIXME: what to do when scraping failed or timeout ?
+        TODO: change to async webdriver
         """
+        # keep original full text for comparison
+        if(rescrap and self.article.full_text != None):
+            self.rescraping = True
+            previous_full_text: str = str(self.article.full_text)
         
         try:
             # open browser
@@ -45,7 +81,9 @@ class ArticleScraper:
             if self.is_browser_headless:
                 fireFoxOptions = webdriver.FirefoxOptions()
                 fireFoxOptions.set_headless()
-                browser = webdriver.Firefox(firefox_options = fireFoxOptions)
+                browser = webdriver.Firefox(
+                    firefox_options = fireFoxOptions
+                )
             else:
                 browser = webdriver.Firefox()
 
@@ -56,15 +94,41 @@ class ArticleScraper:
                 )
             else:
                 self.article.raw_html = raw_html
-
-            # extract content using newspaper from raw html
-            self.__extract_data_from_raw_html()
+            
+        except Exception as Arguments:
+            logging.exception(
+                "Error with raw html scraping of the article [" +
+                self.article.url + "] [timestamp:" +
+                datetime.datetime.now().strftime(
+                    "%S_%M_%H_%d_%m_%Y"
+                ) + "]"
+            )
+            return ScrapingResult(
+                ScrapingResultFlag.RAW_SCRAPING_FAILED
+            )
 
         finally:
+            # close browser
             try:
                 browser.close()
             except:
                 pass
+        
+        # extract content using newspaper from raw html
+        self.__extract_data_from_raw_html()
+
+        # if rescraping, compute relative difference
+        if(self.rescraping):
+            self.__compute_rescraping_relative_difference(
+                previous_full_text
+            )
+
+        # evaluate scraping and parsing result
+        self.__evaluate_scraping_and_parsing()
+
+
+        
+
     
     def __get_article_raw_html(self, browser: webdriver.Firefox) -> str:
         """
@@ -104,9 +168,12 @@ class ArticleScraper:
             regextr = r"<tr(.*?)>"
             regextd = r"<td(.*?)>"
             subst = "/n"
-            html_code = re.sub(regextable, subst, html_code, 0, re.MULTILINE)
-            html_code = re.sub(regextd, subst, html_code, 0, re.MULTILINE)
-            html_code = re.sub(regextr, subst, html_code, 0, re.MULTILINE)
+            html_code = re.sub(
+                regextable, subst, html_code, 0, re.MULTILINE)
+            html_code = re.sub(
+                regextd, subst, html_code, 0, re.MULTILINE)
+            html_code = re.sub(
+                regextr, subst, html_code, 0, re.MULTILINE)
             return html_code
 
         newspaper_article.html = preprocess_raw_html(
@@ -129,7 +196,16 @@ class ArticleScraper:
 
         # log first scraping instant as self.timestamp_start
         if(self.timestamp_start == None or self.timestamp_start == ""):
-            self.timestamp_start = datetime.datetime.now().strftime("%S_%M_%H_%d_%m_%Y")
+            self.timestamp_start = datetime.datetime.now().strftime(
+                "%S_%M_%H_%d_%m_%Y"
+            )
+
+    def __compute_rescraping_relative_difference(
+        self, previous_full_text: str
+    ):
 
 
+
+    
+    def __evaluate_scraping_and_parsing(self):
 

@@ -382,3 +382,26 @@ Illegal instruction (core dumped)
 ```
 
 I don't understand why ? Everything seems to be fine...
+
+Everything seems to be fine… > CPU too old… [https://stackoverflow.com/questions/49092527/illegal-instructioncore-dumped-tensorflow](https://stackoverflow.com/questions/49092527/illegal-instructioncore-dumped-tensorflow).
+
+
+### Wed 30 June 2021
+
+Dropping Torch and BERT ML layer for now. Leaving integration layer in code. Making other layers of decisions.
+
+Worked a lot today. Done DOM integration, however I need to speak to Cédric to understand everything properly. Heuristics are integrated and tested as well. I also implemented a simple score selection and added the code for automatic article scraping with selenium and parsing with newspaper3k.
+
+I need to test that. Need to finish first selenium scraping with timeout and error handling. Need to fine tune error handling during the scraping process and think about evaluating the scaping result as well.
+
+* [X] DOM code integration.
+* [X] Heuristics code integration.
+* [X] Article scraping code integration.
+* [ ] Working on step 4 of source URL scraping. URL evaluation layer in progress (WIP).
+* [ ] Step 6 crucial. Implement raw article scaping first
+* [ ] Step 6 bis: implement an evaluation score or entropy so as to have some confidence or not on the result of the scraping.
+* [ ] Finish step 5. Implement comparison score between previous and current raw scraping result and parsed scraping result.
+
+### Thu 1 Jul 2021
+
+I need to test the full scraping process.

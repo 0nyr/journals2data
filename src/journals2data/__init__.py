@@ -9,4 +9,4 @@ __license__ = "GLP-3+"
 __all__ = ["console", "data", "scraper", "utils", "newspaper"]
 
 from .configuration import DataCollectorConfiguration
-from .datacollector import DataCollector
+from .journals2data import Journals2Data

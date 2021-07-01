@@ -28,6 +28,7 @@ class SourceScraper:
     source: data.Source
 
     last_known_urls: data.MapURLInfo # URLs scraped from last scraping
+    disappeard_urls_for_saving: data.MapURLInfo # URLs for saving
     known_article_url_for_rescraping: data.MapURLInfo # scrap to check if modified
     potential_article_urls_for_scraping: data.MapURLInfo # URLs to scrap this time
     raw_frontpage_urls: data.MapURLInfo
@@ -44,10 +45,11 @@ class SourceScraper:
         self.last_known_urls = data.MapURLInfo()
         self.article_urls_for_scraping = data.MapURLInfo()
         self.raw_frontpage_urls = data.MapURLInfo()
+        self.disappeard_urls_for_saving = data.MapURLInfo()
     
     def scrap_all_urls(self):
         """
-        Get all URLs from sources:
+        Get all URLs from source:
             + 1) retrieve all URLs str from source
         """
         self.raw_frontpage_urls = self.__get_all_website_links(
@@ -63,13 +65,6 @@ class SourceScraper:
             )
 
     # web scraping functions
-    def __is_valid(self, url: str):
-        """
-        Checks whether `url` is a valid URL.
-        """
-        parsed = urlparse(url)
-        return bool(parsed.netloc) and bool(parsed.scheme)
-
     def __get_all_website_links(
             self, url: str
         ) -> data.MapURLInfo:
@@ -136,13 +131,11 @@ class SourceScraper:
             if domain_name not in href:
                 # external link
                 continue
-                
+            
             urls.add(href)
-            title = a_tag.getText().strip().lstrip()       
-            title = title.replace(';','')
-            title = title.replace('""','')
-            title = title.replace("\n", "")
-            title = title.replace("\t", "")
+            
+            raw_title: str = a_tag.getText().strip().lstrip()
+            title: str = self.__clean_title_from_a_tag(raw_title)
             if title == "" or title is None:
                 continue
 
@@ -159,6 +152,20 @@ class SourceScraper:
                 print(new_frontpage_url.to_str(pretty=False))
 
         return frontpage_urls
+    
+    def __is_valid(self, url: str):
+        """
+        Checks whether `url` is a valid URL.
+        """
+        parsed = urlparse(url)
+        return bool(parsed.netloc) and bool(parsed.scheme)
+    
+    def __clean_title_from_a_tag(self, title: str) -> str:      
+        title = title.replace(';','')
+        title = title.replace('""','')
+        title = title.replace("\n", "")
+        title = title.replace("\t", "")
+        return title
     
     def keep_known_urls(self):
         """
@@ -178,6 +185,9 @@ class SourceScraper:
                 # and removes pair from self.last_known_urls, 
                 # what remains will be saved after inside save_source_articles()
                 del self.last_known_urls[url] # FIXME: not sure it will works
+        # all recognised url have been deleted from self.last_known_urls
+        # what remains is for saving
+        self.disappeard_urls_for_saving = self.last_known_urls
 
     def url_lifespan_check(self):
         """
@@ -193,9 +203,11 @@ class SourceScraper:
         Save articles whose URLs disappeared.
         """
         # TODO: do something with self.last_known_urls so as to save
-        # the articles whose URLs are still inside self.last_known_urls
+        # the articles whose URLs are still inside self.disappeard_urls_for_saving
         # do something with self.article_scrapers 
         #    self.article_scrapers...article.save_to_file()
+        for url in self.disappeard_urls_for_saving:
+            self.article_scrapers[url].article.save_to_file()
     
     def determine_article_urls(self):
         """
@@ -235,6 +247,7 @@ class SourceScraper:
 
             def compute_prediction_score(row: pd.Series):
                 # TODO: ameliorate ponderations depending on the key
+                # FIXME: what does DOM layer for the score
                 prediction_keys_with_ponderation: list = [
                     {"key": "BERT", "ponderation": 0.5},
                     {"key": "h0", "ponderation": 0.7},

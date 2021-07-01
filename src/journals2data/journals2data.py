@@ -14,7 +14,7 @@ from journals2data import exception
 from journals2data import console
 from .configuration import DataCollectorConfiguration
 
-class DataCollector:
+class Journals2Data:
 
     sources: List[data.Source]
     source_scrapers: List[scraper.SourceScraper]
