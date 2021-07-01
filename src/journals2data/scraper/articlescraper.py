@@ -203,9 +203,8 @@ class ArticleScraper:
     def __compute_rescraping_relative_difference(
         self, previous_full_text: str
     ):
+        ...
 
 
-
-    
     def __evaluate_scraping_and_parsing(self):
-
+        ...

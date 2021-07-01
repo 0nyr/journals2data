@@ -43,8 +43,10 @@ class SourceScraper:
 
         # default values    data.MapURLInfo({})
         self.last_known_urls = data.MapURLInfo()
-        self.article_urls_for_scraping = data.MapURLInfo()
         self.raw_frontpage_urls = data.MapURLInfo()
+        self.potential_article_urls_for_scraping = data.MapURLInfo()
+        self.known_article_url_for_rescraping = data.MapURLInfo()
+
         self.disappeard_urls_for_saving = data.MapURLInfo()
     
     def scrap_all_urls(self):
@@ -261,7 +263,7 @@ class SourceScraper:
 
                 return detection_sum
 
-            dataframe["score"] = 0 # add column for results
+            dataframe["score"] = 0  # add column for results
             dataframe["score"] = dataframe.apply(
                 compute_prediction_score, axis=1
             )
@@ -271,7 +273,7 @@ class SourceScraper:
         result_df = apply_url_selection(result_df)
         print(
             "result_df after apply_url_selection = [see below]\r\n", 
-            dframe.head(20)
+            result_df.head(20)
         )
 
         def transfer_selected_url_for_scraping(row: pd.Series):
@@ -285,7 +287,7 @@ class SourceScraper:
                     self.potential_article_urls_for_scraping[
                         url] = self.raw_frontpage_urls.pop(url)
 
-        result_df.apply(transfer_selected_url_for_scraping)
+        result_df.apply(transfer_selected_url_for_scraping, axis=1)
 
     def __link_prediction_layers(
         self, 
