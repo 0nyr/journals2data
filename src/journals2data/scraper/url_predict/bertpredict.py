@@ -3,20 +3,21 @@ from transformers import DistilBertTokenizerFast
 from transformers import TFDistilBertForSequenceClassification
 import tensorflow as tf
 
-from journals2data import utils
+import journals2data
 from journals2data import data
 
 def apply_BERT_prediction(
     dataframe: pd.DataFrame,
-    source: data.Source
+    source: data.Source,
+    config: journals2data.J2DConfiguration
 ) -> pd.DataFrame:
     """
     Apply BERT prediction layer based on BERT classifier.
     """
 
     # get model_path depending on the language
-    model_dirpath: str = utils.Global.BASE_BERT_MODEL_BASEPATH + \
-        utils.Global.BERT_LANGUAGE_DIRS[source.language]
+    model_dirpath: str = config.params["BERT_MODEL_BASEPATH"] + \
+        config.params["BERT_LANGUAGE_DIRS"][source.language]
     model = TFDistilBertForSequenceClassification.from_pretrained(
         model_dirpath
     )

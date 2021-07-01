@@ -15,18 +15,40 @@ from journals2data import console
 from journals2data import utils
 
 # debug module imports
-if utils.Global.DEBUG:
-    import os
-    print(
-        "Python Current Working directory = " + str(os.getcwd())
+import os
+print(
+    "Python Current Working directory = " + str(os.getcwd())
+)
+
+# get script params
+import argparse
+parser = argparse.ArgumentParser(description='TryJ2D')
+parser.add_argument(
+    '--conf_path', 
+    type=str, 
+    default="/home/onyr/Documents/code/python/journals2data/src/journals2data/conf/journal2data.onyr.conf",
+    help='url used to retrieve the articles'
+)
+args = parser.parse_args()
+
+
+
+# run journals2data library
+import sys
+if (args.conf_path):
+    collector = journals2data.Journals2Data(
+        args.conf_path
     )
-
-
-
-# test journals2data
-collector = journals2data.Journals2Data()
-collector.scrap()
-
+    collector.scrap()
+else:
+    sys.exit(
+        """
+        Error: No argument given to script. 
+        Please provide a --conf_path
+        param to the script, giving the path of the conf file
+        to execute the library on.
+        """
+    )
 
 
 # get script execution time

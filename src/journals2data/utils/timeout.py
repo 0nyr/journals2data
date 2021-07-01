@@ -1,15 +1,13 @@
 from typing import Any
 
 import signal
-
-from .globalvar import Global
 from journals2data import exception
 
 # StackOverflow: https://stackoverflow.com/questions/2196999/how-to-add-a-timeout-to-a-function-in-python/2197148#2197148 
 # decorators: https://ron.sh/how-to-write-custom-python-decorators/ 
 # signal for timeout: https://code-maven.com/python-timeout 
 
-def syncTimeout(limit=None):
+def syncTimeout(limit: int):
     """
     Decorator for adding timeout to a synchronous function.
 
@@ -22,8 +20,6 @@ def syncTimeout(limit=None):
     See better GitHub: https://github.com/bitranox/wrapt_timeout_decorator 
     """
     # check parameter
-    if limit is None:
-        limit = Global.DEFAULT_TIMEOUT
     if limit <= 0:
         raise ValueError(
             "Please, provide a positive timeout value."

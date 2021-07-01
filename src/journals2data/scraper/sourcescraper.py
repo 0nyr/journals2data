@@ -15,6 +15,7 @@ import sys
 import logging
 logging.basicConfig(stream=sys.stdout, level=logging.INFO)
 
+import journals2data
 from journals2data import data
 from journals2data import utils
 from journals2data import console
@@ -26,6 +27,7 @@ from .mapurlarticlescraper import MapURLArticleScraper
 class SourceScraper:
 
     source: data.Source
+    config: journals2data.J2DConfiguration
 
     last_known_urls: data.MapURLInfo # URLs scraped from last scraping
     disappeard_urls_for_saving: data.MapURLInfo # URLs for saving
@@ -38,8 +40,10 @@ class SourceScraper:
     def __init__(
         self,
         source: data.Source,
+        config: journals2data.J2DConfiguration
     ):  
         self.source = source
+        self.config = config
 
         # default values    data.MapURLInfo({})
         self.last_known_urls = data.MapURLInfo()
@@ -58,7 +62,7 @@ class SourceScraper:
             self.source.url
         )
 
-        if(utils.Global.VERBOSE == utils.VerboseLevel.COLOR):
+        if(self.config.params["VERBOSE"] == utils.VerboseLevel.COLOR):
             console.println_debug(
                 "raw_frontpage_urls type: " + str(
                     type(self.raw_frontpage_urls)
@@ -81,7 +85,7 @@ class SourceScraper:
         domain_name = urlparse(url).netloc
 
         # get raw data from source frontpage, with timeout
-        @utils.syncTimeout(30)
+        @utils.syncTimeout(self.config.params["DEFAULT_TIMEOUT"])
         def __get_page(
             url_to_scrap: str
         ) -> requests.Response:
@@ -148,9 +152,9 @@ class SourceScraper:
             )
             frontpage_urls[href] = new_frontpage_url
 
-            if(utils.Global.VERBOSE == utils.VerboseLevel.NO_COLOR):
+            if(self.config.params["VERBOSE"] == utils.VerboseLevel.NO_COLOR):
                 print(str(new_frontpage_url))
-            elif(utils.Global.VERBOSE == utils.VerboseLevel.COLOR):
+            elif(self.config.params["VERBOSE"] == utils.VerboseLevel.COLOR):
                 print(new_frontpage_url.to_str(pretty=False))
 
         return frontpage_urls

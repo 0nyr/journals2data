@@ -12,20 +12,19 @@ from journals2data import data
 from journals2data import scraper
 from journals2data import exception
 from journals2data import console
-from .configuration import DataCollectorConfiguration
+from .configuration import J2DConfiguration
 
 class Journals2Data:
 
     sources: List[data.Source]
     source_scrapers: List[scraper.SourceScraper]
+    config: J2DConfiguration
 
     def __init__(
         self, 
-        config: typing.Optional[DataCollectorConfiguration] = None
+        config: J2DConfiguration
     ):
-        # set default config
-        if(config == None):
-            config = DataCollectorConfiguration()
+        self.config = config
         
         # get sources
         self.sources = config.get_sources()

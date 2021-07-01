@@ -1,3 +1,3 @@
 from .utils import *
-from .globalvar import Global, VerboseLevel
+from .enums import VerboseLevel
 from .timeout import syncTimeout

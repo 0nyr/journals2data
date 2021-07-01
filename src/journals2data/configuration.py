@@ -5,34 +5,67 @@ from typing import List
 
 from journals2data import data
 from journals2data import console
+from journals2data import utils
 
-class DataCollectorConfiguration:
-
-    # WARN: for debug purpose
-    #DEFAULT_CONFIG_CSV_FILEPATH: str = "./conf/config.csv"
-    DEFAULT_CONFIG_CSV_FILEPATH: str = "/home/onyr/Documents/code/python/journals2data/src/journals2data/input/config.csv"
-
-    config_file_type: str
-    config_filepath: str
+class J2DConfiguration:
+    
+    # default conf params
+    params: dict = {
+        "CONFIG_FILETYPE": "csv",
+        "CONFIG_CSV_FILEPATH": "/home/onyr/Documents/code/python/journals2data/src/journals2data/input/config.csv",
+        "BERT_MODEL_BASEPATH": "/home/onyr/Documents/code/models/",
+        "BERT_LANGUAGE_DIRS": {
+            "en": "BERT_classifier_en/",
+            "fr": "BERT_classifier_fr/"
+        },
+        "DEBUG": True,
+        "VERBOSE": utils.VerboseLevel.COLOR,
+        "DEFAULT_TIMEOUT": 60
+    }
 
     def __init__(
         self,
-        config_file_type: str = "csv",
-        config_filepath: str = ""
-    ):
-        self.config_file_type = config_file_type
-        self.config_filepath = config_filepath
+        journals2data_conf_filepath: str,
+    ):  
+        # IMPT: load journals2data conf
+        self.__load_journals2data_conf(journals2data_conf_filepath)
+        
+    def __load_journals2data_conf(self, path: str):
+        """
+        This method load journals2data conf and init all
+        global variables for the library.
+        """
+        custom_conf: dict = {}
+        # load conf
+        with open(path, encoding = 'utf-8', mode = 'r') as file:
+            lines: List[str] = file.readlines()
 
-        # set default csv config filepath
-        if(self.config_file_type == "csv"):
-            if(self.config_filepath == ""):
-                self.config_filepath = self.DEFAULT_CONFIG_CSV_FILEPATH
+            for line in lines:
+                line = line.replace('\n', '')
+
+                # don't execute blank lines
+                if(line == "" or line == " "):
+                    continue
+
+                # don't execute comments
+                if(line[0] == '#'):
+                    continue
+
+                exec(line)
+        
+        # save modified params
+        for param in custom_conf:
+            if param in self.params:
+                self.params[param] = custom_conf[param]
+
     
     def get_sources(self) -> List[data.Source]:
         sources: List[data.Source] = []
 
-        if(self.config_file_type == "csv"):
-            sources = self.__load_sources_from_csv(self.config_filepath)
+        if(self.params["CONFIG_FILETYPE"] == "csv"):
+            sources = self.__load_sources_from_csv(
+                self.params["CONFIG_CSV_FILEPATH"]
+            )
         
         return sources
 
