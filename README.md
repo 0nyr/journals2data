@@ -385,7 +385,6 @@ I don't understand why ? Everything seems to be fine...
 
 Everything seems to be fine… > CPU too old… [https://stackoverflow.com/questions/49092527/illegal-instructioncore-dumped-tensorflow](https://stackoverflow.com/questions/49092527/illegal-instructioncore-dumped-tensorflow).
 
-
 ### Wed 30 June 2021
 
 Dropping Torch and BERT ML layer for now. Leaving integration layer in code. Making other layers of decisions.
@@ -404,4 +403,23 @@ I need to test that. Need to finish first selenium scraping with timeout and err
 
 ### Thu 1 Jul 2021
 
-I need to test the full scraping process.
+I made good progress with the Article scraping process.
+
+Did a code review with Elöd to validate design choices.
+
+Heavy code refactoring all around. Removed the Global static class and modified the Configuration object to be able to deal with several environment and act as a config object to be passed around in replacement of Global.
+
+Exported a new virtual environment, reinstalled `tensorflow` with `conda`. But with this version, the numpy conversion is not available thus the BERT code still don't run on my pc...
+
+```shell
+NotImplementedError: Cannot convert a symbolic Tensor (tf_distil_bert_for_sequence_classification/distilbert/strided_slice:0) to a numpy array. This error may indicate that you're trying to pass a Tensor to a NumPy call, which is not supported
+```
+
+It's like it was not possible to have the code running on my pc.
+
+TODOs:
+
+* [ ] Need to refactor BERT and DOM layer so as to make only one compound layer.
+* [ ] Validate synchronous Article scraping.
+* [ ] Implement scheduling.
+* [ ] Heavily refactor the code to make manythings asynchronous. This can have huge impacts on performance, especially when dealing with huge source list.
