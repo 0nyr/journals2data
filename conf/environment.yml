@@ -92,4 +92,4 @@ dependencies:
     - urllib3==1.26.6
     - werkzeug==2.0.1
     - wrapt==1.12.1
-prefix: /home/cboscher/anaconda3/envs/py39
+prefix: /home/onyr/Downloads/yes/envs/py39
