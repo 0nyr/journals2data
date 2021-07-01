@@ -315,7 +315,9 @@ class SourceScraper:
         print("dframe base = [see below] \r\n", dframe.head(10))
 
         # [BERT] apply BERT prediction layer
-        dframe = url_predict.apply_BERT_prediction(dframe)
+        dframe = url_predict.apply_BERT_prediction(
+            dframe, self.source, self.config
+            )
         print("dframe columns = ", list(dframe))
         print(
             "dframe after apply_BERT_prediction = [see below] \r\n", 

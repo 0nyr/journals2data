@@ -12,7 +12,7 @@ class J2DConfiguration:
     # default conf params
     params: dict = {
         "CONFIG_FILETYPE": "csv",
-        "CONFIG_CSV_FILEPATH": "/home/onyr/Documents/code/python/journals2data/src/journals2data/input/config.csv",
+        "CONFIG_CSV_FILEPATH": "/home/onyr/Documents/code/python/journals2data/src/journals2data/conf/config.csv",
         "BERT_MODEL_BASEPATH": "/home/onyr/Documents/code/models/",
         "BERT_LANGUAGE_DIRS": {
             "en": "BERT_classifier_en/",
@@ -29,6 +29,15 @@ class J2DConfiguration:
     ):  
         # IMPT: load journals2data conf
         self.__load_journals2data_conf(journals2data_conf_filepath)
+
+        # print arguments
+        if(self.params["VERBOSE"] == utils.VerboseLevel.NO_COLOR):
+            print("****** config.params = [see below]")
+            utils.print_pretty_json(self.params)
+        elif(self.params["VERBOSE"] == utils.VerboseLevel.COLOR):
+            console.println_debug("****** config.params = [see below]")
+            utils.print_pretty_json(self.params)
+
         
     def __load_journals2data_conf(self, path: str):
         """

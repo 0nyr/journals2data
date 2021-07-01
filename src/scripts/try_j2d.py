@@ -36,8 +36,11 @@ args = parser.parse_args()
 # run journals2data library
 import sys
 if (args.conf_path):
-    collector = journals2data.Journals2Data(
+    config = journals2data.J2DConfiguration(
         args.conf_path
+    )
+    collector = journals2data.Journals2Data(
+        config
     )
     collector.scrap()
 else:

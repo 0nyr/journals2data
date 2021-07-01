@@ -24,6 +24,10 @@ class Journals2Data:
         self, 
         config: J2DConfiguration
     ):
+        if not isinstance(config, J2DConfiguration):
+            raise ValueError(
+                "Error: config is not a J2DConfiguration."
+            )
         self.config = config
         
         # get sources
@@ -40,7 +44,7 @@ class Journals2Data:
         self.source_scrapers = []
         for source in self.sources:
             source_scraper: scraper.SourceScraper = scraper.SourceScraper(
-                source
+                source, config
             )
             self.source_scrapers.append(source_scraper)
 
