@@ -2,13 +2,12 @@ import pandas as pd
 from transformers import DistilBertTokenizerFast
 from transformers import TFDistilBertForSequenceClassification
 import tensorflow as tf
-import random
+
+from journals2data import utils
 
 def apply_BERT_prediction(dataframe: pd.DataFrame) -> pd.DataFrame:
     """
     Apply BERT prediction layer based on BERT classifier.
-    WARN: For now, it's fake code -> random()
-    TODO: finish function with real Torch and BERT
     """
 
     def predict(model, tokenizer, sentence):
@@ -17,11 +16,11 @@ def apply_BERT_prediction(dataframe: pd.DataFrame) -> pd.DataFrame:
         tf_prediction = tf.nn.softmax(tf_output, axis=1).numpy()[0]
         return tf_prediction[1]
 
-    # TODO : Fix model path here
+    # FIXME : Fix model path here,
+    # WARN: model path depends on the language!
     model = TFDistilBertForSequenceClassification.from_pretrained(
         '/home/cboscher/psat-elod_time_interval/psat-elod_time_interval/PSAT-master/PSAT-master/models/BERT_classifier_en')
     tokenizer = DistilBertTokenizerFast.from_pretrained('distilbert-base-uncased')
-
 
     dataframe['BERT'] = 0 # add column for results
     dataframe['BERT'] = dataframe.apply(
