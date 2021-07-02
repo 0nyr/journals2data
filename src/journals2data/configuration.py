@@ -23,7 +23,8 @@ class J2DConfiguration:
         "DEFAULT_TIMEOUT": 60,
         "SOURCE_TIMEOUT": None,
         "ARTICLE_TIMEOUT": None,
-        "USER": None
+        "USER": None,
+        "ARTICLE_SCORE_THRESHOLD": None #TODO: choose a good default value
     }
 
     def __init__(

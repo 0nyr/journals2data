@@ -433,5 +433,5 @@ Multiple refactoring everywhere. Lots of bugs smashed.
 * [ ] Refactor SourceScraper with `selenium` instead of `requests`.
 * [ ] Refactor SourceScraper timeout and timeout error handling.
 * [X] Implement article scraping logger.
-* [ ] Implement a `ARTICLE_SCORE_THRESHOLD` and modify scrap_new_potential_articles() to take it into account.
+* [X] Implement a `ARTICLE_SCORE_THRESHOLD` and modify scrap_new_potential_articles() to take it into account.
 * [ ] Implement a `NB_RUN_LIMIT` and `RUN_NUMBER` conf param and modify the code so as to save articles when the run number falls to 0.

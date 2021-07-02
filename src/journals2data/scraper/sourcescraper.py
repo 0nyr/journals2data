@@ -405,16 +405,21 @@ class SourceScraper:
             #    if scraping score good enough, 
             #    add article_scraper to self.article_scrapers
             # TODO: complete function
-            scraping_flag: ScrapingResult = article_scraper.scrap()
-            if(scraping_flag.flag == ScrapingResultFlag.SUCCESS):
+            scrap_result: ScrapingResult = article_scraper.scrap()
+            if(scrap_result.flag == ScrapingResultFlag.SUCCESS):
                 
                 # log successful scraping
                 if(self.config.params["VERBOSE"].value > 0):
                     article_scraper.log_successful_scraping()
                 
-                # save article_scraper and url for future runs
-                self.article_scrapers[url] = article_scraper
-                self.last_known_urls[url] = self.potential_article_urls_for_scraping[url]
+                # save if score > threshold
+                if(
+                    self.config.params["ARTICLE_SCORE_THRESHOLD"] != None and
+                    scrap_result.score >= self.config.params["ARTICLE_SCORE_THRESHOLD"]
+                ):
+                    # save article_scraper and url for future runs
+                    self.article_scrapers[url] = article_scraper
+                    self.last_known_urls[url] = self.potential_article_urls_for_scraping[url]
 
 
 

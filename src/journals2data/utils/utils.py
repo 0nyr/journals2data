@@ -46,7 +46,7 @@ def print_list(list: List[Any]):
 def get_str_time_now(for_logging: bool = True) -> str:
     time_str: str
     if(for_logging):
-        time_str = "[timestamp: " + \
+        time_str = "[time: " + \
             datetime.datetime.now().strftime(
                 "%S_%M_%H_%d_%m_%Y"
             ) + "]"
