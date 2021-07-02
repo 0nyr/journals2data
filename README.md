@@ -431,6 +431,7 @@ Multiple refactoring everywhere. Lots of bugs smashed.
 * [X] Refactor Timeout and timeout error handling for the ArticleScraper.
 * [X] Finish conf file handling and default values.
 * [ ] Refactor SourceScraper with `selenium` instead of `requests`.
+* [ ] Try and implement automatic scrolling to the bottom of the page (see [here](https://stackoverflow.com/questions/32391303/how-to-scroll-to-the-end-of-the-page-using-selenium-in-python)).
 * [ ] Refactor SourceScraper timeout and timeout error handling.
 * [X] Implement article scraping logger.
 * [X] Implement a `ARTICLE_SCORE_THRESHOLD` and modify scrap_new_potential_articles() to take it into account.
