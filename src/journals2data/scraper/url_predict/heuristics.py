@@ -15,6 +15,7 @@ def apply_heuristic_h0(
         else:
             return 1
 
+    dataframe['h0'] = 0
     dataframe['h0'] = dataframe.apply(
         lambda x: heuristic_0(x.title), axis=1
     )

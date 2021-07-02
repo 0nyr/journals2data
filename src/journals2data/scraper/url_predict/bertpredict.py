@@ -37,7 +37,7 @@ def apply_BERT_prediction(
         return tf_prediction[1]
 
     dataframe['BERT'] = 0 # add column for results
-    # 2FIX: this code bloc distinction is just because
+    # HACK: this code bloc distinction is just because
     # I have a pb with tensorflow on my machine.
     # TODO: remove for release
     if(config.params["USER"] == "onyr"):

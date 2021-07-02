@@ -9,19 +9,27 @@ from urllib.parse import urlparse
 from .backpack import get_bagpack, get_attribute_list
 from .build_xpath import to_xpath
 
+import journals2data
 from journals2data import data
 
 def apply_DOM_prediction(
     dataframe: pd.DataFrame,
-    source: data.Source
+    source: data.Source,
+    config: journals2data.J2DConfiguration
 ) -> pd.DataFrame:
     """
     Apply DOM prediction layer with xpath expressions.
     """
+    # HACK: this code bloc distinction is just because
+    # I have a pb with tensorflow on my machine.
+    # TODO: remove for release
+    if(config.params["USER"] == "onyr"):
+        return dataframe
+
+
     # positive selection for clustering based on threshold
     threshold: float = 0.01
     rslt_df = dataframe[dataframe['BERT'] >= threshold]
-    rslt_df.rename(columns={"A": "a", "B": "c"})
     rslt_df = rslt_df.drop(['BERT'], axis=1)
 
     # get html tree
@@ -29,8 +37,8 @@ def apply_DOM_prediction(
 
     a_dom = []
 
-    for link in rslt_df['link']:
-        path = urlparse(link).path
+    for url in rslt_df['URL']:
+        path = urlparse(url).path
 
         if path == "":
             continue
@@ -86,6 +94,7 @@ def apply_DOM_prediction(
 
     ## PREDICTION ##
     X = np.array(list_of_vectors)
+    # DBUG: Expected 2D array, got 1D array instead
     db = DBSCAN(eps=0.5, min_samples=2, metric='cosine').fit(X)  # use cosine similarity to compute the distance
 
     db.fit(X)
@@ -162,9 +171,9 @@ def apply_DOM_prediction(
     result = pd.DataFrame({'URL': liste_href})
 
     true_name = list()
-    for link in result['URL']:
-        if not dataframe.loc[dataframe['link'] == link, 'title'].empty:
-            title = dataframe.loc[dataframe['link'] == link, 'title'].iloc[0]
+    for url in result['URL']:
+        if not dataframe.loc[dataframe['URL'] == url, 'title'].empty:
+            title = dataframe.loc[dataframe['URL'] == url, 'title'].iloc[0]
         else:
             title = ''
         true_name.append(title)
@@ -173,7 +182,7 @@ def apply_DOM_prediction(
 
     # merge DOM URL results with dframe 
     merged_df = pd.merge(
-        dataframe[['link', 'title', 'BERT']].rename(columns={'link': 'URL'}), 
+        dataframe[['URL', 'title', 'BERT']], 
         result,
         on=['URL', 'title'], 
         how='left',

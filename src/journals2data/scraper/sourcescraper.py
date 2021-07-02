@@ -307,10 +307,10 @@ class SourceScraper:
         pd.set_option('display.width', None)
         pd.set_option('display.max_colwidth', None)
 
-        dframe = pd.DataFrame(data = {
-            "link": title_link_df["url"],
-            "title": title_link_df["title_from_a_tag"],
-            "scrap": title_link_df["scraped_nb_times"]
+        dframe = title_link_df.rename(columns={
+            "url": "URL",
+            "title_from_a_tag": "title",
+            "scraped_nb_times": "scrap"
         })
         print("dframe base = [see below] \r\n", dframe.head(10))
 
@@ -327,7 +327,8 @@ class SourceScraper:
         # [DOM] apply DOM prediction layer
         dframe = url_predict.apply_DOM_prediction(
             dframe,
-            self.source
+            self.source,
+            self.config
         )
         print(
             "dframe after apply_DOM_prediction = [see below] \r\n", 
