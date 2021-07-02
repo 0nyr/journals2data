@@ -428,11 +428,17 @@ TODOs:
 
 Multiple refactoring everywhere. Lots of bugs smashed.
 
+I'm proud to announce that (not taking BERT and DOM layer into consideration), the library scraping loop is now functionning! 
+
+However, keep in mind the loop process is not finished yet. Not article are saved for now. Scheduling and multithreading are still to be implemented. And BERT & DOM are still buggy and untested by my own due to PC problems...
+
+Still, the weekly goal can be considered as achieved 🎉️.
+
 * [X] Refactor Timeout and timeout error handling for the ArticleScraper.
 * [X] Finish conf file handling and default values.
-* [ ] Refactor SourceScraper with `selenium` instead of `requests`.
-* [ ] Try and implement automatic scrolling to the bottom of the page (see [here](https://stackoverflow.com/questions/32391303/how-to-scroll-to-the-end-of-the-page-using-selenium-in-python)).
-* [ ] Refactor SourceScraper timeout and timeout error handling.
+* [X] Refactor SourceScraper with `selenium` instead of `requests`.
+* [X] Try and implement automatic scrolling to the bottom of the page (see [here](https://stackoverflow.com/questions/32391303/how-to-scroll-to-the-end-of-the-page-using-selenium-in-python)).
+* [X] Refactor SourceScraper timeout and timeout error handling.
 * [X] Implement article scraping logger.
 * [X] Implement a `ARTICLE_SCORE_THRESHOLD` and modify scrap_new_potential_articles() to take it into account.
 * [ ] Implement a `NB_RUN_LIMIT` and `RUN_NUMBER` conf param and modify the code so as to save articles when the run number falls to 0.
