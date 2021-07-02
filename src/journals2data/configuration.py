@@ -20,7 +20,8 @@ class J2DConfiguration:
         },
         "DEBUG": True,
         "VERBOSE": utils.VerboseLevel.COLOR,
-        "DEFAULT_TIMEOUT": 60
+        "DEFAULT_TIMEOUT": 60,
+        "USER": None
     }
 
     def __init__(

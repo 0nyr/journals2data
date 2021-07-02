@@ -33,4 +33,19 @@ console.warn: SearchSettings: "get: No settings file exists, new profile?" (new 
 [GFX1-]: RenderCompositorSWGL failed mapping default framebuffer, no dt
 [GFX1-]: RenderCompositorSWGL failed mapping default framebuffer, no dt
 [GFX1-]: RenderCompositorSWGL failed mapping default framebuffer, no dt
+[GFX1-]: RenderCompositorSWGL failed mapping default framebuffer, no dt1625218229860	geckodriver	INFO	Listening on 127.0.0.1:34299
+1625218229888	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "--marionette" "-headless" "-foreground" "-no-remote" "-profile" "/tmp/rust_mozprofile43cxNE"
+*** You are running in headless mode.
+1625218230669	Marionette	INFO	Marionette enabled
+[GFX1-]: RenderCompositorSWGL failed mapping default framebuffer, no dt
+[GFX1-]: RenderCompositorSWGL failed mapping default framebuffer, no dt
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at /tmp/rust_mozprofile43cxNE/search.json.mozlz4", (void 0)))
+[GFX1-]: RenderCompositorSWGL failed mapping default framebuffer, no dt
+[GFX1-]: RenderCompositorSWGL failed mapping default framebuffer, no dt
+[GFX1-]: RenderCompositorSWGL failed mapping default framebuffer, no dt
+[GFX1-]: RenderCompositorSWGL failed mapping default framebuffer, no dt
+[GFX1-]: RenderCompositorSWGL failed mapping default framebuffer, no dt
+1625218233754	Marionette	INFO	Listening on port 45705
+[GFX1-]: RenderCompositorSWGL failed mapping default framebuffer, no dt
+1625218233793	Marionette	WARN	TLS certificate errors will be ignored for this session
 [GFX1-]: RenderCompositorSWGL failed mapping default framebuffer, no dt
