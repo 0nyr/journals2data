@@ -36,6 +36,11 @@ args = parser.parse_args()
 # run journals2data library
 import sys
 if (args.conf_path):
+    console.println_debug(
+        "****** running J2D [--conf_path: " +
+        args.conf_path + "]"
+    )
+
     config = journals2data.J2DConfiguration(
         args.conf_path
     )
