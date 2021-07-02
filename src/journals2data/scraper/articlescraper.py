@@ -237,3 +237,20 @@ class ArticleScraper:
 
     def __evaluate_scraping_and_parsing(self):
         ...
+    
+    def log_successful_scraping(self):
+        """
+        VERB: display a part of the scraped full text
+        """
+        text_preview = utils.limit_line_str(
+            self.article.full_text
+        )
+        url_preview = utils.limit_line_str(
+            self.article.url
+        )
+        print(
+            "Article scraped: " + 
+            "[url: " + url_preview + "] " +
+            "[txt: " + text_preview + "] " +
+            utils.get_str_time_now()
+        )

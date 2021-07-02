@@ -423,3 +423,15 @@ TODOs:
 * [ ] Validate synchronous Article scraping.
 * [ ] Implement scheduling.
 * [ ] Heavily refactor the code to make manythings asynchronous. This can have huge impacts on performance, especially when dealing with huge source list.
+
+### Fri 2 Jul 2021
+
+Multiple refactoring everywhere. Lots of bugs smashed.
+
+* [X] Refactor Timeout and timeout error handling for the ArticleScraper.
+* [X] Finish conf file handling and default values.
+* [ ] Refactor SourceScraper with `selenium` instead of `requests`.
+* [ ] Refactor SourceScraper timeout and timeout error handling.
+* [X] Implement article scraping logger.
+* [ ] Implement a `ARTICLE_SCORE_THRESHOLD` and modify scrap_new_potential_articles() to take it into account.
+* [ ] Implement a `NB_RUN_LIMIT` and `RUN_NUMBER` conf param and modify the code so as to save articles when the run number falls to 0.

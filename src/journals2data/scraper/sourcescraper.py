@@ -408,18 +408,16 @@ class SourceScraper:
             scraping_flag: ScrapingResult = article_scraper.scrap()
             if(scraping_flag.flag == ScrapingResultFlag.SUCCESS):
                 
-                # VERB: display a part of the scraped full text
+                # log successful scraping
                 if(self.config.params["VERBOSE"].value > 0):
-                    text_preview: str
-                    if(len(article_scraper.article.full_text) > 80):
-                        text_preview = article_scraper.article.full_text[:79]
-                    else:
-                        text_preview = str(article_scraper.article.full_text)
-                    
-                    print(
-                        "Scraped: " + text_preview + "   " +
-                        utils.get_str_time_now()
-                    )
+                    article_scraper.log_successful_scraping()
+                
+                # save article_scraper and url for future runs
+                self.article_scrapers[url] = article_scraper
+                self.last_known_urls[url] = self.potential_article_urls_for_scraping[url]
+
+
+
 
 
 

@@ -42,11 +42,11 @@ def print_list(list: List[Any]):
     from pprint import pprint
     pprint(list)
 
-# datetime
+# str manipulations
 def get_str_time_now(for_logging: bool = True) -> str:
     time_str: str
     if(for_logging):
-        time_str = "[timestamp:" + \
+        time_str = "[timestamp: " + \
             datetime.datetime.now().strftime(
                 "%S_%M_%H_%d_%m_%Y"
             ) + "]"
@@ -55,3 +55,9 @@ def get_str_time_now(for_logging: bool = True) -> str:
             "%S_%M_%H_%d_%m_%Y"
         )
     return time_str
+
+def limit_line_str(string: str, limit: int = 50) -> str:
+    string = string.replace("\n", "")
+    if(len(string) > limit):
+        string = string[:limit - 1]
+    return string
