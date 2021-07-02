@@ -1,15 +1,11 @@
 from typing import List, Any
 
 from selenium import webdriver
-from selenium.webdriver.firefox.options import Options
+from selenium.common.exceptions import TimeoutException
 
 from urllib.parse import urlparse, urljoin
 from bs4 import BeautifulSoup
 import pandas as pd
-
-
-import requests
-import re
 
 import sys
 import logging
@@ -86,31 +82,16 @@ class SourceScraper:
         # domain name of the URL without the protocol
         domain_name = urlparse(url).netloc
 
-        # get raw data from source frontpage, with timeout
-        @utils.syncTimeout(self.config.params["SOURCE_TIMEOUT"])
-        def __get_page(
-            url_to_scrap: str
-        ) -> requests.Response:
-            return requests.get(url_to_scrap)
-
-        # handle timeout exception
-        try:
-            response = __get_page(url)
-            page_bytes = response.content
-            self.source.set_html(response.text) # page HTML as Unicode
-        except exception.Timeout as ex:
-            logging.warning(
-                """
-                Source frontpage scraping for raw URL aborted 
-                due to timeout. Concerned source URL: 
-                """ + 
-                self.source.url
-            )
-            # timeout limit reached, no URL can be retrieve, return empty
+        # get page raw html and check it worked
+        page_raw_html: str = self.__get_page_raw_html(url)
+        if(page_raw_html == ""):
+            # scraping failed, return empty data.MapURLInfo
             return frontpage_urls
         
+        self.source.set_html(page_raw_html)
+        
         # parse raw data with BeautifulSoup
-        soup = BeautifulSoup(page_bytes, "html.parser")
+        soup = BeautifulSoup(page_raw_html, "html.parser")
 
         # extract URLs and title info from related <a> tags
         for a_tag in soup.findAll("a"):
@@ -174,6 +155,75 @@ class SourceScraper:
         title = title.replace("\n", "")
         title = title.replace("\t", "")
         return title
+    
+    def __get_page_raw_html(
+        self, 
+        url: str,
+        is_browser_headless: bool = True,
+        raw_html: str = ""
+    ) -> str:
+        """
+        This function is used to scrap content from the front page
+        of the Source using selenium.
+        NOTE: It performs a down scrolling up to the bottom 
+        of the page to make sure everything was scrapped.
+        It returns None if the article is no more available online.
+        TODO: change to async webdriver
+        """
+        
+        # return directly if html was already provided
+        if(raw_html != ""):
+            return raw_html
+
+        try:
+            # open browser
+            browser: webdriver.Firefox
+            fireFoxOptions = webdriver.FirefoxOptions()
+            if is_browser_headless:
+                fireFoxOptions.set_headless()
+                browser = webdriver.Firefox(
+                    firefox_options = fireFoxOptions
+                )
+            else:
+                browser = webdriver.Firefox()
+            # set timeout
+            browser.set_page_load_timeout(
+                self.config.params["ARTICLE_TIMEOUT"]
+            )
+            # get page and automatic scroll to bottom of page
+            browser.get(url)
+            browser.execute_script(
+                "window.scrollTo(0, document.body.scrollHeight);"
+            )
+
+            # get raw html
+            raw_html = browser.page_source
+
+        except TimeoutException as err:
+            logging.exception(
+                "TimeoutException with raw html scraping of the source [" +
+                self.source.url + "] " +
+                utils.get_str_time_now()
+            )
+            return ""
+
+        except Exception as err:
+            logging.exception(
+                "Error with raw html scraping of the source [" +
+                self.source.url + "] " +
+                utils.get_str_time_now()
+            )
+            return ""
+
+        finally:
+            # close browser
+            try:
+                browser.close()
+            except:
+                pass
+        
+        return raw_html
+
     
     def keep_known_urls(self):
         """

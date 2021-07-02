@@ -77,7 +77,6 @@ class ArticleScraper:
         Optionally, the function can take direct raw html.
         It retuns itself if the scraping was successful.
         It returns None if the article is no more available online.
-        FIXME: what to do when scraping failed or timeout ?
         TODO: change to async webdriver
         """
         # keep original full text for comparison
@@ -94,12 +93,12 @@ class ArticleScraper:
                 browser = webdriver.Firefox(
                     firefox_options = fireFoxOptions
                 )
-                # set timeout
-                browser.set_page_load_timeout(
-                    self.config.params["ARTICLE_TIMEOUT"]
-                )
             else:
                 browser = webdriver.Firefox()
+            # set timeout
+            browser.set_page_load_timeout(
+                self.config.params["ARTICLE_TIMEOUT"]
+            )
 
             # get raw html
             if(raw_html == "" or raw_html == "null"):
