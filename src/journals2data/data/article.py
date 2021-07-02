@@ -17,23 +17,23 @@ class Article():
     url: str
     url_source: str
     language: str
-    timestamp_start: typing.Optional[str]
-    timestamp_end: typing.Optional[str]
-    title_from_source: typing.Optional[str]
-    title_from_page: typing.Optional[str]
-    full_text: typing.Optional[str]
-    publish_date: typing.Optional[str]
+    timestamp_start: str
+    timestamp_end: str
+    title_from_source: str
+    title_from_page: str
+    full_text: str
+    publish_date: str
 
     # WARN: default arguments must be at the end
     def __init__(
         self,
         source: Source,
         url: str,
-        title: typing.Optional[str]=None,
-        full_text: typing.Optional[str]=None,
-        timestamp_start: typing.Optional[str]=None,
-        timestamp_end: typing.Optional[str]=None,
-        title_from_source: typing.Optional[str]=None,
+        title: str = "",
+        full_text: str = "",
+        timestamp_start: str = "",
+        timestamp_end: str = "",
+        title_from_source: str = ""
     ):
         self.source = source
         self.url = url

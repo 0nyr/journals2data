@@ -4,6 +4,7 @@ import datetime
 import re
 import logging
 
+from selenium.common.exceptions import TimeoutException
 from selenium.common.exceptions import WebDriverException
 from selenium import webdriver
 from selenium.webdriver.common.by import By
@@ -14,22 +15,28 @@ from selenium.webdriver.support.wait import WebDriverWait
 import newspaper
 import unicodedata
 
+import journals2data
 from journals2data import data
-from journals2data import console
+from journals2data import utils
 
 from enum import Enum
 
 class ScrapingResultFlag(Enum):
 
     SUCCESS = 0
-    RAW_SCRAPING_FAILED = 1
+    RAW_SCRAPING_TIMEOUT = 1
+    RAW_SCRAPING_FAILED = 2
 
 class ScrapingResult():
 
     flag: ScrapingResultFlag
     score: float
 
-    def __init__(self, result_flag, score: float = 0):
+    def __init__(
+        self, 
+        result_flag, 
+        score: float = 0
+    ):
         """
         This is a return object for the ArticleScraper.scrap()
         method. It contains a ScrapingResultFlag and a score.
@@ -41,6 +48,7 @@ class ScrapingResult():
 
 class ArticleScraper:
 
+    config: journals2data.J2DConfiguration
     article: data.Article
     is_browser_headless: bool
 
@@ -50,10 +58,12 @@ class ArticleScraper:
     def __init__(
         self, 
         article: data.Article,
+        config: journals2data.J2DConfiguration,
         is_browser_headless: bool = True
     ):
         self.article = article
         self.is_browser_headless = is_browser_headless
+        self.config = config
 
         # default flag init
         self.rescraping = False
@@ -84,6 +94,10 @@ class ArticleScraper:
                 browser = webdriver.Firefox(
                     firefox_options = fireFoxOptions
                 )
+                # set timeout
+                browser.set_page_load_timeout(
+                    self.config.params["ARTICLE_TIMEOUT"]
+                )
             else:
                 browser = webdriver.Firefox()
 
@@ -94,14 +108,22 @@ class ArticleScraper:
                 )
             else:
                 self.article.raw_html = raw_html
-            
+
+        except TimeoutException as e:
+            logging.exception(
+                "TimeoutException with raw html scraping of the article [" +
+                self.article.url + "] " +
+                utils.get_str_time_now()
+            )
+            return ScrapingResult(
+                ScrapingResultFlag.RAW_SCRAPING_TIMEOUT
+            )
+
         except Exception as Arguments:
             logging.exception(
                 "Error with raw html scraping of the article [" +
-                self.article.url + "] [timestamp:" +
-                datetime.datetime.now().strftime(
-                    "%S_%M_%H_%d_%m_%Y"
-                ) + "]"
+                self.article.url + "] " +
+                utils.get_str_time_now()
             )
             return ScrapingResult(
                 ScrapingResultFlag.RAW_SCRAPING_FAILED
@@ -126,6 +148,9 @@ class ArticleScraper:
         # evaluate scraping and parsing result
         self.__evaluate_scraping_and_parsing()
 
+        return ScrapingResult(
+            ScrapingResultFlag.SUCCESS
+        )
 
         
 
@@ -133,8 +158,7 @@ class ArticleScraper:
     def __get_article_raw_html(self, browser: webdriver.Firefox) -> str:
         """
         Scrap raw html using selenium
-        FIXME: what to do when scraping failed or timeout ?
-        TODO: implement timeout
+        NOTE: can raise errors
         """
         raw_html: str = ""
         browser.get(self.article.url)
@@ -147,7 +171,9 @@ class ArticleScraper:
         raw html using newspaper3k to self.article.
         WARN: do not confuse data.Article with newspaper.Article!
         """
-        newspaper_article: newspaper.Article(self.article.url)
+        newspaper_article: newspaper.Article = newspaper.Article(
+            self.article.url
+        )
         # simulate download but by passing to it raw html instead
         newspaper_article.download(self.article.raw_html)
 
@@ -195,7 +221,10 @@ class ArticleScraper:
         self.article.publish_date = newspaper_article.publish_date
 
         # log first scraping instant as self.timestamp_start
-        if(self.timestamp_start == None or self.timestamp_start == ""):
+        if(
+            self.article.timestamp_start == None or
+            self.article.timestamp_start == ""
+        ):
             self.timestamp_start = datetime.datetime.now().strftime(
                 "%S_%M_%H_%d_%m_%Y"
             )

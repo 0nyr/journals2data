@@ -21,6 +21,8 @@ class J2DConfiguration:
         "DEBUG": True,
         "VERBOSE": utils.VerboseLevel.COLOR,
         "DEFAULT_TIMEOUT": 60,
+        "SOURCE_TIMEOUT": None,
+        "ARTICLE_TIMEOUT": None,
         "USER": None
     }
 
@@ -30,6 +32,12 @@ class J2DConfiguration:
     ):  
         # IMPT: load journals2data conf
         self.__load_journals2data_conf(journals2data_conf_filepath)
+
+        # apply timeout defaults
+        if(self.params["SOURCE_TIMEOUT"] == None):
+            self.params["SOURCE_TIMEOUT"] = self.params["DEFAULT_TIMEOUT"]
+        if(self.params["ARTICLE_TIMEOUT"] == None):
+            self.params["ARTICLE_TIMEOUT"] = self.params["DEFAULT_TIMEOUT"]
 
         # print arguments
         if(self.params["VERBOSE"] == utils.VerboseLevel.NO_COLOR):

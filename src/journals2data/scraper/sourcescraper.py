@@ -21,7 +21,7 @@ from journals2data import utils
 from journals2data import console
 from journals2data import exception
 from journals2data.scraper import url_predict
-from .articlescraper import ArticleScraper
+from .articlescraper import ArticleScraper, ScrapingResult, ScrapingResultFlag
 from .mapurlarticlescraper import MapURLArticleScraper
 
 class SourceScraper:
@@ -48,10 +48,12 @@ class SourceScraper:
         # default values    data.MapURLInfo({})
         self.last_known_urls = data.MapURLInfo()
         self.raw_frontpage_urls = data.MapURLInfo()
+        self.disappeard_urls_for_saving = data.MapURLInfo()
         self.potential_article_urls_for_scraping = data.MapURLInfo()
         self.known_article_url_for_rescraping = data.MapURLInfo()
 
-        self.disappeard_urls_for_saving = data.MapURLInfo()
+        # other defaults
+        self.article_scrapers = MapURLArticleScraper()
     
     def scrap_all_urls(self):
         """
@@ -85,7 +87,7 @@ class SourceScraper:
         domain_name = urlparse(url).netloc
 
         # get raw data from source frontpage, with timeout
-        @utils.syncTimeout(self.config.params["DEFAULT_TIMEOUT"])
+        @utils.syncTimeout(self.config.params["SOURCE_TIMEOUT"])
         def __get_page(
             url_to_scrap: str
         ) -> requests.Response:
@@ -395,13 +397,29 @@ class SourceScraper:
                 url
             )
             article_scraper: ArticleScraper = ArticleScraper(
-                article
+                article,
+                self.config
             )
             # call scraping steps
             # check scraping score
             #    if scraping score good enough, 
             #    add article_scraper to self.article_scrapers
             # TODO: complete function
+            scraping_flag: ScrapingResult = article_scraper.scrap()
+            if(scraping_flag.flag == ScrapingResultFlag.SUCCESS):
+                
+                # VERB: display a part of the scraped full text
+                if(self.config.params["VERBOSE"].value > 0):
+                    text_preview: str
+                    if(len(article_scraper.article.full_text) > 80):
+                        text_preview = article_scraper.article.full_text[:79]
+                    else:
+                        text_preview = str(article_scraper.article.full_text)
+                    
+                    print(
+                        "Scraped: " + text_preview + "   " +
+                        utils.get_str_time_now()
+                    )
 
 
 

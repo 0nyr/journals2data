@@ -1,6 +1,7 @@
+from typing import Any, List, Dict
 import json
 import csv
-from typing import Any, List, Dict
+import datetime
 
 # json manipulations
 def json_file_to_data(json_file_path: str):
@@ -40,3 +41,17 @@ def write_in_csv(data: Dict[Any, Any], csv_file_name: str):
 def print_list(list: List[Any]):
     from pprint import pprint
     pprint(list)
+
+# datetime
+def get_str_time_now(for_logging: bool = True) -> str:
+    time_str: str
+    if(for_logging):
+        time_str = "[timestamp:" + \
+            datetime.datetime.now().strftime(
+                "%S_%M_%H_%d_%m_%Y"
+            ) + "]"
+    else:
+        time_str = datetime.datetime.now().strftime(
+            "%S_%M_%H_%d_%m_%Y"
+        )
+    return time_str
