@@ -447,9 +447,15 @@ Still, the weekly goal can be considered as achieved 🎉️.
 
 First full loop test result: Done on one source only ([https://www.wsj.com/](https://www.wsj.com/)), and without BERT + DOM layer. It took 1200s which is a really long time however there are many ways to decrease that length in the future.
 
+Made many refactoring all around to clean the code.
+
+Connected to a VM over SSH. I have set up a SSH key for GitHub and I downloaded the repository. 
+
 * [X] Implement a `NB_RUN_LIMIT` and `RUN_NUMBER` conf param and modify the code so as to save articles when the run number equals `NB_RUN_LIMIT`.
-* [ ] Add a nb of article to save limit for debug purpose: `ARTICLE_SCRAPER_LIMIT`.
-* [ ] Add a global param to choose saving option (no saving, display to stdin, save to file, save to db...)
+* [X] Add a nb of article to save limit for debug purpose: `ARTICLE_SCRAPER_LIMIT`.
 * [X] Add global param to set `DEFAULT_OUTPUT_FILEPATH`.
+* [X] Test automatic article scraping and saving.
+* [X] Connect to VM and set up SSH key for GitHub.
+* [ ] Add a global param to choose saving option (no saving, display to stdin, save to file, save to db...)
 * [ ] Clean ressources in articlescraper and sourcescraper at the end of a scraping loop.
 * [ ] Implement the CLI.
