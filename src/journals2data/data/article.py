@@ -209,5 +209,12 @@ class Article():
 
             file.seek(0)
             file.writelines(lines)
-    
+        
+        # logging
+        if(self.source.config.params["VERBOSE"].value > 0):
+            print(
+                "Saved article[url: " + self.url + "]" +
+                "at " + filepath
+            )
+
 

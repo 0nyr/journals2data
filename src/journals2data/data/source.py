@@ -2,6 +2,7 @@ import typing
 from typing import List, Dict, TYPE_CHECKING
 import json
 
+import journals2data
 from journals2data import console
 
 # avoid circular import for type checking
@@ -11,13 +12,13 @@ from journals2data import console
 
 class Source:
 
+    config: journals2data.J2DConfiguration
+
     url: str
     language: str
     html: str
     scrap_frequency: str
     output_filepath: str
-
-    DEFAULT_OUTPUT_FILEPATH: str = "out/out.json"
 
     # list of ongoing article urls to Article
     #articles: typing.Optional[List[Article]]
@@ -26,6 +27,7 @@ class Source:
         self, 
         url: str, 
         language: str, 
+        config: journals2data.J2DConfiguration,
         html: str = "",
         scrap_frequency: str = "",
         output_filepath: str = "",
@@ -41,7 +43,7 @@ class Source:
             output_filepath == "null" or
             output_filepath == "None"
         ):
-            self.output_filepath = self.DEFAULT_OUTPUT_FILEPATH
+            self.output_filepath = self.config.params["DEFAULT_OUTPUT_FILEPATH"]
         else:
             self.output_filepath = output_filepath
         

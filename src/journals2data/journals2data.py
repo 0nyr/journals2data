@@ -9,6 +9,7 @@ from selenium import webdriver
 from selenium.webdriver.firefox.options import Options
 
 from journals2data import data
+from journals2data import utils
 from journals2data import scraper
 from journals2data import exception
 from journals2data import console
@@ -96,6 +97,15 @@ class Journals2Data:
             self.config.params["RUN_NUMBER"] >= 
             self.config.params["NB_RUN_LIMIT"]
         ):
+            if(
+                self.config.params["VERBOSE"] == 
+                utils.VerboseLevel.COLOR
+            ):
+                console.println_ctrl_sequence(
+                    "****** RUN number at maximum. Saving everything.",
+                    console.ANSICtrlSequence.PASSED
+                )
+
             for source_scraper in self.source_scrapers:
                 source_scraper.save_all_now()
 

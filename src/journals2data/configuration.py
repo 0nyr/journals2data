@@ -12,6 +12,7 @@ class J2DConfiguration:
     # default conf params
     params: dict = {
         "CONFIG_FILETYPE": "csv",
+        "DEFAULT_OUTPUT_FILEPATH": "/home/onyr/Documents/code/python/journals2data/out/out.json",
         "CONFIG_CSV_FILEPATH": "/home/onyr/Documents/code/python/journals2data/src/journals2data/conf/config.csv",
         "BERT_MODEL_BASEPATH": "/home/onyr/Documents/code/models/",
         "BERT_LANGUAGE_DIRS": {
