@@ -509,18 +509,14 @@ class SourceScraper:
                     save_article_scraper()
                 else:
                     # VERB: log article_scaper and score
-                    scrap_result.
-            else:
-                if(
-                    self.config.params["VERBOSE"].value == 
-                    utils.enums.VerboseLevel.COLOR
-                ):
-                    console.println_ctrl_sequence(
-                        "article_scraper not saved." +
-                        "Scraping failed: " +
-                        str(scrap_result),
-                        console.ANSICtrlSequence.FAILED
+                    scrap_result.log_scraping_result(
+                        "Warning: article_scraper not saved. Score too low."
                     )
+            else:
+                # VERB: log article_scaper and score
+                scrap_result.log_scraping_result(
+                    "Warning: article_scraper not saved. Scraping failed."
+                )
 
     def save_all_now(self):
         """

@@ -190,7 +190,7 @@ class ArticleScraper:
         text = unicodedata.normalize(
             'NFKC', article_text).encode('utf-8', 'ignore')
         article_text = text.decode("utf-8")
-        self.article.full_text = article_text
+        self.article.set_full_text(article_text)
 
         # add last data from newspaper_article to article
         self.article.title_from_page = newspaper_article.title

@@ -6,7 +6,7 @@ import datetime
 
 from .source import Source
 from journals2data import console
-
+from journals2data import utils
 
 class Article():
 
@@ -49,6 +49,9 @@ class Article():
 
         self.publish_date = ""
         self.title_from_page = ""
+    
+    def set_full_text(self, text: str):
+        self.full_text = text.replace("\n", "")  # remove \n
     
     def __str__(self) -> str:
         return self.to_str(
@@ -212,8 +215,9 @@ class Article():
         
         # logging
         if(self.source.params["VERBOSE"].value > 0):
+            url_preview = utils.limit_line_str(self.url)
             print(
-                "Saved article[url: " + self.url + "]" +
+                "Article saved: [url: " + url_preview + "] " +
                 "at " + filepath
             )
 
