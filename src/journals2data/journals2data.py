@@ -102,7 +102,7 @@ class Journals2Data:
                 utils.VerboseLevel.COLOR
             ):
                 console.println_ctrl_sequence(
-                    "****** RUN number at maximum. Saving everything.",
+                    "****** RUN_NUMBER at maximum. Saving everything.",
                     console.ANSICtrlSequence.PASSED
                 )
 

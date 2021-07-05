@@ -18,33 +18,7 @@ import unicodedata
 import journals2data
 from journals2data import data
 from journals2data import utils
-
-from enum import Enum
-
-class ScrapingResultFlag(Enum):
-
-    SUCCESS = 0
-    RAW_SCRAPING_TIMEOUT = 1
-    RAW_SCRAPING_FAILED = 2
-
-class ScrapingResult():
-
-    flag: ScrapingResultFlag
-    score: float
-
-    def __init__(
-        self, 
-        result_flag, 
-        score: float = 0
-    ):
-        """
-        This is a return object for the ArticleScraper.scrap()
-        method. It contains a ScrapingResultFlag and a score.
-        NOTE: In case of error, score == 0.
-        """
-        self.flag = result_flag
-        self.score = score
-
+from .scrapingresult import ScrapingResult, ScrapingResultFlag
 
 class ArticleScraper:
 
@@ -115,7 +89,8 @@ class ArticleScraper:
                 utils.get_str_time_now()
             )
             return ScrapingResult(
-                ScrapingResultFlag.RAW_SCRAPING_TIMEOUT
+                ScrapingResultFlag.RAW_SCRAPING_TIMEOUT,
+                self.config
             )
 
         except Exception as Arguments:
@@ -125,7 +100,8 @@ class ArticleScraper:
                 utils.get_str_time_now()
             )
             return ScrapingResult(
-                ScrapingResultFlag.RAW_SCRAPING_FAILED
+                ScrapingResultFlag.RAW_SCRAPING_FAILED,
+                self.config
             )
 
         finally:
@@ -148,7 +124,8 @@ class ArticleScraper:
         self.__evaluate_scraping_and_parsing()
 
         return ScrapingResult(
-            ScrapingResultFlag.SUCCESS
+            ScrapingResultFlag.SUCCESS,
+            self.config
         )
 
         

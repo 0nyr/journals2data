@@ -9,6 +9,8 @@ import pandas as pd
 
 import sys
 import logging
+
+from journals2data.data.mapurlinfo import MapURLInfo
 logging.basicConfig(stream=sys.stdout, level=logging.INFO)
 
 import journals2data
@@ -17,7 +19,8 @@ from journals2data import utils
 from journals2data import console
 from journals2data import exception
 from journals2data.scraper import url_predict
-from .articlescraper import ArticleScraper, ScrapingResult, ScrapingResultFlag
+from .articlescraper import ArticleScraper
+from .scrapingresult import ScrapingResult, ScrapingResultFlag
 from .mapurlarticlescraper import MapURLArticleScraper
 
 class SourceScraper:
@@ -439,7 +442,35 @@ class SourceScraper:
         NOTE: There is an evaluation of the article scraping score. 
         If too bad, the newly created ArticleScraper is not added to 
         self.url_article_scrapers.
-        """
+        """ 
+
+        # DBUG: limit number of potential articles to scrap
+        __limit = self.config.params["POTENTIAL_ARTICLE_LIMIT"]
+        if(__limit != None):
+            tmp_transfer_dict = data.MapURLInfo()
+            count: int = 0
+            for url in self.potential_article_urls_for_scraping:
+                if(count < __limit): 
+                    tmp_transfer_dict[
+                        url
+                    ] = self.potential_article_urls_for_scraping[url]
+                    count += 1
+                else:
+                    break
+            self.potential_article_urls_for_scraping = tmp_transfer_dict
+        
+        # VERB: log nb of potential articles to scrap
+        if(
+            self.config.params["VERBOSE"].value == 
+            utils.enums.VerboseLevel.COLOR
+        ):
+            console.println_ctrl_sequence(
+                "*** nb of potential articles to scrap for source[" +
+                self.source.url + "] = " + str(len(
+                    self.potential_article_urls_for_scraping
+                )),
+                console.ANSICtrlSequence.PASSED
+            )
 
         for url in self.potential_article_urls_for_scraping:
             article: data.Article = data.Article(
@@ -450,29 +481,46 @@ class SourceScraper:
                 article,
                 self.config
             )
-            # call scraping steps
-            # check scraping score
-            #    if scraping score good enough, 
-            #    add article_scraper to self.url_article_scrapers
-            # TODO: complete function
+
+            # save article_scraper on scraping success
             scrap_result: ScrapingResult = article_scraper.scrap()
             if(scrap_result.flag == ScrapingResultFlag.SUCCESS):
                 
                 # log successful scraping
                 if(self.config.params["VERBOSE"].value > 0):
                     article_scraper.log_successful_scraping()
-                
-                # save if score > threshold
-                if(
-                    self.config.params["ARTICLE_SCORE_THRESHOLD"] != None and
-                    scrap_result.score >= self.config.params["ARTICLE_SCORE_THRESHOLD"]
-                ):
+
+                # save article_scraper if necessary
+                def save_article_scraper():
                     # save article_scraper and url for future runs
                     self.url_article_scrapers[url] = article_scraper
                     self.last_known_urls[url] = self.potential_article_urls_for_scraping[url]
 
                     # increment scraping nb
                     self.last_known_urls[url].increment_scraped_nb()
+                
+                if(self.config.params["ARTICLE_SCORE_THRESHOLD"] == None):
+                    save_article_scraper()
+                # save if score > threshold
+                elif(
+                    self.config.params["ARTICLE_SCORE_THRESHOLD"] != None and
+                    scrap_result.score >= self.config.params["ARTICLE_SCORE_THRESHOLD"]
+                ):
+                    save_article_scraper()
+                else:
+                    # VERB: log article_scaper and score
+                    scrap_result.
+            else:
+                if(
+                    self.config.params["VERBOSE"].value == 
+                    utils.enums.VerboseLevel.COLOR
+                ):
+                    console.println_ctrl_sequence(
+                        "article_scraper not saved." +
+                        "Scraping failed: " +
+                        str(scrap_result),
+                        console.ANSICtrlSequence.FAILED
+                    )
 
     def save_all_now(self):
         """

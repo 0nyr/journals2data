@@ -27,7 +27,8 @@ class J2DConfiguration:
         "USER": None,
         "ARTICLE_SCORE_THRESHOLD": None, #TODO: choose a good default value
         "NB_RUN_LIMIT": None,
-        "RUN_NUMBER": 0 # should not be edited by hand
+        "RUN_NUMBER": 0, # should not be edited by hand
+        "POTENTIAL_ARTICLE_LIMIT": None
     }
 
     def __init__(
