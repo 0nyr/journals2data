@@ -37,6 +37,7 @@ class Source:
         self.language = language
         self.html = html
         self.scrap_frequency = scrap_frequency
+        self.config = config
 
         if(
             output_filepath == "" or

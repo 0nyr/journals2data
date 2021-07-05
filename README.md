@@ -445,7 +445,11 @@ Still, the weekly goal can be considered as achieved 🎉️.
 
 ### Mon 5 Jul 2021
 
-* [ ] Implement a `NB_RUN_LIMIT` and `RUN_NUMBER` conf param and modify the code so as to save articles when the run number equals `NB_RUN_LIMIT`.
+First full loop test result: Done on one source only ([https://www.wsj.com/](https://www.wsj.com/)), and without BERT + DOM layer. It took 1200s which is a really long time however there are many ways to decrease that length in the future.
+
+* [X] Implement a `NB_RUN_LIMIT` and `RUN_NUMBER` conf param and modify the code so as to save articles when the run number equals `NB_RUN_LIMIT`.
+* [ ] Add a nb of article to save limit for debug purpose.
 * [ ] Add a global param to choose saving option (no saving, display to stdin, save to file, save to db...)
+* [X] Add global param to set `DEFAULT_OUTPUT_FILEPATH`.
 * [ ] Clean ressources in articlescraper and sourcescraper at the end of a scraping loop.
 * [ ] Implement the CLI.

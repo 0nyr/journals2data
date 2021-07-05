@@ -116,10 +116,11 @@ class J2DConfiguration:
                 line_data: List[str] = list(line.split(";"))
                 try:
                     new_source: data.Source = data.Source(
-                        line_data[0], # url
-                        line_data[1], # language
-                        line_data[2], # scrap_frequency
-                        line_data[3]  # output_filepath
+                        url=line_data[0], 
+                        language=line_data[1], 
+                        scrap_frequency=line_data[2], 
+                        output_filepath=line_data[3],
+                        config=self
                     )
                     sources.append(new_source)
                 except:
