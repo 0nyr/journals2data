@@ -120,7 +120,7 @@ class J2DConfiguration:
                         language=line_data[1], 
                         scrap_frequency=line_data[2], 
                         output_filepath=line_data[3],
-                        config=self
+                        params=self.params
                     )
                     sources.append(new_source)
                 except:

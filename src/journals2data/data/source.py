@@ -12,7 +12,7 @@ from journals2data import console
 
 class Source:
 
-    config: journals2data.J2DConfiguration
+    params: dict # instead of config due to circular import
 
     url: str
     language: str
@@ -27,7 +27,7 @@ class Source:
         self, 
         url: str, 
         language: str, 
-        config: journals2data.J2DConfiguration,
+        params: dict,
         html: str = "",
         scrap_frequency: str = "",
         output_filepath: str = "",
@@ -37,14 +37,14 @@ class Source:
         self.language = language
         self.html = html
         self.scrap_frequency = scrap_frequency
-        self.config = config
+        self.params = params
 
         if(
             output_filepath == "" or
             output_filepath == "null" or
             output_filepath == "None"
         ):
-            self.output_filepath = self.config.params["DEFAULT_OUTPUT_FILEPATH"]
+            self.output_filepath = self.params["DEFAULT_OUTPUT_FILEPATH"]
         else:
             self.output_filepath = output_filepath
         
