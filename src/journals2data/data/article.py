@@ -47,8 +47,8 @@ class Article():
         self.language = source.language
         self.url_source = source.url
 
-        self.publish_date = None
-        self.title_from_page = None
+        self.publish_date = ""
+        self.title_from_page = ""
     
     def __str__(self) -> str:
         return self.to_str(
@@ -156,8 +156,17 @@ class Article():
         to_string += "}"
 
         return to_string
+
+    def save(self):
+        """
+        Save the article data if it make sense to do so 
+        (not empty).
+        TODO: add a global param to choose saving option
+        """
+        if(self.full_text != ""):
+            self.__save_to_file()
     
-    def save_to_file(self):
+    def __save_to_file(self):
         """
         This function is responsible for saving the object as 
         a JSON object.
@@ -168,7 +177,7 @@ class Article():
         writing can occur.
         """
         filepath: str = self.source.output_filepath
-        endl: str = "\r\n"
+        endl: str = "\n"
 
         # if file does not exist, create one with empty JSON list
         if(os.path.exists(filepath) == False):

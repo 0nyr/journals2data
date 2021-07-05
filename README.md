@@ -428,9 +428,9 @@ TODOs:
 
 Multiple refactoring everywhere. Lots of bugs smashed.
 
-I'm proud to announce that (not taking BERT and DOM layer into consideration), the library scraping loop is now functionning! 
+I'm proud to announce that (not taking BERT and DOM layer into consideration), the library scraping loop is now functionning!
 
-However, keep in mind the loop process is not finished yet. Not article are saved for now. Scheduling and multithreading are still to be implemented. And BERT & DOM are still buggy and untested by my own due to PC problems...
+However, keep in mind the loop process is not finished yet. No articles are saved for now. Scheduling and multithreading are still to be implemented. And BERT & DOM are still buggy and untested by my own due to PC problems...
 
 Still, the weekly goal can be considered as achieved 🎉️.
 
@@ -442,3 +442,10 @@ Still, the weekly goal can be considered as achieved 🎉️.
 * [X] Implement article scraping logger.
 * [X] Implement a `ARTICLE_SCORE_THRESHOLD` and modify scrap_new_potential_articles() to take it into account.
 * [ ] Implement a `NB_RUN_LIMIT` and `RUN_NUMBER` conf param and modify the code so as to save articles when the run number falls to 0.
+
+### Mon 5 Jul 2021
+
+* [ ] Implement a `NB_RUN_LIMIT` and `RUN_NUMBER` conf param and modify the code so as to save articles when the run number equals `NB_RUN_LIMIT`.
+* [ ] Add a global param to choose saving option (no saving, display to stdin, save to file, save to db...)
+* [ ] Clean ressources in articlescraper and sourcescraper at the end of a scraping loop.
+* [ ] Implement the CLI.

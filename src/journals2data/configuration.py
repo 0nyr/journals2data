@@ -24,7 +24,9 @@ class J2DConfiguration:
         "SOURCE_TIMEOUT": None,
         "ARTICLE_TIMEOUT": None,
         "USER": None,
-        "ARTICLE_SCORE_THRESHOLD": None #TODO: choose a good default value
+        "ARTICLE_SCORE_THRESHOLD": None, #TODO: choose a good default value
+        "NB_RUN_LIMIT": None,
+        "RUN_NUMBER": 0 # should not be edited by hand
     }
 
     def __init__(

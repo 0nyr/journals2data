@@ -3,12 +3,9 @@ from typing import Dict
 
 import json
 
-import selenium
-from bs4 import BeautifulSoup
-
 from journals2data import console
 
-class FrontpageURL:
+class FrontpageURLInfo:
 
     url: str
     title_from_a_tag: str
@@ -28,6 +25,9 @@ class FrontpageURL:
 
         # default init values
         self.scraped_nb_times = 0
+    
+    def increment_scraped_nb(self):
+        self.scraped_nb_times += 1
     
     def __str__(self) -> str:
         return self.to_str(

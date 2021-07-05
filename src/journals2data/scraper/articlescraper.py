@@ -239,7 +239,9 @@ class ArticleScraper:
     
     def log_successful_scraping(self):
         """
-        VERB: display a part of the scraped full text
+        VERB: display a part of the scraped full text. 
+        This is a quick way to see what happened with
+        the scraping of the article.
         """
         text_preview = utils.limit_line_str(
             self.article.full_text
@@ -253,3 +255,10 @@ class ArticleScraper:
             "[txt: " + text_preview + "] " +
             utils.get_str_time_now()
         )
+    
+    def save_all_articles_now(self):
+        """
+        This method is used to save all pending articles that 
+        have already been scraped at least once.
+        """
+        self.article.save()

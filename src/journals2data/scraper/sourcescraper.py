@@ -31,7 +31,7 @@ class SourceScraper:
     potential_article_urls_for_scraping: data.MapURLInfo # URLs to scrap this time
     raw_frontpage_urls: data.MapURLInfo
 
-    article_scrapers: MapURLArticleScraper # current and past article scrapers
+    url_article_scrapers: MapURLArticleScraper # current and past article scrapers
 
     def __init__(
         self,
@@ -49,7 +49,7 @@ class SourceScraper:
         self.known_article_url_for_rescraping = data.MapURLInfo()
 
         # other defaults
-        self.article_scrapers = MapURLArticleScraper()
+        self.url_article_scrapers = MapURLArticleScraper()
     
     def scrap_all_urls(self):
         """
@@ -129,7 +129,7 @@ class SourceScraper:
                 continue
 
             # build return object
-            new_frontpage_url: data.FrontpageURL = data.FrontpageURL(
+            new_frontpage_url: data.FrontpageURLInfo = data.FrontpageURLInfo(
                 url=href,
                 title_from_a_tag=title
             )
@@ -262,10 +262,10 @@ class SourceScraper:
         """
         # TODO: do something with self.last_known_urls so as to save
         # the articles whose URLs are still inside self.disappeard_urls_for_saving
-        # do something with self.article_scrapers 
-        #    self.article_scrapers...article.save_to_file()
+        # do something with self.url_article_scrapers 
+        #    self.url_article_scrapers...article.save_to_file()
         for url in self.disappeard_urls_for_saving:
-            self.article_scrapers[url].article.save_to_file()
+            self.url_article_scrapers[url].article.save_to_file()
     
     def determine_article_urls(self):
         """
@@ -425,7 +425,7 @@ class SourceScraper:
         if they were modified or not!
         """
         for url in self.known_article_url_for_rescraping:
-            article_scraper: ArticleScraper = self.article_scrapers[url]
+            article_scraper: ArticleScraper = self.url_article_scrapers[url]
             # TODO: finish function
             # rescrap article and check if content was modified
             ...
@@ -438,7 +438,7 @@ class SourceScraper:
         scraping process.
         NOTE: There is an evaluation of the article scraping score. 
         If too bad, the newly created ArticleScraper is not added to 
-        self.article_scrapers.
+        self.url_article_scrapers.
         """
 
         for url in self.potential_article_urls_for_scraping:
@@ -453,7 +453,7 @@ class SourceScraper:
             # call scraping steps
             # check scraping score
             #    if scraping score good enough, 
-            #    add article_scraper to self.article_scrapers
+            #    add article_scraper to self.url_article_scrapers
             # TODO: complete function
             scrap_result: ScrapingResult = article_scraper.scrap()
             if(scrap_result.flag == ScrapingResultFlag.SUCCESS):
@@ -468,10 +468,21 @@ class SourceScraper:
                     scrap_result.score >= self.config.params["ARTICLE_SCORE_THRESHOLD"]
                 ):
                     # save article_scraper and url for future runs
-                    self.article_scrapers[url] = article_scraper
+                    self.url_article_scrapers[url] = article_scraper
                     self.last_known_urls[url] = self.potential_article_urls_for_scraping[url]
 
+                    # increment scraping nb
+                    self.last_known_urls[url].increment_scraped_nb()
 
+    def save_all_now(self):
+        """
+        This method is used to save everything that need to be saved,
+        for instance before terminating the run cicles.
+        """
+
+        # save all scraped articles
+        for article_scraper in self.url_article_scrapers.values():
+            article_scraper.save_all_articles_now()
 
 
 

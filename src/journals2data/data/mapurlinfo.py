@@ -1,12 +1,12 @@
 from journals2data import data
-from .frontpageurl import FrontpageURL
+from .frontpageurlinfo import FrontpageURLInfo
 
 import typing
 from typing import Dict
 
 import pandas as pd
 
-typing.NewType('MapURLInfo', Dict[str, FrontpageURL])
+typing.NewType('MapURLInfo', Dict[str, FrontpageURLInfo])
 
 class MapURLInfo(dict):
 

@@ -78,20 +78,8 @@ class Journals2Data:
             FIXME: Not async, needed for schedule and improved performance
             FIXME: not scheduled !!!
         """
-        # FIXME: make it async
-        # open sync browser connection
-        # set Firefox headless
-        firefox_options = Options()
-        firefox_options.headless = True
 
-        brower = webdriver.Firefox(
-            options = firefox_options,
-            #service_log_path="./logs/geckodriver.log"
-            service_log_path="/home/onyr/Documents/code/python/journals2data/logs/geckodriver.log"
-        )
-
-
-        # TODO: finish function and processes
+        # sources scraping loop 
         for source_scraper in self.source_scrapers:
             # use a SourceScraper object to scrap URLs
             source_scraper.scrap_all_urls()
@@ -101,3 +89,13 @@ class Journals2Data:
             source_scraper.determine_article_urls()
             source_scraper.scrap_known_url_articles()
             source_scraper.scrap_new_potential_articles()
+        
+        # run limit and saving
+        self.config.params["RUN_NUMBER"] += 1
+        if(
+            self.config.params["RUN_NUMBER"] >= 
+            self.config.params["NB_RUN_LIMIT"]
+        ):
+            for source_scraper in self.source_scrapers:
+                source_scraper.save_all_now()
+
