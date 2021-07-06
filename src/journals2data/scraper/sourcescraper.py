@@ -185,7 +185,10 @@ class SourceScraper:
             if is_browser_headless:
                 fireFoxOptions.set_headless()
                 browser = webdriver.Firefox(
-                    firefox_options = fireFoxOptions
+                    firefox_options=fireFoxOptions,
+                    log_path=self.config.params[
+                        "GECKODRIVER_LOG_FILEPATH"
+                    ]
                 )
             else:
                 browser = webdriver.Firefox()
