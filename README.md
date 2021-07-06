@@ -462,10 +462,13 @@ Connected to a VM over SSH. I have set up a SSH key for GitHub and I downloaded 
 
 ### Tue 6 Jul 2021
 
-Trying the VM...
+Trying the VM given by Elöd
 
+Trying another VM from Cédric's PC
 
-* [ ] Scheduler simple à implémenter
+This times, it seams to work but for a mysterious reason, the scraping of articles failed for  but not for `https://www.theguardian.com/` where the articles where scraped properly... ?
+
+* [ ] Scheduler simple à implémenter (WIP)
 * [ ] Add a global param to choose saving option (no saving, display to stdin, save to file, save to db...)
 * [ ] Clean ressources in articlescraper and sourcescraper at the end of a scraping loop.
 * [ ] Implement the CLI.
