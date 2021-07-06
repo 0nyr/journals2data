@@ -83,6 +83,8 @@ class Journals2Data:
         # sources scraping loop 
         for source_scraper in self.source_scrapers:
             # use a SourceScraper object to scrap URLs
+            # TODO:    +1) multithread this loop
+            # TODO:    +2) add scheduling method there
             source_scraper.scrap_all_urls()
             source_scraper.keep_known_urls()
             source_scraper.url_lifespan_check()
