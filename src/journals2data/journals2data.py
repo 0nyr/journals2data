@@ -37,7 +37,7 @@ class Journals2Data:
             raise exception.NoSourcesError(
                 """
                 Error: No sources were found.
-                Nothing do do. Terminating.
+                Nothing to do. Terminating.
                 """
             )
         
