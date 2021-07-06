@@ -459,3 +459,13 @@ Connected to a VM over SSH. I have set up a SSH key for GitHub and I downloaded 
 * [ ] Add a global param to choose saving option (no saving, display to stdin, save to file, save to db...)
 * [ ] Clean ressources in articlescraper and sourcescraper at the end of a scraping loop.
 * [ ] Implement the CLI.
+
+### Tue 6 Jul 2021
+
+Trying the VM...
+
+
+* [ ] Scheduler simple à implémenter
+* [ ] Add a global param to choose saving option (no saving, display to stdin, save to file, save to db...)
+* [ ] Clean ressources in articlescraper and sourcescraper at the end of a scraping loop.
+* [ ] Implement the CLI.

@@ -26,7 +26,7 @@ parser = argparse.ArgumentParser(description='TryJ2D')
 parser.add_argument(
     '--conf_path', 
     type=str, 
-    default="/home/onyr/Documents/code/python/journals2data/src/journals2data/conf/journal2data.onyr.conf",
+    default="/home/onyr/Documents/code/python/journals2data/src/journals2data/conf/journals2data.onyr.conf",
     help='url used to retrieve the articles'
 )
 args = parser.parse_args()
