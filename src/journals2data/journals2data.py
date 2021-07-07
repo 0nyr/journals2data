@@ -64,7 +64,6 @@ class Journals2Data:
                     TODO: not implemented
                     + source_scraper.url_lifespan_check()
             + 3) save articles whose URLs disappeared
-                    TODO: not implemented
                     + source_scraper.save_source_articles()
             + 4) determine which ones are potential article URLs
                     + source_scraper.determine_article_urls()
@@ -73,7 +72,7 @@ class Journals2Data:
                     + source_scraper.scrap_known_url_articles()
             + 6) scrap new potential Articles
             and evaluate scraping of URLs (entropy/confidence score)
-                    TODO: to be finished, crucial
+                    TODO: to be finished, evaluation not implemented
                     + source_scraper.scrap_new_potential_articles()
             + 7) Clean dictionnaries and prepare next scraping run
                     + source_scraper.clean_ressources()

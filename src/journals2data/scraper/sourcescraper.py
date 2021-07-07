@@ -266,13 +266,14 @@ class SourceScraper:
     def save_source_articles(self):
         """
         Save articles whose URLs disappeared.
+        NOTE: Remove their associated ArticleScraper from the list
+        of current articles scraped.
         """
-        # TODO: do something with self.last_known_urls so as to save
-        # the articles whose URLs are still inside self.disappeard_urls_for_saving
-        # do something with self.url_article_scrapers 
-        #    self.url_article_scrapers...article.save_to_file()
         for url in self.disappeard_urls_for_saving:
-            self.url_article_scrapers[url].article.save_to_file()
+            # remove article_scraper from self.url_article_scrapers
+            # and save their corresponding articles
+            article_scraper: ArticleScraper = self.url_article_scrapers.pop(url)
+            article_scraper.save_article()
     
     def determine_article_urls(self):
         """
@@ -530,7 +531,7 @@ class SourceScraper:
 
         # save all scraped articles
         for article_scraper in self.url_article_scrapers.values():
-            article_scraper.save_all_articles_now()
+            article_scraper.save_article()
 
     def clean_ressources(self):
         """
@@ -542,6 +543,20 @@ class SourceScraper:
         self.known_article_url_for_rescraping = data.MapURLInfo() 
         self.potential_article_urls_for_scraping = data.MapURLInfo()
         self.raw_frontpage_urls = data.MapURLInfo()
+
+        if(self.config.params["DEBUG"]):
+            utils.log(
+                self.config.params["VERBOSE"],
+                "*** scraping run of source[" + \
+                self.source.url + "] ended"
+            )
+            utils.log(
+                self.config.params["VERBOSE"],
+                "self.disappeard_urls_for_saving length = " + \
+                str(len(self.disappeard_urls_for_saving))
+            )
+
+
 
 
 

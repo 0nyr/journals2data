@@ -236,7 +236,7 @@ class ArticleScraper:
             utils.get_str_time_now()
         )
     
-    def save_all_articles_now(self):
+    def save_article(self):
         """
         This method is used to save all pending articles that 
         have already been scraped at least once.
