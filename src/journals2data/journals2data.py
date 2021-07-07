@@ -129,12 +129,23 @@ class Journals2Data:
 
             # log waitng time if needed
             if(log_waiting_time):
-                if(self.config.params["VERBOSE"].value > 0):
-                    print(
-                        "... waiting for " + 
-                        self.config.params["SCHEDULE_SYNC_SCRAP_MIN"] +
-                        " minute(s)..."
-                    )
+                log_text: str = "... waiting for " + \
+                        str(self.config.params[
+                            "SCHEDULE_SYNC_SCRAP_MIN"
+                        ]) + " minute(s)..."
+                if(
+                    self.config.params["VERBOSE"] == 
+                    utils.enums.VerboseLevel.NO_COLOR
+                ):
+                    print(log_text)
+                elif(
+                    self.config.params["VERBOSE"] == 
+                    utils.enums.VerboseLevel.COLOR
+                ):
+                    console.println_ctrl_sequence(
+                        log_text,
+                        console.ANSICtrlSequence.PASSED
+                    )   
 
         if(
             self.config.params["SCHEDULE_SYNC_SCRAP_MIN"] != None and
