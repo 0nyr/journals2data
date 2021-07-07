@@ -26,10 +26,12 @@ class J2DConfiguration:
         "SOURCE_TIMEOUT": None,
         "ARTICLE_TIMEOUT": None,
         "USER": None,
-        "ARTICLE_SCORE_THRESHOLD": None, #TODO: choose a good default value
+        "ARTICLE_SCORE_THRESHOLD": None,  #TODO: choose a good default value
         "NB_RUN_LIMIT": None,
-        "RUN_NUMBER": 0, # should not be edited by hand
-        "POTENTIAL_ARTICLE_LIMIT": None
+        "RUN_NUMBER": 0,  # should not be edited by hand
+        "IS_J2D_RUNNING": True,  # should not be edited by hand
+        "POTENTIAL_ARTICLE_LIMIT": None,
+        "SCHEDULE_SYNC_SCRAP_MIN": None
     }
 
     def __init__(

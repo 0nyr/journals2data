@@ -3,7 +3,8 @@
 
 import typing
 from typing import List
-from newspaper import source
+import time
+import schedule
 
 from selenium import webdriver
 from selenium.webdriver.firefox.options import Options
@@ -98,7 +99,11 @@ class Journals2Data:
         if(
             self.config.params["RUN_NUMBER"] >= 
             self.config.params["NB_RUN_LIMIT"]
-        ):
+        ):  
+            # change IS_J2D_RUNNING to false
+            self.config.params["IS_J2D_RUNNING"] = False
+
+            # saving pending scraped articles
             if(
                 self.config.params["VERBOSE"] == 
                 utils.VerboseLevel.COLOR
@@ -111,3 +116,43 @@ class Journals2Data:
             for source_scraper in self.source_scrapers:
                 source_scraper.save_all_now()
 
+    def scheduled_sync_scrap(self):
+        """
+        This method calls the self.scrap() method 
+        every SCHEDULE_SYNC_SCRAP_MIN minutes.
+        NOTE: The SCHEDULE_SYNC_SCRAP_MIN conf param
+        need to be defined and not equals to None.
+        """
+
+        def job(log_waiting_time: bool = False):
+            self.scrap()
+
+            # log waitng time if needed
+            if(log_waiting_time):
+                if(self.config.params["VERBOSE"].value > 0):
+                    print(
+                        "... waiting for " + 
+                        self.config.params["SCHEDULE_SYNC_SCRAP_MIN"] +
+                        " minute(s)..."
+                    )
+
+        if(
+            self.config.params["SCHEDULE_SYNC_SCRAP_MIN"] != None and
+            self.config.params["SCHEDULE_SYNC_SCRAP_MIN"] > 0
+        ):
+            interval: int = self.config.params[
+                "SCHEDULE_SYNC_SCRAP_MIN"
+            ]
+
+            # run first time
+            job(log_waiting_time=True)
+
+            # run on schedule
+            schedule.every(interval).minutes.do(
+                job, log_waiting_time=True
+            )
+            while(self.config.params["IS_J2D_RUNNING"] == True):
+                schedule.run_pending()
+                time.sleep(1)
+        else:
+            job()
