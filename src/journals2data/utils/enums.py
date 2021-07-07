@@ -9,6 +9,7 @@ class VerboseLevel(IntEnum):
     on verbosity.
     NOTE: Use IntEnum instead of Enum fo correct 
     JSON serialization.
+    WARN: Since it is an IntEnum, it is used as a value!
     """
 
     NONE = 0
@@ -19,6 +20,7 @@ class ArticleSavingOption(IntEnum):
     """
     This enum presents the different options for saving the result
     from scraping of the obtained articles.
+    WARN: Since it is an IntEnum, it is used as a value!
     """
     NO_SAVING = 0
     SAVE_TO_FILE = 1 

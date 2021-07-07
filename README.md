@@ -484,4 +484,6 @@ This times, it seams to work but for a mysterious reason, the scraping of articl
 * [X] Refactor and fix `source_scraper.keep_known_urls()`.
 * [X] Add a global param to choose saving option (no saving, display to stdin, save to file, save to db...)
 * [X] Add conf param `EMPTY_OUT_FILE` to erase output file at beginning of a run.
+* [ ] Investigate empty `source.html` error while scraping some sources like `https://www.leprogres.fr/rss`.
+* [ ] Implement correct program handling of SIGTERM.
 * [ ] Implement the CLI.

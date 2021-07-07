@@ -171,7 +171,7 @@ class Article():
         the conf param ARTICLE_SAVING_OPTION.
         """
         if(
-            self.full_text != "" or
+            self.full_text == "" or
             self.source.params["ARTICLE_SAVING_OPTION"] ==
             utils.ArticleSavingOption.NO_SAVING
         ):
@@ -179,9 +179,9 @@ class Article():
             utils.log(
                 self.source.params["VERBOSE"],
                 "Article [" + self.url + "] [txt: " + \
-                utils.limit_line_str(self.full_text) + \
-                " not saved.",
-                console.ANSIColorCode.GREY2_C
+                utils.limit_line_str(self.full_text) + "] " + \
+                "not saved!",
+                console.ANSIColorCode.MISSED_C
             )
         elif(
             self.source.params["ARTICLE_SAVING_OPTION"] ==
