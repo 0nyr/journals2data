@@ -2,6 +2,7 @@
 
 import typing
 from typing import List
+import time
 
 from journals2data import data
 from journals2data import console
@@ -31,7 +32,8 @@ class J2DConfiguration:
         "RUN_NUMBER": 0,  # should not be edited by hand
         "IS_J2D_RUNNING": True,  # should not be edited by hand
         "POTENTIAL_ARTICLE_LIMIT": None,
-        "SCHEDULE_SYNC_SCRAP_MIN": None
+        "SCHEDULE_SYNC_SCRAP_MIN": None,
+        "J2D_RUN_START_TIME": None # should not be edited by hand
     }
 
     def __init__(
@@ -46,6 +48,10 @@ class J2DConfiguration:
             self.params["SOURCE_TIMEOUT"] = self.params["DEFAULT_TIMEOUT"]
         if(self.params["ARTICLE_TIMEOUT"] == None):
             self.params["ARTICLE_TIMEOUT"] = self.params["DEFAULT_TIMEOUT"]
+        
+        # save start time
+        if(self.params["J2D_RUN_START_TIME"] == None):
+            self.params["J2D_RUN_START_TIME"] = time.time()
 
         # print arguments
         if(self.params["VERBOSE"] == utils.VerboseLevel.NO_COLOR):

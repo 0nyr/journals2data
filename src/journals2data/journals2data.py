@@ -125,27 +125,27 @@ class Journals2Data:
         """
 
         def job(log_waiting_time: bool = False):
+            # count job execution time
+            job_start_time = time.time()
+
+            # run main job
             self.scrap()
 
-            # log waitng time if needed
+            # log job time
+            job_execution_time = (time.time() - job_start_time)
+            utils.log(
+                self.config.params["VERBOSE"],
+                "Scrap time for last run: " + str(job_execution_time),
+                console.ANSIColorCode.LIGHT_ORANGE_C
+            )
+
+            # log waiting time if needed
             if(log_waiting_time):
                 log_text: str = "... waiting for " + \
-                        str(self.config.params[
-                            "SCHEDULE_SYNC_SCRAP_MIN"
-                        ]) + " minute(s)..."
-                if(
-                    self.config.params["VERBOSE"] == 
-                    utils.enums.VerboseLevel.NO_COLOR
-                ):
-                    print(log_text)
-                elif(
-                    self.config.params["VERBOSE"] == 
-                    utils.enums.VerboseLevel.COLOR
-                ):
-                    console.println_ctrl_sequence(
-                        log_text,
-                        console.ANSICtrlSequence.PASSED
-                    )   
+                    str(self.config.params[
+                        "SCHEDULE_SYNC_SCRAP_MIN"
+                    ]) + " minute(s)..."
+                utils.log(self.config.params["VERBOSE"], log_text)
 
         if(
             self.config.params["SCHEDULE_SYNC_SCRAP_MIN"] != None and
