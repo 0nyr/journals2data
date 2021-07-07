@@ -488,6 +488,7 @@ A long test over a set of 6 articles is being performed over 10 runs each 90 min
 * [X] Refactor and fix `source_scraper.keep_known_urls()`.
 * [X] Add a global param to choose saving option (no saving, display to stdin, save to file, save to db...)
 * [X] Add conf param `EMPTY_OUT_FILE` to erase output file at beginning of a run.
+* [X] Fix empty outfile error.
 * [ ] Investigate empty `source.html` error while scraping some sources like `https://www.leprogres.fr/rss`.
 * [ ] Implement correct program handling of SIGTERM.
 * [ ] Implement the CLI.
