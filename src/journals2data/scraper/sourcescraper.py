@@ -58,19 +58,28 @@ class SourceScraper:
     def scrap_all_urls(self):
         """
         Get all URLs from source:
-            + 1) retrieve all URLs str from source
         """
+        # VERB: log self.raw_frontpage_urls size
+        # TODO: code block to be removed
+        utils.log(
+            self.config.params["VERBOSE"],
+            "self.raw_frontpage_urls length before __get_all_website_links = " + \
+            str(len(self.raw_frontpage_urls))
+        )
+
+        # get URLs from source page
         self.raw_frontpage_urls = self.__get_all_website_links(
             self.source.url
         )
 
-        if(self.config.params["VERBOSE"] == utils.VerboseLevel.COLOR):
-            console.println_debug(
-                "raw_frontpage_urls type: " + str(
-                    type(self.raw_frontpage_urls)
-                ) + 
-                "source URL: " + self.source.url
-            )
+        # VERB: log self.raw_frontpage_urls size
+        # TODO: code block to be removed
+        utils.log(
+            self.config.params["VERBOSE"],
+            "self.raw_frontpage_urls length after __get_all_website_links = " + \
+            str(len(self.raw_frontpage_urls))
+        )
+
 
     # web scraping functions
     def __get_all_website_links(
@@ -240,6 +249,14 @@ class SourceScraper:
             + 2) Check if they are present inside last_known_urls_map
             + 3) If present, add current pair to article_urls_for_scraping
         """
+        # VERB: log self.raw_frontpage_urls size
+        # TODO: code block to be removed
+        utils.log(
+            self.config.params["VERBOSE"],
+            "self.raw_frontpage_urls length = " + \
+            str(len(self.raw_frontpage_urls))
+        )
+
         # iterate trhough the dict keys: https://www.geeksforgeeks.org/iterate-over-a-dictionary-in-python/ 
         for url in self.raw_frontpage_urls:
             # check if url key is present in self.last_known_urls
@@ -544,17 +561,17 @@ class SourceScraper:
         self.potential_article_urls_for_scraping = data.MapURLInfo()
         self.raw_frontpage_urls = data.MapURLInfo()
 
-        if(self.config.params["DEBUG"]):
-            utils.log(
-                self.config.params["VERBOSE"],
-                "*** scraping run of source[" + \
-                self.source.url + "] ended"
-            )
-            utils.log(
-                self.config.params["VERBOSE"],
-                "self.disappeard_urls_for_saving length = " + \
-                str(len(self.disappeard_urls_for_saving))
-            )
+        # VERB: log self.raw_frontpage_urls size
+        utils.log(
+            self.config.params["VERBOSE"],
+            "*** scraping run of source[" + \
+            self.source.url + "] ended"
+        )
+        utils.log(
+            self.config.params["VERBOSE"],
+            "self.raw_frontpage_urls length = " + \
+            str(len(self.raw_frontpage_urls))
+        )
 
 
 
