@@ -374,6 +374,7 @@ class SourceScraper:
         determination algorithms so as to get a multiple scores of 
         prediction for a link to be an article or not.
         """
+
         # pandas printing options
         pd.set_option('display.max_columns', None)
         pd.set_option('display.width', None)
@@ -385,6 +386,17 @@ class SourceScraper:
             "scraped_nb_times": "scrap"
         })
         print("dframe base = [see below] \r\n", dframe.head(10))
+
+        # WTCH: if source.html is empty, return
+        if(self.source.html == None or self.source.html == ""):
+            return dframe
+
+            # VERB: log empty source!
+            utils.log(
+                self.config.params["VERBOSE"],
+                "source.html [" + self.source.url + "] is empty.",
+                console.ANSIColorCode.LIGHT_ORANGE_C
+            )
 
         # [BERT] apply BERT prediction layer
         dframe = url_predict.apply_BERT_prediction(

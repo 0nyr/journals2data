@@ -6,11 +6,13 @@ from lxml import html
 from sklearn.cluster import DBSCAN
 from urllib.parse import urlparse
 
+
 from .backpack import get_bagpack, get_attribute_list
 from .build_xpath import to_xpath
 
 import journals2data
 from journals2data import data
+from journals2data import utils
 
 def apply_DOM_prediction(
     dataframe: pd.DataFrame,
