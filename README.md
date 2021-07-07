@@ -479,7 +479,7 @@ This times, it seams to work but for a mysterious reason, the scraping of articl
 
 * [X] Investigate `https://www.wsj.com/` failed scraping and solve problem. Actually, it's just linked to the `POTENTIAL_ARTICLE_LIMIT` limit, which is just a debug param, used to limit the time of scraping of the program. By default, it is equal to None and do not interfere with the process.
 * [X] TEMP: implement a synchronous Scheduler (WIP) with all same scraping frequency.
-* [ ] Log time needed for every scrap() run.
+* [X] Log time needed for every scrap() run.
+* [X] Clean ressources in articlescraper and sourcescraper at the end of a scraping loop.
 * [ ] Add a global param to choose saving option (no saving, display to stdin, save to file, save to db...)
-* [ ] Clean ressources in articlescraper and sourcescraper at the end of a scraping loop.
 * [ ] Implement the CLI.

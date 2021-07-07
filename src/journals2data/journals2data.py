@@ -67,7 +67,6 @@ class Journals2Data:
                     TODO: not implemented
                     + source_scraper.save_source_articles()
             + 4) determine which ones are potential article URLs
-                    TODO: to be finished, crucial
                     + source_scraper.determine_article_urls()
             + 5) scrap already known URLs and check if content was modified
                     TODO: to be finished, crucial
@@ -76,9 +75,10 @@ class Journals2Data:
             and evaluate scraping of URLs (entropy/confidence score)
                     TODO: to be finished, crucial
                     + source_scraper.scrap_new_potential_articles()
+            + 7) Clean dictionnaries and prepare next scraping run
+                    + source_scraper.clean_ressources()
 
             FIXME: Not async, needed for schedule and improved performance
-            FIXME: not scheduled !!!
         """
 
         # sources scraping loop 
@@ -93,6 +93,7 @@ class Journals2Data:
             source_scraper.determine_article_urls()
             source_scraper.scrap_known_url_articles()
             source_scraper.scrap_new_potential_articles()
+            source_scraper.clean_ressources()
         
         # run limit and saving
         self.config.params["RUN_NUMBER"] += 1

@@ -28,13 +28,14 @@ class SourceScraper:
     source: data.Source
     config: journals2data.J2DConfiguration
 
-    last_known_urls: data.MapURLInfo # URLs scraped from last scraping
     disappeard_urls_for_saving: data.MapURLInfo # URLs for saving
     known_article_url_for_rescraping: data.MapURLInfo # scrap to check if modified
     potential_article_urls_for_scraping: data.MapURLInfo # URLs to scrap this time
     raw_frontpage_urls: data.MapURLInfo
 
+    # object to keep between runs
     url_article_scrapers: MapURLArticleScraper # current and past article scrapers
+    last_known_urls: data.MapURLInfo # URLs scraped from last scraping
 
     def __init__(
         self,
@@ -531,7 +532,16 @@ class SourceScraper:
         for article_scraper in self.url_article_scrapers.values():
             article_scraper.save_all_articles_now()
 
-
+    def clean_ressources(self):
+        """
+        This method is used to clean ressources such as empty
+        MapURLInfo object that need to be cleaned before
+        next run.
+        """
+        self.disappeard_urls_for_saving = data.MapURLInfo()
+        self.known_article_url_for_rescraping = data.MapURLInfo() 
+        self.potential_article_urls_for_scraping = data.MapURLInfo()
+        self.raw_frontpage_urls = data.MapURLInfo()
 
 
 
