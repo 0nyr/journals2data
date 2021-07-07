@@ -466,9 +466,19 @@ Trying the VM given by Elöd
 
 Trying another VM from Cédric's PC
 
-This times, it seams to work but for a mysterious reason, the scraping of articles failed for  but not for `https://www.theguardian.com/` where the articles where scraped properly... ?
+This times, it seams to work but for a mysterious reason, the scraping of articles failed for `https://www.wsj.com/` but not for `https://www.theguardian.com/` where the articles where scraped properly... ? This is strange since I tested it several times before ???
 
-* [ ] Scheduler simple à implémenter (WIP)
+* [ ] Investigate `https://www.wsj.com/` failed scraping and solve problem.
+* [ ] TEMP: implement a synchronous Scheduler (WIP)
+* [ ] Add a global param to choose saving option (no saving, display to stdin, save to file, save to db...)
+* [ ] Clean ressources in articlescraper and sourcescraper at the end of a scraping loop.
+* [ ] Implement the CLI.
+
+### Wed 7 Jul 2021
+
+
+* [ ] Investigate `https://www.wsj.com/` failed scraping and solve problem.
+* [ ] TEMP: implement a synchronous Scheduler (WIP) with all same scraping frequency.
 * [ ] Add a global param to choose saving option (no saving, display to stdin, save to file, save to db...)
 * [ ] Clean ressources in articlescraper and sourcescraper at the end of a scraping loop.
 * [ ] Implement the CLI.
