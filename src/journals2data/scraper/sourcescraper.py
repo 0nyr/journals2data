@@ -257,16 +257,25 @@ class SourceScraper:
             str(len(self.raw_frontpage_urls))
         )
 
-        # iterate trhough the dict keys: https://www.geeksforgeeks.org/iterate-over-a-dictionary-in-python/ 
+        # iterate through the dict keys: https://www.geeksforgeeks.org/iterate-over-a-dictionary-in-python/ 
+        urls_to_delete: List[str] = []
         for url in self.raw_frontpage_urls:
             # check if url key is present in self.last_known_urls
             if url in self.last_known_urls:
-                # transfer pair to self.known_article_url_for_rescraping
+                # build list of urls to be able to remove them after
+                # from self.last_known_urls
+                # WARN: if deletion done while looping, can give error
+                urls_to_delete.append(url)
+                # copy pair to self.known_article_url_for_rescraping
                 self.known_article_url_for_rescraping[
-                    url] = self.raw_frontpage_urls.pop(url)
-                # and removes pair from self.last_known_urls, 
-                # what remains will be saved after inside save_source_articles()
-                del self.last_known_urls[url] # FIXME: not sure it will works
+                    url] = self.raw_frontpage_urls[url]
+
+        # remove recognized urls
+        for url in urls_to_delete:
+            del self.raw_frontpage_urls[url]
+            # what remains will be saved after inside save_source_articles()
+            del self.last_known_urls[url]
+        
         # all recognised url have been deleted from self.last_known_urls
         # what remains is for saving
         self.disappeard_urls_for_saving = self.last_known_urls
