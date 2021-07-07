@@ -1,8 +1,11 @@
+from logging import log
 import typing
 from typing import Dict, List
 import json
 import os
 import datetime
+
+import pandas
 
 from .source import Source
 from journals2data import console
@@ -163,10 +166,27 @@ class Article():
     def save(self):
         """
         Save the article data if it make sense to do so 
-        (not empty).
-        TODO: add a global param to choose saving option
+        (not empty). 
+        NOTE: The saving method used for the article depends on
+        the conf param ARTICLE_SAVING_OPTION.
         """
-        if(self.full_text != ""):
+        if(
+            self.full_text != "" or
+            self.source.params["ARTICLE_SAVING_OPTION"] ==
+            utils.ArticleSavingOption.NO_SAVING
+        ):
+            # VERB: log article not saved
+            utils.log(
+                self.source.params["VERBOSE"],
+                "Article [" + self.url + "] [txt: " + \
+                utils.limit_line_str(self.full_text) + \
+                " not saved.",
+                console.ANSIColorCode.GREY2_C
+            )
+        elif(
+            self.source.params["ARTICLE_SAVING_OPTION"] ==
+            utils.ArticleSavingOption.SAVE_TO_FILE
+        ):
             self.__save_to_file()
     
     def __save_to_file(self):

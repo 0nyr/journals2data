@@ -14,3 +14,11 @@ class VerboseLevel(IntEnum):
     NONE = 0
     NO_COLOR = 1
     COLOR = 2
+
+class ArticleSavingOption(IntEnum):
+    """
+    This enum presents the different options for saving the result
+    from scraping of the obtained articles.
+    """
+    NO_SAVING = 0
+    SAVE_TO_FILE = 1 

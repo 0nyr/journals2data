@@ -33,7 +33,8 @@ class J2DConfiguration:
         "IS_J2D_RUNNING": True,  # should not be edited by hand
         "POTENTIAL_ARTICLE_LIMIT": None,
         "SCHEDULE_SYNC_SCRAP_MIN": None,
-        "J2D_RUN_START_TIME": None # should not be edited by hand
+        "J2D_RUN_START_TIME": None, # should not be edited by hand
+        "ARTICLE_SAVING_OPTION": utils.ArticleSavingOption.SAVE_TO_FILE
     }
 
     def __init__(

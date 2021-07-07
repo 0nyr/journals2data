@@ -481,5 +481,6 @@ This times, it seams to work but for a mysterious reason, the scraping of articl
 * [X] Log time needed for every scrap() run.
 * [X] Clean ressources in articlescraper and sourcescraper at the end of a scraping loop.
 * [X] Refactor and fix `source_scraper.save_source_articles()`.
+* [ ] Refactor and fix `source_scraper.keep_known_urls()`.
 * [ ] Add a global param to choose saving option (no saving, display to stdin, save to file, save to db...)
 * [ ] Implement the CLI.
