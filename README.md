@@ -476,6 +476,10 @@ This times, it seams to work but for a mysterious reason, the scraping of articl
 
 ### Wed 7 Jul 2021
 
+Worked a lot today, on the finalisation of the scheduling and scraping process. Fixed a lot of bugs and added several handy conf params.
+
+A long test over a set of 6 articles is being performed over 10 runs each 90 mins.
+
 * [X] Investigate `https://www.wsj.com/` failed scraping and solve problem. Actually, it's just linked to the `POTENTIAL_ARTICLE_LIMIT` limit, which is just a debug param, used to limit the time of scraping of the program. By default, it is equal to None and do not interfere with the process.
 * [X] TEMP: implement a synchronous Scheduler (WIP) with all same scraping frequency.
 * [X] Log time needed for every scrap() run.

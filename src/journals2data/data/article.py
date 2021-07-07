@@ -202,15 +202,18 @@ class Article():
         filepath: str = self.source.output_filepath
         endl: str = "\n"
 
-        # if file does not exist, create one with empty JSON list
-        if(os.path.exists(filepath) == False):
+        # if file does not exist or is empty, create one with empty JSON list
+        if(
+            os.path.exists(filepath) == False or
+            os.path.getsize(filepath) == 0
+        ):
             with open(
                 filepath, encoding = 'utf-8', mode = 'w'
             ) as file:
                 file.write(
                     "[" + endl + "]"
                 )
-
+        
         with open(
             filepath, encoding = 'utf-8', mode = 'r+'
         ) as file:
