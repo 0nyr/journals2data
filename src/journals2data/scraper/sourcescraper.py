@@ -59,13 +59,6 @@ class SourceScraper:
         """
         Get all URLs from source:
         """
-        # VERB: log self.raw_frontpage_urls size
-        # TODO: code block to be removed
-        utils.log(
-            self.config.params["VERBOSE"],
-            "self.raw_frontpage_urls length before __get_all_website_links = " + \
-            str(len(self.raw_frontpage_urls))
-        )
 
         # get URLs from source page
         self.raw_frontpage_urls = self.__get_all_website_links(
@@ -73,7 +66,7 @@ class SourceScraper:
         )
 
         # VERB: log self.raw_frontpage_urls size
-        # TODO: code block to be removed
+        if(self.config.params["DEBUG"])
         utils.log(
             self.config.params["VERBOSE"],
             "self.raw_frontpage_urls length after __get_all_website_links = " + \
@@ -249,13 +242,6 @@ class SourceScraper:
             + 2) Check if they are present inside last_known_urls_map
             + 3) If present, add current pair to article_urls_for_scraping
         """
-        # VERB: log self.raw_frontpage_urls size
-        # TODO: code block to be removed
-        utils.log(
-            self.config.params["VERBOSE"],
-            "self.raw_frontpage_urls length = " + \
-            str(len(self.raw_frontpage_urls))
-        )
 
         # iterate through the dict keys: https://www.geeksforgeeks.org/iterate-over-a-dictionary-in-python/ 
         urls_to_delete: List[str] = []
