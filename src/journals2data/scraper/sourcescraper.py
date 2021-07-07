@@ -66,12 +66,12 @@ class SourceScraper:
         )
 
         # VERB: log self.raw_frontpage_urls size
-        if(self.config.params["DEBUG"])
-        utils.log(
-            self.config.params["VERBOSE"],
-            "self.raw_frontpage_urls length after __get_all_website_links = " + \
-            str(len(self.raw_frontpage_urls))
-        )
+        if(self.config.params["DEBUG"]):
+            utils.log(
+                self.config.params["VERBOSE"],
+                "self.raw_frontpage_urls length after __get_all_website_links = " + \
+                str(len(self.raw_frontpage_urls))
+            )
 
 
     # web scraping functions

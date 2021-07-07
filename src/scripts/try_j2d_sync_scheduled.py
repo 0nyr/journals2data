@@ -40,7 +40,6 @@ if (args.conf_path):
         "****** running J2D [--conf_path: " +
         args.conf_path + "]"
     )
-
     config = journals2data.J2DConfiguration(
         args.conf_path
     )

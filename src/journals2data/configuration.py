@@ -3,6 +3,9 @@
 import typing
 from typing import List
 import time
+import os
+
+import pandas
 
 from journals2data import data
 from journals2data import console
@@ -34,7 +37,8 @@ class J2DConfiguration:
         "POTENTIAL_ARTICLE_LIMIT": None,
         "SCHEDULE_SYNC_SCRAP_MIN": None,
         "J2D_RUN_START_TIME": None, # should not be edited by hand
-        "ARTICLE_SAVING_OPTION": utils.ArticleSavingOption.SAVE_TO_FILE
+        "ARTICLE_SAVING_OPTION": utils.ArticleSavingOption.SAVE_TO_FILE,
+        "EMPTY_OUT_FILE": True
     }
 
     def __init__(
@@ -61,7 +65,13 @@ class J2DConfiguration:
         elif(self.params["VERBOSE"] == utils.VerboseLevel.COLOR):
             console.println_debug("****** config.params = [see below]")
             utils.print_pretty_json(self.params)
-
+        
+        # empty default out file if EMPTY_OUT_FILE == True
+        if(
+            self.params["DEFAULT_OUTPUT_FILEPATH"] != None and
+            self.params["EMPTY_OUT_FILE"] == True
+        ):
+            self.__empty_out_file()
         
     def __load_journals2data_conf(self, path: str):
         """
@@ -141,3 +151,21 @@ class J2DConfiguration:
                     )
         
         return sources
+    
+    def __empty_out_file(self):
+        """
+        Erase content of the default output file.
+        NOTE: conf param DEFAULT_OUTPUT_FILEPATH need to be used.
+        """
+        outfile_path: str = self.params["DEFAULT_OUTPUT_FILEPATH"]
+        if(os.path.exists(outfile_path)):
+            # errase content of file
+            open(outfile_path, 'w').close()
+
+            # VERB: log outfile erased
+            utils.log(
+                self.params["VERBOSE"],
+                "Default out file [" + outfile_path + "] " + \
+                "content has been erased.",
+                console.ANSIColorCode.LIGHT_ORANGE_C
+            )
