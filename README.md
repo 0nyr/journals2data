@@ -492,3 +492,19 @@ A long test over a set of 6 articles is being performed over 10 runs each 90 min
 * [ ] Investigate empty `source.html` error while scraping some sources like `https://www.leprogres.fr/rss`.
 * [ ] Implement correct program handling of SIGTERM.
 * [ ] Implement the CLI.
+
+### Thu 8 Jul 2021
+
+The long run failed due to a KeyError in the `source_scraper.save_source_articles()` method:
+
+```shell
+File "/home/florian/code/python/journals2data/src/journals2data/scraper/sourcescraper.py", line 287, in save_source_articles
+    article_scraper: ArticleScraper = self.url_article_scrapers.pop(url)
+KeyError: 'https://www.lyonplus.com/actualite/2021/06/30/harry-potter-les-mythiques-musiques-de-la-saga-jouees-en-concert-a-lyon-en-2022'
+```
+
+
+* [X] ~~Investigate empty `source.html` error while scraping some sources like `https://www.leprogres.fr/rss`.~~ This is because the real URL to scrap is `https://www.leprogres.fr/`.
+* [ ] Fix `source_scraper.save_source_articles()` KeyError problem.
+* [ ] Implement correct program handling of SIGTERM.
+* [ ] Implement the CLI.

@@ -263,8 +263,11 @@ class SourceScraper:
             del self.last_known_urls[url]
         
         # all recognised url have been deleted from self.last_known_urls
-        # what remains is for saving
-        self.disappeard_urls_for_saving = self.last_known_urls
+        # what remains is to be saved. 
+        # WARN: Do a shallow copy
+        self.disappeard_urls_for_saving = self.last_known_urls.copy()
+        # WARN: Now that everything to be saved has been tranfered, clear
+        self.last_known_urls.clear()
 
     def url_lifespan_check(self):
         """
@@ -281,11 +284,51 @@ class SourceScraper:
         NOTE: Remove their associated ArticleScraper from the list
         of current articles scraped.
         """
+
+        # DBUG: KeyError. I want to see what's happening
+        if(self.config.params["DEBUG"]):
+            utils.log(
+                self.config.params["VERBOSE"],
+                "***** save_source_articles()",
+                console.ANSIColorCode.LIGHT_ORANGE_C
+            )
+
+            keys_disappeard_urls_for_saving: list = list(
+                self.disappeard_urls_for_saving.keys()
+            )
+            utils.log(
+                self.config.params["VERBOSE"],
+                "keys_disappeard_urls_for_saving = " + \
+                str(keys_disappeard_urls_for_saving),
+                console.ANSIColorCode.TURQUOISE_C
+            )
+
+            keys_url_article_scrapers: list = list(
+                self.url_article_scrapers.keys()
+            )
+            utils.log(
+                self.config.params["VERBOSE"],
+                "keys_url_article_scrapers = " + \
+                str(keys_url_article_scrapers),
+                console.ANSIColorCode.LIGHT_BLUE_C
+            )
+
         for url in self.disappeard_urls_for_saving:
             # remove article_scraper from self.url_article_scrapers
             # and save their corresponding articles
-            article_scraper: ArticleScraper = self.url_article_scrapers.pop(url)
-            article_scraper.save_article()
+            # DBUG: KeyError, catch those errors
+            try:
+                article_scraper: ArticleScraper = self.url_article_scrapers.pop(url)
+                article_scraper.save_article()
+            except KeyError as err:
+                utils.log(
+                    self.config.params["VERBOSE"],
+                    "KeyError detected [url: " + \
+                    str(url) + "]",
+                    console.ANSIColorCode.FAILED_C
+                )
+                print(err)
+                continue
     
     def determine_article_urls(self):
         """
