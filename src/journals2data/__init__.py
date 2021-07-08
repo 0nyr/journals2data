@@ -10,3 +10,4 @@ __all__ = ["console", "data", "scraper", "utils", "newspaper"]
 
 from .configuration import J2DConfiguration
 from .journals2data import Journals2Data
+from .cli import main
