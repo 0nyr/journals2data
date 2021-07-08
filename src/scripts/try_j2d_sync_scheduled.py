@@ -40,13 +40,13 @@ if (args.conf_path):
         "****** running J2D [--conf_path: " +
         args.conf_path + "]"
     )
-    config = journals2data.J2DConfiguration(
+    new_config = journals2data.J2DConfiguration(
         args.conf_path
     )
-    collector = journals2data.Journals2Data(
-        config
+    j2d = journals2data.Journals2Data(
+        config=new_config
     )
-    collector.scheduled_sync_scrap()
+    j2d.master_scraper.scheduled_sync_scrap()
 else:
     sys.exit(
         """
