@@ -2,8 +2,6 @@ from signal import signal, SIGINT
 from sys import exit
 from typing import Callable
 
-from journals2data.journals2data import Journals2Data
-
 from .configuration import J2DConfiguration
 from journals2data import console
 from journals2data import utils
@@ -38,7 +36,7 @@ class SignalHandler:
             """
             utils.log(
                 self.config.params["VERBOSE"],
-                "!!!!!! SIGINT or CTRL-C detected. Exiting gracefully !!!!!!",
+                "!!!!!! SIGINT or CTRL-C detected. Trying to exit gracefully !!!!!!",
                 console.ANSIColorCode.RED_C
             )
 

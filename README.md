@@ -503,8 +503,13 @@ File "/home/florian/code/python/journals2data/src/journals2data/scraper/sourcesc
 KeyError: 'https://www.lyonplus.com/actualite/2021/06/30/harry-potter-les-mythiques-musiques-de-la-saga-jouees-en-concert-a-lyon-en-2022'
 ```
 
+The error came from previous runs, since I did not correctly copy and empty the object `last_known_urls`. I solved the problem doing a shallow copy and empty just after.
+
+I have also heavily refactored `Journals2Data` so as to be able to plug in a new object: `SignalHandler`. Since this object need to manipulate the code inside `Journals2Data`, I migrated the functions and attributes of that object to a new `MasterScraper`. Now `Journals2Data` truly acts as a top-level api object. I made a new git branch since there were risks to break the previous state of the code.
 
 * [X] ~~Investigate empty `source.html` error while scraping some sources like `https://www.leprogres.fr/rss`.~~ This is because the real URL to scrap is `https://www.leprogres.fr/`.
-* [ ] Fix `source_scraper.save_source_articles()` KeyError problem.
-* [ ] Implement correct program handling of SIGTERM.
-* [ ] Implement the CLI.
+* [X] Fix `source_scraper.save_source_articles()` KeyError problem.
+* [X] Implement correct program handling of SIGTINT. (See [this guide](https://www.devdungeon.com/content/python-catch-sigint-ctrl-c) ⭐️).
+* [X] Test SIGINT handling while waiting next run.
+* [X] Test SIGINT hadling while scraping.
+* [X] Test SIGINT hadling before scraping.
