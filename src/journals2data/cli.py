@@ -21,13 +21,13 @@ print(
     "Python Current Working directory = " + str(os.getcwd())
 )
 
-def main(conf_path: str):
+# 2FIX: circular import: $ python3 src/journals2data/cli.py
+#  ImportError: attempted relative import with no known parent package
+# executing a module
+from .configuration import J2DConfiguration
+from .journals2data import Journals2Data
 
-    # 2FIX: circular import: $ python3 src/journals2data/cli.py
-    #  ImportError: attempted relative import with no known parent package
-    # executing a module
-    from .configuration import J2DConfiguration
-    from .journals2data import Journals2Data
+def main(conf_path: str):
 
     # run journals2data library
     import sys

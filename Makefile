@@ -32,6 +32,9 @@ build:
 	@$(ECHO) "$(LIGHT_BLUE_COLOR)* Copying src/journals2data/ $(NO_COLOR)"
 	cp -ru src/journals2data/* $(PGK_BUILD_DIR)
 
+	@$(ECHO) "$(LIGHT_BLUE_COLOR)* Copying src/setup.py $(NO_COLOR)"
+	cp src/setup.py $(PGK_BUILD_DIR)
+
 	@$(ECHO) "$(LIGHT_BLUE_COLOR)* Copying conf/ $(NO_COLOR)"
 	cp -ru ./conf $(PGK_BUILD_DIR)/conf/env
 
@@ -78,3 +81,7 @@ run:
 # accept extra arguments (by doing nothing when we get a job that doesn't match, rather than throwing an error
 %:
     @:
+
+dirs:
+	mkdir -p build/
+	mkdir -p releases/

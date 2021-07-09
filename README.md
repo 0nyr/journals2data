@@ -522,6 +522,7 @@ Now that the step 1 of the internship is almost done, I have started to read doc
 I'm still working on the building process of the library, the CLI launcher and additional documentation.
 
 * [X]~~Fix the CLI launcher~~ Changed how it is supposed to work since what I wanted to do is not possible.
-* [ ] Finish the Makefile
-* [ ] Ship a first completed library`zip` file.
-* [ ] Finish the doc, especially conf param description.
+* [X] Finish the Makefile
+* [X] Finish the doc, especially conf param description.
+* [X] Ship a first completed library`zip` file.
+* [ ] Complete the`setup.py` file.
