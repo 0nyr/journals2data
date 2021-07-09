@@ -6,25 +6,25 @@ This library is used to scrap automaticaly online newspapers, by providing a lis
 
 ## Installation
 
-1. Install conda. There is a script you can run at `cmd/install_conda.sh`
-2. Install dependencies by creating a virtual environment using conda. Use `conda env create --file environment.yml`.
-3. Install geckodriver. There is a script you can run at `cmd/install_gecko.sh`. Before that, make sure you have an available Firefox browser by running `firefox --version`. You should see something like what is shown below. If it is not the case, install firefox.
+1. Install conda. There is a script you can run at`cmd/install_conda.sh`
+2. Install dependencies by creating a virtual environment using conda. Use`conda env create --file environment.yml`.
+3. Install geckodriver. There is a script you can run at`cmd/install_gecko.sh`. Before that, make sure you have an available Firefox browser by running`firefox --version`. You should see something like what is shown below. If it is not the case, install firefox.
 
 ```shell
 (base) onyr@laerys:~$ firefox --version
 Mozilla Firefox 89.0.2
 ```
 
-4. Switch to this virtual environment: `conda activate <venv_name>`.
-5. Modify the list of article to scrap by modifying `conf/config.csv`. You can find examples inside `conf/example`.
-6. Modify the conf params by making a `conf/journals2data.conf` file. You can find examples inside `conf/example`.
+4. Switch to this virtual environment:`conda activate <venv_name>`.
+5. Modify the list of article to scrap by modifying`conf/config.csv`. You can find examples inside`conf/example`.
+6. Modify the conf params by making a`conf/journals2data.conf` file. You can find examples inside`conf/example`.
 
 ## running
 
 There are 3 ways to use the library.
 
-1. Use the library as any module and import it's top level object to use it. This is the intended way of using the library. See `cli.cpp` to get a basic example on how to use  it.
-2. Quick test (working): Run `python3`, then `import journals2data` then try it `
+1. Use the library as any module and import it's top level object to use it. This is the intended way of using the library. See`cli.cpp` to get a basic example on how to use  it.
+2. Quick test (working): Run`python3`, then`import journals2data` then try it `
 
 ```shell
 (py39) onyr@laerys:~/Documents/code/python/journals2data/src$ python3
@@ -68,4 +68,19 @@ Default out file [/home/onyr/Documents/code/python/journals2data/out/out.json] c
 (py39) onyr@laerys:~/Documents/code/python/journals2data/src$ 
 ```
 
-3. (not working yet, FIX imports ?!) If you wish, you can directly use the library as is by running `python3 cli.cpp --conf_path <path/to/journals2data.conf>`. This file shows a good example on how to manipulate the library.
+3. (not working yet, FIX imports ?!) If you wish, you can directly use the library as is by running`python3 cli.cpp --conf_path <path/to/journals2data.conf>`. This file shows a good example on how to manipulate the library.
+
+## Troubleshooting
+
+### change tmp/ to a bigger folder and install conda venv named py39
+
+> WARN: Firefox cannot be run as `root`. Hence, install `conda` and run the project from a non-root user like `ssh_user`.
+
+1. Use`mkdir tmp` to create a`tmp` directory inside for instance`/home/ssh_user`.
+2. `export TEMP=/home/ssh_user/tmp`: export a new variable so as to change the`tmp` directory for the current terminal sessions.
+3. Install venv named`py39`. Inside`python/journals2data/conf/`, run`conda venv create --file environment.yml`.
+4. WARN: Make sure to`rm -rf ~/tmp/` after that! Else, if trying to reuse it, it could make errors.
+
+### send bert models/ directory over SSH
+
+`scp -r -P 22 models/ florian@134.214.108.151:/home/florian/code/`: Adapt this command to copy over SSH. Note the use of `-r` since it is a directory.

@@ -318,16 +318,16 @@ Next step is code integration and refactoring of Cedric/5IF code...
 
 * [X] Finish the VM installation. Set up
 * [X] Install Conda
-* [X] Learn to use `conda`. Then set up `venv`
-* [X] Set up Python3.9.5 on `conda`.
-* [X] Download dependencies from `requirements.txt`
-* [X] `Newspaper3K` needs a special installation. Install it with `pip` over `conda` after having installed necessary dependencies.
+* [X] Learn to use`conda`. Then set up`venv`
+* [X] Set up Python3.9.5 on`conda`.
+* [X] Download dependencies from`requirements.txt`
+* [X]`Newspaper3K` needs a special installation. Install it with`pip` over`conda` after having installed necessary dependencies.
 * [X] Set up Git
 * [X] Set up GitHub connection over SSH
 * [X] Set up VSCode plugins
-* [X] Set up VSCode over `Python3.9` path resolution.
-* [X] Set up VSCode over `venv`.
-* [X] Finish `MapURLInfo` conversion to `pd.DataFrame`.
+* [X] Set up VSCode over`Python3.9` path resolution.
+* [X] Set up VSCode over`venv`.
+* [X] Finish`MapURLInfo` conversion to`pd.DataFrame`.
 * [ ] Working on step 4 of source URL scraping. URL evaluation layer in progress (WIP).
 
 ### Mon 28 June 2021
@@ -343,8 +343,8 @@ Actually, GitHub do not like large files at all so I have moved the BERT models 
 Many questions about code integration. Need to speak to Cedric. About distinction between DOM and title attribute, the use of some libraries. The meaning of obtained results and many more. I integrated its code, though not tested yet.
 
 * [X] Added data structure for Article - URL scraping.
-* [X] ~~Manage large files with Git LFS~~ just use another directory.
-* [X] Download `transformers` and `tensorflow`.
+* [X]~~Manage large files with Git LFS~~ just use another directory.
+* [X] Download`transformers` and`tensorflow`.
 * [ ] Working on step 4 of source URL scraping. URL evaluation layer in progress (WIP).
 * [ ] Step 6 crucial. Implement raw article scaping first
 * [ ] Step 6 bis: implement an evaluation score or entropy so as to have some confidence or not on the result of the scraping.
@@ -436,12 +436,12 @@ Still, the weekly goal can be considered as achieved 🎉️.
 
 * [X] Refactor Timeout and timeout error handling for the ArticleScraper.
 * [X] Finish conf file handling and default values.
-* [X] Refactor SourceScraper with `selenium` instead of `requests`.
-* [X] Try and implement automatic scrolling to the bottom of the page (see [here](https://stackoverflow.com/questions/32391303/how-to-scroll-to-the-end-of-the-page-using-selenium-in-python)).
+* [X] Refactor SourceScraper with`selenium` instead of`requests`.
+* [X] Try and implement automatic scrolling to the bottom of the page (see[here](https://stackoverflow.com/questions/32391303/how-to-scroll-to-the-end-of-the-page-using-selenium-in-python)).
 * [X] Refactor SourceScraper timeout and timeout error handling.
 * [X] Implement article scraping logger.
-* [X] Implement a `ARTICLE_SCORE_THRESHOLD` and modify scrap_new_potential_articles() to take it into account.
-* [ ] Implement a `NB_RUN_LIMIT` and `RUN_NUMBER` conf param and modify the code so as to save articles when the run number falls to 0.
+* [X] Implement a`ARTICLE_SCORE_THRESHOLD` and modify scrap_new_potential_articles() to take it into account.
+* [ ] Implement a`NB_RUN_LIMIT` and`RUN_NUMBER` conf param and modify the code so as to save articles when the run number falls to 0.
 
 ### Mon 5 Jul 2021
 
@@ -451,9 +451,9 @@ Made many refactoring all around to clean the code.
 
 Connected to a VM over SSH. I have set up a SSH key for GitHub and I downloaded the repository.
 
-* [X] Implement a `NB_RUN_LIMIT` and `RUN_NUMBER` conf param and modify the code so as to save articles when the run number equals `NB_RUN_LIMIT`.
-* [X] Add a nb of article to save limit for debug purpose: `ARTICLE_SCRAPER_LIMIT`.
-* [X] Add global param to set `DEFAULT_OUTPUT_FILEPATH`.
+* [X] Implement a`NB_RUN_LIMIT` and`RUN_NUMBER` conf param and modify the code so as to save articles when the run number equals`NB_RUN_LIMIT`.
+* [X] Add a nb of article to save limit for debug purpose:`ARTICLE_SCRAPER_LIMIT`.
+* [X] Add global param to set`DEFAULT_OUTPUT_FILEPATH`.
 * [X] Test automatic article scraping and saving.
 * [X] Connect to VM and set up SSH key for GitHub.
 * [ ] Add a global param to choose saving option (no saving, display to stdin, save to file, save to db...)
@@ -468,7 +468,7 @@ Trying another VM from Cédric's PC
 
 This times, it seams to work but for a mysterious reason, the scraping of articles failed for `https://www.wsj.com/` but not for `https://www.theguardian.com/` where the articles where scraped properly... ? This is strange since I tested it several times before ???
 
-* [ ] Investigate `https://www.wsj.com/` failed scraping and solve problem.
+* [ ] Investigate`https://www.wsj.com/` failed scraping and solve problem.
 * [ ] TEMP: implement a synchronous Scheduler (WIP)
 * [ ] Add a global param to choose saving option (no saving, display to stdin, save to file, save to db...)
 * [ ] Clean ressources in articlescraper and sourcescraper at the end of a scraping loop.
@@ -480,16 +480,16 @@ Worked a lot today, on the finalisation of the scheduling and scraping process. 
 
 A long test over a set of 6 articles is being performed over 10 runs each 90 mins.
 
-* [X] Investigate `https://www.wsj.com/` failed scraping and solve problem. Actually, it's just linked to the `POTENTIAL_ARTICLE_LIMIT` limit, which is just a debug param, used to limit the time of scraping of the program. By default, it is equal to None and do not interfere with the process.
+* [X] Investigate`https://www.wsj.com/` failed scraping and solve problem. Actually, it's just linked to the`POTENTIAL_ARTICLE_LIMIT` limit, which is just a debug param, used to limit the time of scraping of the program. By default, it is equal to None and do not interfere with the process.
 * [X] TEMP: implement a synchronous Scheduler (WIP) with all same scraping frequency.
 * [X] Log time needed for every scrap() run.
 * [X] Clean ressources in articlescraper and sourcescraper at the end of a scraping loop.
-* [X] Refactor and fix `source_scraper.save_source_articles()`.
-* [X] Refactor and fix `source_scraper.keep_known_urls()`.
+* [X] Refactor and fix`source_scraper.save_source_articles()`.
+* [X] Refactor and fix`source_scraper.keep_known_urls()`.
 * [X] Add a global param to choose saving option (no saving, display to stdin, save to file, save to db...)
-* [X] Add conf param `EMPTY_OUT_FILE` to erase output file at beginning of a run.
+* [X] Add conf param`EMPTY_OUT_FILE` to erase output file at beginning of a run.
 * [X] Fix empty outfile error.
-* [ ] Investigate empty `source.html` error while scraping some sources like `https://www.leprogres.fr/rss`.
+* [ ] Investigate empty`source.html` error while scraping some sources like`https://www.leprogres.fr/rss`.
 * [ ] Implement correct program handling of SIGTERM.
 * [ ] Implement the CLI.
 
@@ -503,13 +503,24 @@ File "/home/florian/code/python/journals2data/src/journals2data/scraper/sourcesc
 KeyError: 'https://www.lyonplus.com/actualite/2021/06/30/harry-potter-les-mythiques-musiques-de-la-saga-jouees-en-concert-a-lyon-en-2022'
 ```
 
-The error came from previous runs, since I did not correctly copy and empty the object `last_known_urls`. I solved the problem doing a shallow copy and empty just after.
+Corrected many small errors and bugs. Optimisez Scrap loop especially around saving functions. Added watchdogs for dict manipulations and transfers.
 
-I have also heavily refactored `Journals2Data` so as to be able to plug in a new object: `SignalHandler`. Since this object need to manipulate the code inside `Journals2Data`, I migrated the functions and attributes of that object to a new `MasterScraper`. Now `Journals2Data` truly acts as a top-level api object. I made a new git branch since there were risks to break the previous state of the code.
+Added a makefile with rules to build a clean, feature-full `.zip` with automatic versioning.
 
-* [X] ~~Investigate empty `source.html` error while scraping some sources like `https://www.leprogres.fr/rss`.~~ This is because the real URL to scrap is `https://www.leprogres.fr/`.
-* [X] Fix `source_scraper.save_source_articles()` KeyError problem.
-* [X] Implement correct program handling of SIGTINT. (See [this guide](https://www.devdungeon.com/content/python-catch-sigint-ctrl-c) ⭐️).
-* [X] Test SIGINT handling while waiting next run.
-* [X] Test SIGINT hadling while scraping.
-* [X] Test SIGINT hadling before scraping.
+I have been blocked several hours with import errors while trying to implement a CLI launcher for the library... I need to fix that.
+
+* [X]~~Investigate empty `source.html` error while scraping some sources like `https://www.leprogres.fr/rss`.~~ This is because the real URL to scrap is`https://www.leprogres.fr/`.
+* [X] Fix`source_scraper.save_source_articles()` KeyError problem.
+* [X] Implement correct program handling of SIGTERM.
+* [X] Add a Makefile for code building.
+* [ ] Implement the CLI launcher. (WIP)
+
+### Fri 9 Jul 2021
+
+Now that the step 1 of the internship is almost done, I have started to read documentation for the next task.
+
+I'm still working on the building process of the library, the CLI launcher and additional documentation.
+
+* [ ] Fix the CLI launcher. (WIP)
+* [ ] Finish the Makefile
+* [ ] Ship a first completed library`zip` file.
