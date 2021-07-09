@@ -523,6 +523,8 @@ I'm still working on the building process of the library, the CLI launcher and a
 
 I made a mistake by pushing both to `main` and `sigint`. I need to merge both branches properly.
 
+I merged with fast-forward. No conflict to `sigint` branch.
+
 * [X]~~Fix the CLI launcher~~ Changed how it is supposed to work since what I wanted to do is not possible.
 * [X] Finish the Makefile
 * [X] Finish the doc, especially conf param description.
