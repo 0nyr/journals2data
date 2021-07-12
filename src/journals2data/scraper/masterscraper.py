@@ -89,23 +89,24 @@ class MasterScraper:
         
         # run limit and saving
         self.config.params["RUN_NUMBER"] += 1
-        if(
-            self.config.params["RUN_NUMBER"] >= 
-            self.config.params["NB_RUN_LIMIT"]
-        ):  
-            # change IS_J2D_RUNNING to false
-            self.config.params["IS_J2D_RUNNING"] = False
+        if(self.config.params["NB_RUN_LIMIT"] != None):
+            if( 
+                self.config.params["RUN_NUMBER"] >= 
+                self.config.params["NB_RUN_LIMIT"]
+            ):  
+                # change IS_J2D_RUNNING to false
+                self.config.params["IS_J2D_RUNNING"] = False
 
-            # saving pending scraped articles
-            if(
-                self.config.params["VERBOSE"] == 
-                utils.VerboseLevel.COLOR
-            ):
-                console.println_ctrl_sequence(
-                    "****** RUN_NUMBER at maximum. Saving everything.",
-                    console.ANSICtrlSequence.PASSED
-                )
-                self.save()
+                # saving pending scraped articles
+                if(
+                    self.config.params["VERBOSE"] == 
+                    utils.VerboseLevel.COLOR
+                ):
+                    console.println_ctrl_sequence(
+                        "****** RUN_NUMBER at maximum. Saving everything.",
+                        console.ANSICtrlSequence.PASSED
+                    )
+                    self.save()
     
     def save(self):
         """

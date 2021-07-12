@@ -540,7 +540,7 @@ I want to finish the last small things on J2D today, then start reading and test
 
 I have modified the Makefile so as to correct many small bugs. I finished the installation documentation and I tested it on the VM. I also made a GitHub release (private repository).
 
-I have launched an infinite scraping session, every 2 hours.
+I have launched an infinite scraping session, every 2 hours. After lunch, I realised it was stopped due to a type error I could not test before since I neverhad run a never-ending scraping session. The bug is corrected.
 
 I can now start reading the list of article from Cedric.
 
