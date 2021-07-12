@@ -540,10 +540,11 @@ I want to finish the last small things on J2D today, then start reading and test
 
 I have modified the Makefile so as to correct many small bugs. I finished the installation documentation and I tested it on the VM. I also made a GitHub release (private repository).
 
+I have launched an infinite scraping session, every 2 hours.
+
+I can now start reading the list of article from Cedric.
 
 * [X] Do the big merge.
 * [X] Test merge result of `florian@liris-livrons`.
 * [X] Do a clean battle-tested `environment.yml` file from`florian@liris-livrons`.
-
-
 * [X] Make a GitHub release.
