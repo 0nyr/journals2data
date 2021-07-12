@@ -14,6 +14,29 @@ This library is used to scrap automaticaly online newspapers, by providing a lis
 
 ## Installation
 
+### step 1: unzip
+
+1. Get the last version of `journals2data-<last_version>.zip`.
+2. Put the zip in the directory where you plan to use `journals2data`.
+3. Unzip it with the command `unzip journals2data-<last_version>.zip`. After that you can also remove the zip file.
+
+```shell
+(base) onyr@laerys:~/Documents/code/python/journals2data/releases$ ls
+journals2data-0.1.1.zip
+(base) onyr@laerys:~/Documents/code/python/journals2data/releases$ unzip journals2data-0.1.1.zip 
+Archive:  journals2data-0.1.1.zip
+   creating: journals2data/
+   creating: journals2data/console/
+  inflating: journals2data/console/ansictrlsequence.py  
+[...]
+  inflating: journals2data/configuration.py  
+  inflating: journals2data/README.md  
+(base) onyr@laerys:~/Documents/code/python/journals2data/releases$ ls
+journals2data  journals2data-0.1.1.zip
+```
+
+### step 2: install dependencies in venv
+
 1. Install conda. There is a script you can run at`cmd/install_conda.sh`
 2. Install dependencies by creating a virtual environment using conda. Use`conda env create --file environment.yml`.
 3. Install geckodriver. There is a script you can run at`cmd/install_gecko.sh`. Before that, make sure you have an available Firefox browser by running`firefox --version`. You should see something like what is shown below. If it is not the case, install firefox.
@@ -25,12 +48,11 @@ Mozilla Firefox 89.0.2
 
 4. Switch to this virtual environment:`conda activate <venv_name>`.
 
-
 ## Configuration
 
 ### what to edit
 
-The configuration process is important since it dictates how the library will work. 
+The configuration process is important since it dictates how the library will work.
 
 > WARN: Some functionality are not yet implemented and some parameters are not fully working yet.
 
@@ -49,7 +71,7 @@ The configuration process is important since it dictates how the library will wo
 
 `DEFAULT_OUTPUT_FILEPATH`: Filepath of the default output file, in `.json` format.
 
-`CONFIG_CSV_FILEPATH`: Filepath of the `config.csv` file containing the list of source URLs for scraping. You can find examples inside `conf/example`. NOTE: This params replaces for now what isFilepath of the 
+`CONFIG_CSV_FILEPATH`: Filepath of the `config.csv` file containing the list of source URLs for scraping. You can find examples inside `conf/example`. NOTE: This params replaces for now what isFilepath of the
 
 `GECKODRIVER_LOG_FILEPATH`: Filepath of the log file used by `selenium`.
 
@@ -67,7 +89,7 @@ The configuration process is important since it dictates how the library will wo
 
 `ARTICLE_TIMEOUT`: Max waiting time for article loading.
 
-`USER`: This param is not intended to be used. 
+`USER`: This param is not intended to be used.
 
 `ARTICLE_SCORE_THRESHOLD`: Not used yet. Allows to exclude articles whose scraping score is too low. Such a score is not computed yet. So don't use this param for now.
 
@@ -79,14 +101,13 @@ The configuration process is important since it dictates how the library will wo
 
 `POTENTIAL_ARTICLE_LIMIT`: Useful for debug. Limit the number of articles being scraped so as to speed the execution of the library.
 
-`SCHEDULE_SYNC_SCRAP_MIN`: Important param! Set in minutes the time to wait between each source scraping run. 
+`SCHEDULE_SYNC_SCRAP_MIN`: Important param! Set in minutes the time to wait between each source scraping run.
 
 `J2D_RUN_START_TIME`: Do no use this param by hand.
 
 `ARTICLE_SAVING_OPTION`: Set how the articles should be saved or not: NO_SAVING, SAVE_TO_FILE.
 
 `EMPTY_OUT_FILE`: Wether or not to clear the out file when relaunching the library.
-
 
 ## Running
 

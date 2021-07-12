@@ -14,8 +14,8 @@ ECHO = echo # @echo hides this command in terminal, not its output
 PKG_NAME = journals2data
 PKG_VERSION = 0.1.1
 FULL_PKG_NAME = $(PKG_NAME)-$(PKG_VERSION)
-PGK_BUILD_DIR = build/$(FULL_PKG_NAME)
 ZIP_PATH = releases/$(FULL_PKG_NAME).zip
+PGK_BUILD_DIR = build/journals2data
 
 
 # targets
@@ -52,7 +52,7 @@ build:
 	find ./build | grep -E "(__pycache__|\.pyc|\.pyo)" | xargs rm -rf
 
 	@$(ECHO) "$(LIGHT_BLUE_COLOR)*** Building $(ZIP_PATH)  *** $(NO_COLOR)"
-	(cd build/ && zip -r ../$(ZIP_PATH) $(FULL_PKG_NAME))
+	(cd build/ && zip -r ../$(ZIP_PATH) journals2data/)
 
 clean_last:
 	rm -rf $(PGK_BUILD_DIR)
