@@ -530,7 +530,7 @@ I merged with fast-forward. No conflict to `sigint` branch.
 * [X] Finish the doc, especially conf param description.
 * [X] Ship a first completed library`zip` file.
 * [ ] Complete the`setup.py` file.
-* [X] Do the big merge.
+* [ ] Do the big merge.
 * [ ] Test merge result of`florian@liris-livrons`.
 * [ ] Do a clean battle-tested `environment.yml` file from`florian@liris-livrons`.
 
@@ -538,36 +538,12 @@ I merged with fast-forward. No conflict to `sigint` branch.
 
 I want to finish the last small things on J2D today, then start reading and testing on infolegale.
 
-I did some problem fixing, like the error with the imports:
+I have modified the Makefile so as to correct many small bugs. I finished the installation documentation and I tested it on the VM. I also made a GitHub release (private repository).
 
-```shell
-(py39) florian@liris-livrons:~/code/testzone/journals2data-0.1.1$ python3
-Python 3.9.5 (default, Jun  4 2021, 12:28:51) 
-[GCC 7.5.0] :: Anaconda, Inc. on linux
-Type "help", "copyright", "credits" or "license" for more information.
->>> import journals2data
-Traceback (most recent call last):
-  File "<stdin>", line 1, in <module>
-  File "/home/florian/code/testzone/journals2data-0.1.1/journals2data.py", line 5, in <module>
-    from journals2data import data
-ImportError: cannot import name 'data' from partially initialized module 'journals2data' (most likely due to a circular import) (/home/florian/code/testzone/journals2data-0.1.1/journals2data.py)
->>> 
-(py39) florian@liris-livrons:~/code/testzone/journals2data-0.1.1$ cd ..
-(py39) florian@liris-livrons:~/code/testzone$ mv journals2data-0.1.1 journals2data
-(py39) florian@liris-livrons:~/code/testzone$ ls
-journals2data  journals2data-0.1.1.zip
-(py39) florian@liris-livrons:~/code/testzone$ python3
-Python 3.9.5 (default, Jun  4 2021, 12:28:51) 
-[GCC 7.5.0] :: Anaconda, Inc. on linux
-Type "help", "copyright", "credits" or "license" for more information.
->>> import journals2data$
-  File "<stdin>", line 1
-    import journals2data$
-                        ^
-SyntaxError: invalid syntax
->>> import journals2data
-2021-07-12 10:41:44.922726: W tensorflow/stream_executor/platform/default/dso_loader.cc:64] Could not load dynamic library 'libcudart.so.11.0'; dlerror: libcudart.so.11.0: cannot open shared object file: No such file or directory
-2021-07-12 10:41:44.922756: I tensorflow/stream_executor/cuda/cudart_stub.cc:29] Ignore above cudart dlerror if you do not have a GPU set up on your machine.
-Python Current Working directory = /home/florian/code/testzone
->>> 
-```
+
+* [X] Do the big merge.
+* [X] Test merge result of `florian@liris-livrons`.
+* [X] Do a clean battle-tested `environment.yml` file from`florian@liris-livrons`.
+
+
+* [X] Make a GitHub release.
