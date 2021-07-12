@@ -38,15 +38,22 @@ journals2data  journals2data-0.1.1.zip
 ### step 2: install dependencies in venv
 
 1. Install conda. There is a script you can run at`cmd/install_conda.sh`
-2. Install dependencies by creating a virtual environment using conda. Use`conda env create --file environment.yml`.
-3. Install geckodriver. There is a script you can run at`cmd/install_gecko.sh`. Before that, make sure you have an available Firefox browser by running`firefox --version`. You should see something like what is shown below. If it is not the case, install firefox.
+2. Install dependencies by creating a virtual environment using conda. Modify the `conf/env/j2d.yml` file `prefix` param to match you `conda` path. Then use `conda env create --file j2d_env.yml` to create a venv from this file.
+
+```yml
+prefix: /home/florian/anaconda3/envs/j2d
+```
+
+> The `requirements.txt` file use is not recommanded since some modules are imported over `conda` and some others with `pip` from the conda venv.
+
+Install geckodriver. There is a script you can run at`cmd/install_gecko.sh`. Before that, make sure you have an available Firefox browser by running`firefox --version`. You should see something like what is shown below. If it is not the case, install firefox.
 
 ```shell
 (base) onyr@laerys:~$ firefox --version
 Mozilla Firefox 89.0.2
 ```
 
-4. Switch to this virtual environment:`conda activate <venv_name>`.
+4. Switch to this virtual environment: `conda activate <venv_name>`.
 
 ## Configuration
 

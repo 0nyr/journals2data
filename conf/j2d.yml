@@ -1,4 +1,4 @@
-name: py39
+name: j2d
 channels:
   - defaults
 dependencies:
@@ -93,4 +93,4 @@ dependencies:
     - urllib3==1.26.6
     - werkzeug==2.0.1
     - wrapt==1.12.1
-prefix: /home/florian/anaconda3/envs/py39
+prefix: /home/florian/anaconda3/envs/j2d

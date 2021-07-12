@@ -35,8 +35,9 @@ build:
 	@$(ECHO) "$(LIGHT_BLUE_COLOR)* Copying src/setup.py $(NO_COLOR)"
 	cp src/setup.py $(PGK_BUILD_DIR)
 
-	@$(ECHO) "$(LIGHT_BLUE_COLOR)* Copying conf/ $(NO_COLOR)"
-	cp -ru ./conf $(PGK_BUILD_DIR)/conf/env
+	@$(ECHO) "$(LIGHT_BLUE_COLOR)* Copying some conf/ files $(NO_COLOR)"
+	cp ./conf/j2d.yml $(PGK_BUILD_DIR)
+	cp ./conf/requirements.txt $(PGK_BUILD_DIR)
 
 	@$(ECHO) "$(LIGHT_BLUE_COLOR)* Copying cmd/ $(NO_COLOR)"
 	cp -ru ./cmd $(PGK_BUILD_DIR)
