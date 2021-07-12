@@ -530,8 +530,10 @@ I merged with fast-forward. No conflict to `sigint` branch.
 * [X] Finish the doc, especially conf param description.
 * [X] Ship a first completed library`zip` file.
 * [ ] Complete the`setup.py` file.
-* [ ] Do the big merge.
+* [X] Do the big merge.
 * [ ] Test merge result of`florian@liris-livrons`.
-* [ ] Do a clean battle-tested`environment.yml` file from`florian@liris-livrons`.
+* [ ] Do a clean battle-tested `environment.yml` file from`florian@liris-livrons`.
 
-### Mon
+### Mon 12 Jul 2021
+
+I want to finish the last small things on J2D today, then start reading and testing on infolegale.

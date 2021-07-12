@@ -52,17 +52,25 @@ build:
 	find ./build | grep -E "(__pycache__|\.pyc|\.pyo)" | xargs rm -rf
 
 	@$(ECHO) "$(LIGHT_BLUE_COLOR)*** Building $(ZIP_PATH)  *** $(NO_COLOR)"
-	zip -r $(ZIP_PATH) $(PGK_BUILD_DIR)	
+	(cd build/ && zip -r ../$(ZIP_PATH) $(FULL_PKG_NAME))
 
 clean_last:
 	rm -rf $(PGK_BUILD_DIR)
 
-clean_all:
-	rm -rf $(PGK_BUILD_DIR)/*
+clean_build:
+	rm -rf build/*
+
+clean_releases:
+	rm -rf releases/*
+
 
 # Determine this makefile's path.
 # Be sure to place this BEFORE `include` directives, if any.
 THIS_FILE := $(lastword $(MAKEFILE_LIST))
+
+clean_all:
+	@$(MAKE) -f $(THIS_FILE) clean_build
+	@$(MAKE) -f $(THIS_FILE) clean_releases
 
 rebuild:
 	@$(MAKE) -f $(THIS_FILE) clean_last
