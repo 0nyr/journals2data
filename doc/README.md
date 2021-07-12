@@ -38,7 +38,9 @@ journals2data  journals2data-0.1.1.zip
 ### step 2: install dependencies in venv
 
 1. Install conda. There is a script you can run at`cmd/install_conda.sh`
-2. Install dependencies by creating a virtual environment using conda. Modify the `conf/env/j2d.yml` file `prefix` param to match you `conda` path. Then use `conda env create --file j2d_env.yml` to create a venv from this file.
+2. Install dependencies by creating a virtual environment using conda. Modify the `j2d.yml` file `prefix` param to match you `conda` path. Then use `conda env create --file j2d.yml` to create a venv from this file.
+
+> You can also change the environment name if you wish. just make sure to modify both `name` and `prefix` params accordingly.
 
 ```yml
 prefix: /home/florian/anaconda3/envs/j2d
@@ -46,7 +48,117 @@ prefix: /home/florian/anaconda3/envs/j2d
 
 > The `requirements.txt` file use is not recommanded since some modules are imported over `conda` and some others with `pip` from the conda venv.
 
-Install geckodriver. There is a script you can run at`cmd/install_gecko.sh`. Before that, make sure you have an available Firefox browser by running`firefox --version`. You should see something like what is shown below. If it is not the case, install firefox.
+Example:
+
+```shell
+(py39) florian@liris-livrons:~/code/testzone$ ls
+journals2data  journals2data-0.1.1.zip
+(py39) florian@liris-livrons:~/code/testzone$ cd journals2data/
+(py39) florian@liris-livrons:~/code/testzone/journals2data$ ls
+cli.py  configuration.py  exception    journals2data.py  README.md         setup.py
+cmd     console           __init__.py  logs              requirements.txt  signalhandler.py
+conf    data              j2d.yml      out               scraper           utils
+(py39) florian@liris-livrons:~/code/testzone/journals2data$ ls
+cli.py  configuration.py  exception    journals2data.py  README.md         setup.py
+cmd     console           __init__.py  logs              requirements.txt  signalhandler.py
+conf    data              j2d.yml      out               scraper           utils
+(py39) florian@liris-livrons:~/code/testzone/journals2data$ conda env create --file j2d.yml
+Collecting package metadata (repodata.json): done
+Solving environment: done
+
+
+==> WARNING: A newer version of conda exists. <==
+  current version: 4.10.1
+  latest version: 4.10.3
+
+Please update conda by running
+
+    $ conda update -n base -c defaults conda
+
+
+Preparing transaction: done
+Verifying transaction: done
+Executing transaction: done
+Installing pip dependencies: / Ran pip subprocess with arguments:
+['/home/florian/anaconda3/envs/j2d/bin/python', '-m', 'pip', 'install', '-U', '-r', '/home/florian/code/testzone/journals2data/condaenv.9flbir4q.requirements.txt']
+Pip subprocess output:
+[...]
+Collecting wrapt==1.12.1
+  Using cached wrapt-1.12.1-cp39-cp39-linux_x86_64.whl
+Requirement already satisfied: wheel<1.0,>=0.23.0 in /home/florian/anaconda3/envs/j2d/lib/python3.9/site-packages (from astunparse==1.6.3->-r /home/florian/code/testzone/journals2data/condaenv.9flbir4q.requirements.txt (line 2)) (0.36.2)
+Requirement already satisfied: setuptools>=40.3.0 in /home/florian/anaconda3/envs/j2d/lib/python3.9/site-packages (from google-auth==1.32.1->-r /home/florian/code/testzone/journals2data/condaenv.9flbir4q.requirements.txt (line 13)) (52.0.0.post20210125)
+Requirement already satisfied: certifi>=2017.4.17 in /home/florian/anaconda3/envs/j2d/lib/python3.9/site-packages (from requests==2.25.1->-r /home/florian/code/testzone/journals2data/condaenv.9flbir4q.requirements.txt (line 41)) (2021.5.30)
+Installing collected packages: urllib3, pyasn1, idna, chardet, six, rsa, requests, pyasn1-modules, oauthlib, cachetools, soupsieve, requests-oauthlib, google-auth, werkzeug, tqdm, tensorboard-plugin-wit, tensorboard-data-server, sgmllib3k, requests-file, regex, pyparsing, protobuf, numpy, markdown, joblib, grpcio, google-auth-oauthlib, filelock, click, beautifulsoup4, absl-py, wrapt, typing-extensions, tokenizers, tldextract, tinysegmenter, threadpoolctl, termcolor, tensorflow-estimator, tensorboard, scipy, sacremoses, pyyaml, pytz, python-dateutil, pillow, packaging, opt-einsum, nltk, lxml, keras-preprocessing, keras-nightly, jieba3k, h5py, google-pasta, gast, flatbuffers, feedparser, feedfinder2, cssselect, astunparse, transformers, torch, tensorflow, selenium, scikit-learn, schedule, pandas, newspaper3k
+Successfully installed absl-py-0.13.0 astunparse-1.6.3 beautifulsoup4-4.9.3 cachetools-4.2.2 chardet-4.0.0 click-8.0.1 cssselect-1.1.0 feedfinder2-0.0.4 feedparser-6.0.8 filelock-3.0.12 flatbuffers-1.12 gast-0.4.0 google-auth-1.32.1 google-auth-oauthlib-0.4.4 google-pasta-0.2.0 grpcio-1.34.1 h5py-3.1.0 idna-2.10 jieba3k-0.35.1 joblib-1.0.1 keras-nightly-2.5.0.dev2021032900 keras-preprocessing-1.1.2 lxml-4.6.3 markdown-3.3.4 newspaper3k-0.2.8 nltk-3.6.2 numpy-1.19.5 oauthlib-3.1.1 opt-einsum-3.3.0 packaging-20.9 pandas-1.2.5 pillow-8.3.0 protobuf-3.17.3 pyasn1-0.4.8 pyasn1-modules-0.2.8 pyparsing-2.4.7 python-dateutil-2.8.1 pytz-2021.1 pyyaml-5.4.1 regex-2021.4.4 requests-2.25.1 requests-file-1.5.1 requests-oauthlib-1.3.0 rsa-4.7.2 sacremoses-0.0.45 schedule-1.1.0 scikit-learn-0.24.2 scipy-1.7.0 selenium-3.141.0 sgmllib3k-1.0.0 six-1.15.0 soupsieve-2.2.1 tensorboard-2.5.0 tensorboard-data-server-0.6.1 tensorboard-plugin-wit-1.8.0 tensorflow-2.5.0 tensorflow-estimator-2.5.0 termcolor-1.1.0 threadpoolctl-2.1.0 tinysegmenter-0.3 tldextract-3.1.0 tokenizers-0.10.3 torch-1.9.0 tqdm-4.61.1 transformers-4.3.3 typing-extensions-3.7.4.3 urllib3-1.26.6 werkzeug-2.0.1 wrapt-1.12.1
+
+done
+#
+# To activate this environment, use
+#
+#     $ conda activate j2d
+#
+# To deactivate an active environment, use
+#
+#     $ conda deactivate
+
+(py39) florian@liris-livrons:~/code/testzone/journals2data$ conda info -e
+# conda environments:
+#
+base                     /home/florian/anaconda3
+j2d                      /home/florian/anaconda3/envs/j2d
+py39                  *  /home/florian/anaconda3/envs/py39
+
+(py39) florian@liris-livrons:~/code/testzone/journals2data$ conda activate j2d
+(j2d) florian@liris-livrons:~/code/testzone/journals2data$ ls
+cli.py  configuration.py  exception    journals2data.py  README.md         setup.py
+cmd     console           __init__.py  logs              requirements.txt  signalhandler.py
+conf    data              j2d.yml      out               scraper           utils
+(j2d) florian@liris-livrons:~/code/testzone/journals2data$ cd ..
+(j2d) florian@liris-livrons:~/code/testzone$ python3
+Python 3.9.5 (default, Jun  4 2021, 12:28:51) 
+[GCC 7.5.0] :: Anaconda, Inc. on linux
+Type "help", "copyright", "credits" or "license" for more information.
+>>> fro
+from        frozenset(  
+>>> from journals2data import main
+2021-07-12 11:48:13.290251: W tensorflow/stream_executor/platform/default/dso_loader.cc:64] Could not load dynamic library 'libcudart.so.11.0'; dlerror: libcudart.so.11.0: cannot open shared object file: No such file or directory
+2021-07-12 11:48:13.290271: I tensorflow/stream_executor/cuda/cudart_stub.cc:29] Ignore above cudart dlerror if you do not have a GPU set up on your machine.
+Python Current Working directory = /home/florian/code/testzone
+>>> main("/home/florian/code/testzone/journals2data/conf/journals2data.florian.conf")
+****** running J2D [--conf_path: /home/florian/code/testzone/journals2data/conf/journals2data.florian.conf]
+****** config.params = [see below]
+{
+    "CONFIG_FILETYPE": "csv",
+    "DEFAULT_OUTPUT_FILEPATH": "/home/florian/code/python/journals2data/out/out.json",
+    "CONFIG_CSV_FILEPATH": "/home/florian/code/python/journals2data/src/journals2data/conf/csv/config_elod_long_test.csv",
+    "GECKODRIVER_LOG_FILEPATH": "/home/florian/code/python/journals2data/logs/geckodriver.log",
+    "BERT_MODEL_BASEPATH": "/home/florian/code/models/",
+    "BERT_LANGUAGE_DIRS": {
+        "en": "BERT_classifier_en/",
+        "fr": "BERT_classifier_fr/"
+    },
+    "DEBUG": true,
+    "VERBOSE": 2,
+    "DEFAULT_TIMEOUT": 120,
+    "SOURCE_TIMEOUT": 120,
+    "ARTICLE_TIMEOUT": 120,
+    "USER": null,
+    "ARTICLE_SCORE_THRESHOLD": null,
+    "NB_RUN_LIMIT": 2,
+    "RUN_NUMBER": 0,
+    "IS_J2D_RUNNING": true,
+    "POTENTIAL_ARTICLE_LIMIT": 3,
+    "SCHEDULE_SYNC_SCRAP_MIN": 1,
+    "J2D_RUN_START_TIME": 1626083320.3937113,
+    "ARTICLE_SAVING_OPTION": 1,
+    "EMPTY_OUT_FILE": true
+}
+Default out file [/home/florian/code/python/journals2data/out/out.json] content has been erased.
+****** SIGINT (CTRL + C) termination handled. ******
+
+```
+
+3. Install geckodriver. There is a script you can run at`cmd/install_gecko.sh`. Before that, make sure you have an available Firefox browser by running`firefox --version`. You should see something like what is shown below. If it is not the case, install firefox.
 
 ```shell
 (base) onyr@laerys:~$ firefox --version
