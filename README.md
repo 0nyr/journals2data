@@ -544,6 +544,7 @@ I have launched an infinite scraping session, every 2 hours. After lunch, I real
 
 I can now start reading the list of article from Cedric.
 
+
 * [X] Do the big merge.
 * [X] Test merge result of `florian@liris-livrons`.
 * [X] Do a clean battle-tested `environment.yml` file from`florian@liris-livrons`.
