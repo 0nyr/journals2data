@@ -185,6 +185,59 @@ from journals2data import main
 main("/home/onyr/Documents/code/python/journals2data/src/journals2data/conf/journals2data.onyr.conf")
 ```
 
+Example:
+
+```shell
+(py39) florian@liris-livrons:~/code/testzone$ ls /home/florian/code/testzone/journals2data/conf/journals2data.florian.conf 
+/home/florian/code/testzone/journals2data/conf/journals2data.florian.conf
+(py39) florian@liris-livrons:~/code/testzone$ python3
+Python 3.9.5 (default, Jun  4 2021, 12:28:51) 
+[GCC 7.5.0] :: Anaconda, Inc. on linux
+Type "help", "copyright", "credits" or "license" for more information.
+>>> from journals2data import main
+2021-07-12 11:03:15.752140: W tensorflow/stream_executor/platform/default/dso_loader.cc:64] Could not load dynamic library 'libcudart.so.11.0'; dlerror: libcudart.so.11.0: cannot open shared object file: No such file or directory
+2021-07-12 11:03:15.752158: I tensorflow/stream_executor/cuda/cudart_stub.cc:29] Ignore above cudart dlerror if you do not have a GPU set up on your machine.
+Python Current Working directory = /home/florian/code/testzone
+>>> main("/home/florian/code/testzone/journals2data/conf/journals2data.florian.conf")
+****** running J2D [--conf_path: /home/florian/code/testzone/journals2data/conf/journals2data.florian.conf]
+****** config.params = [see below]
+{
+    "CONFIG_FILETYPE": "csv",
+    "DEFAULT_OUTPUT_FILEPATH": "/home/florian/code/python/journals2data/out/out.json",
+    "CONFIG_CSV_FILEPATH": "/home/florian/code/python/journals2data/src/journals2data/conf/csv/config_elod_long_test.csv",
+    "GECKODRIVER_LOG_FILEPATH": "/home/florian/code/python/journals2data/logs/geckodriver.log",
+    "BERT_MODEL_BASEPATH": "/home/florian/code/models/",
+    "BERT_LANGUAGE_DIRS": {
+        "en": "BERT_classifier_en/",
+        "fr": "BERT_classifier_fr/"
+    },
+    "DEBUG": true,
+    "VERBOSE": 2,
+    "DEFAULT_TIMEOUT": 120,
+    "SOURCE_TIMEOUT": 120,
+    "ARTICLE_TIMEOUT": 120,
+    "USER": null,
+    "ARTICLE_SCORE_THRESHOLD": null,
+    "NB_RUN_LIMIT": 2,
+    "RUN_NUMBER": 0,
+    "IS_J2D_RUNNING": true,
+    "POTENTIAL_ARTICLE_LIMIT": 3,
+    "SCHEDULE_SYNC_SCRAP_MIN": 1,
+    "J2D_RUN_START_TIME": 1626080626.7153962,
+    "ARTICLE_SAVING_OPTION": 1,
+    "EMPTY_OUT_FILE": true
+}
+Default out file [/home/florian/code/python/journals2data/out/out.json] content has been erased.
+****** SIGINT (CTRL + C) termination handled. ******
+{"url": "https://www.leprogres.fr/e-services/ForgotPassword", "title_from_a_tag": "mot de passe oublié ?", "scraped_nb_times": "0"}
+{"url": "https://www.leprogres.fr/edition-ain-est/a-la-une", "title_from_a_tag": "Ain Est", "scraped_nb_times": "0"}
+{"url": "https://www.leprogres.fr/edition-ain-ouest/a-la-une", "title_from_a_tag": "Ain Ouest", "scraped_nb_times": "0"}
+{"url": "https://www.leprogres.fr/edition-est-lyonnais/a-la-une", "title_from_a_tag": "Est Lyonnais", "scraped_nb_times": "0"}
+{"url": "https://www.leprogres.fr/edition-haute-loire/a-la-une", "title_from_a_tag": "Haute-Loire", "scraped_nb_times": "0"}
+[...]
+```
+
+
 ## Troubleshooting
 
 ### change tmp/ to a bigger folder and install conda venv named py39
