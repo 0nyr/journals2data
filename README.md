@@ -1,13 +1,5 @@
 # Journals2Data
 
-### Useful links
-
-##### Internship
-
-[Google drive](https://drive.google.com/drive/folders/1TMXp8a-w8gT9m85oas4vVlC_5WxnGZXQ)
-
-[Google doc report](https://docs.google.com/document/d/1Puyytyf1mq6PpvFar1PQ_91NqK7eE1bbRsUNZP1BROA/edit#)
-
 ## Objectif
 
 Development of a deployable Python library allowing the use of online  scraping functions at regular intervals, through the use of pre-trained models.
