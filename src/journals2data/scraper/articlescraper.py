@@ -193,6 +193,11 @@ class ArticleScraper:
         text = unicodedata.normalize(
             'NFKC', article_text).encode('utf-8', 'ignore')
         article_text = text.decode("utf-8")
+
+        def replace_parenthesis_in_full_text(text: str) -> str:
+            return text.replace('"', "'") # TODO: test it work
+
+        article_text = replace_parenthesis_in_full_text(article_text)
         self.article.set_full_text(article_text)
 
         # add last data from newspaper_article to article
