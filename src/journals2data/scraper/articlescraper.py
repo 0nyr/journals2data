@@ -194,15 +194,21 @@ class ArticleScraper:
             'NFKC', article_text).encode('utf-8', 'ignore')
         article_text = text.decode("utf-8")
 
-        def replace_parenthesis_in_full_text(text: str) -> str:
-            return text.replace('"', "'") # TODO: test it work
+        def replace_parenthesis(text: str) -> str:
+            return text.replace('"', "'")
 
-        article_text = replace_parenthesis_in_full_text(article_text)
+        article_text = replace_parenthesis(article_text)
         self.article.set_full_text(article_text)
 
         # add last data from newspaper_article to article
-        self.article.title_from_page = newspaper_article.title
-        self.article.publish_date = newspaper_article.publish_date
+        if(newspaper_article.title != None):
+            self.article.title_from_page = replace_parenthesis(
+                newspaper_article.title
+            )
+        if(newspaper_article.publish_date != None):
+            self.article.publish_date = replace_parenthesis(
+                newspaper_article.publish_date
+            )
 
         # log first scraping instant as self.timestamp_start
         if(
