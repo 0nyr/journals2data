@@ -5,7 +5,7 @@ ARG PATH="/root/miniconda3/bin:${PATH}"
 # Add source directory
 COPY src/journals2data journals2data/src/journals2data
 COPY logs journals2data/logs
-COPY out journls2data/out
+COPY out journals2data/out
 
 # Install Conda
 RUN apt-get update
