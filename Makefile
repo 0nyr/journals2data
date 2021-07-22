@@ -31,6 +31,7 @@ build:
 
 	@$(ECHO) "$(LIGHT_BLUE_COLOR)* Copying src/journals2data/ $(NO_COLOR)"
 	cp -ru src/journals2data/* $(PGK_BUILD_DIR)
+	rm $(PGK_BUILD_DIR)/docker_conda_config.yml
 
 	@$(ECHO) "$(LIGHT_BLUE_COLOR)* Copying src/setup.py $(NO_COLOR)"
 	cp src/setup.py $(PGK_BUILD_DIR)
@@ -53,6 +54,7 @@ build:
 	find ./build | grep -E "(__pycache__|\.pyc|\.pyo)" | xargs rm -rf
 
 	@$(ECHO) "$(LIGHT_BLUE_COLOR)*** Building $(ZIP_PATH)  *** $(NO_COLOR)"
+	mkdir -p releases/
 	(cd build/ && zip -r ../$(ZIP_PATH) journals2data/)
 
 clean_last:
