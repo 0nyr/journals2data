@@ -38,7 +38,14 @@ class J2DConfiguration:
         "SCHEDULE_SYNC_SCRAP_MIN": None,
         "J2D_RUN_START_TIME": None, # should not be edited by hand
         "ARTICLE_SAVING_OPTION": utils.ArticleSavingOption.SAVE_TO_FILE,
-        "EMPTY_OUT_FILE": True
+        "EMPTY_OUT_FILE": True,
+        "ES_HOST": "localhost",
+        "ES_PORT": 9200,
+        "ES_USER": "elastic",
+        "ES_PASSWORD": "elastic",
+        "ES_INDEX" : "scrapper_index"
+
+
     }
 
     def __init__(
