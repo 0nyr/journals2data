@@ -22,5 +22,4 @@ ln -s /opt/geckodriver/geckodriver-v0.29.1-linux64/geckodriver /usr/local/bin/ge
 # delete archive
 rm geckodriver-v0.29.1-linux64.tar.gz
 
-
 exit 0
