@@ -12,7 +12,7 @@ ECHO = echo # @echo hides this command in terminal, not its output
 
 # package variables
 PKG_NAME = journals2data
-PKG_VERSION = 0.1.1
+PKG_VERSION = 0.1.2
 FULL_PKG_NAME = $(PKG_NAME)-$(PKG_VERSION)
 ZIP_PATH = releases/$(FULL_PKG_NAME).zip
 PGK_BUILD_DIR = build/journals2data
