@@ -14,6 +14,12 @@ This library is used to scrap automaticaly online newspapers, by providing a lis
 
 ## Installation
 
+> Before everything, you will need to download the zipped build of the project as well as the zip containing BERT models. Find these on GitHub > Releases > Latest
+
+[GitHub releases for Journals2Data](https://github.com/0nyr/python/releases) 
+
+> WARN: Don't download the full zip of the project (Github > Code button), this contains everything and is not intended to be installed.
+
 ### step 1: unzip
 
 1. Get the last version of `journals2data-<last_version>.zip`.
@@ -176,7 +182,7 @@ The configuration process is important since it dictates how the library will wo
 > WARN: Some functionality are not yet implemented and some parameters are not fully working yet.
 
 1. Modify the list of article to scrap by modifying`conf/config.csv`. You can find examples inside`conf/example`.
-2. Modify the conf params by making a`conf/journals2data.conf` file. You can find examples inside`conf/example`.
+2. Modify the conf params by making a`conf/journals2data.conf` file. You can find examples inside`conf/example` or check `conf/journals2data.example.conf`.
 
 ### conf params description
 
@@ -355,7 +361,6 @@ Default out file [/home/florian/code/python/journals2data/out/out.json] content 
 {"url": "https://www.leprogres.fr/edition-haute-loire/a-la-une", "title_from_a_tag": "Haute-Loire", "scraped_nb_times": "0"}
 [...]
 ```
-
 
 ## Troubleshooting
 
