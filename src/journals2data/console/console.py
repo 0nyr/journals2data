@@ -28,12 +28,13 @@ def println_ctrl_sequence(
     message: str, ctrlSequence: Union[ANSICtrlSequence, str]
 ) -> None:
     """
-    This function is use with  terminals to print the message
-    with colors specified by a, ANSI control sequence that 
+    This function is use with terminals to print the message
+    with colors specified by an ANSI control sequence that 
     can be either a str or a console.ANSICtrlSequence object.
     """
     #print("type ctrlSequence = ", type(ctrlSequence))
-    if type(ctrlSequence) == ANSICtrlSequence:
+    #if type(ctrlSequence) == ANSICtrlSequence:
+    if isinstance(ctrlSequence, ANSICtrlSequence):
         ctrlSequenceStr: str = ctrlSequence.value
     else:
         ctrlSequenceStr = ctrlSequence
