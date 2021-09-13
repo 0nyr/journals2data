@@ -7,6 +7,9 @@ import datetime
 
 import pandas
 
+from elasticsearch import Elasticsearch
+es = Elasticsearch()
+
 from .source import Source
 from journals2data import console
 from journals2data import utils
@@ -188,10 +191,16 @@ class Article():
             utils.ArticleSavingOption.SAVE_TO_FILE
         ):
             self.__save_to_file()
-    
+
+        elif(
+            self.source.params["ARTICLE_SAVING_OPTION"] ==
+            utils.ArticleSavingOption.SAVE_TO_ELASTICSEARCH
+        ):
+            self.__save_to_elasticsearch()
+
     def __save_to_file(self):
         """
-        This function is responsible for saving the object as 
+        This function is responsible for saving the object as
         a JSON object.
 
         TODO: Add verification that the object is not already
@@ -213,7 +222,7 @@ class Article():
                 file.write(
                     "[" + endl + "]"
                 )
-        
+
         with open(
             filepath, encoding = 'utf-8', mode = 'r+'
         ) as file:
@@ -221,21 +230,21 @@ class Article():
             nb_of_lines: int = len(lines)
 
             # insert line at a line before the last one
-            #    + StackOverflow: https://stackoverflow.com/questions/1325905/inserting-line-at-specified-position-of-a-text-file 
+            #    + StackOverflow: https://stackoverflow.com/questions/1325905/inserting-line-at-specified-position-of-a-text-file
             spaces: str = "    "
             lines.insert(nb_of_lines - 1, spaces + str(self) + endl)
 
             # check if preceding line needs a ',' at its end
             line_before_insertion: str = lines[nb_of_lines - 2]
             if(
-                line_before_insertion[:1] != '[' and 
+                line_before_insertion[:1] != '[' and
                 line_before_insertion[:1] != ']'
             ):
                 lines[nb_of_lines - 2] = line_before_insertion.strip('\n') + "," + endl
 
             file.seek(0)
             file.writelines(lines)
-        
+
         # logging
         if(self.source.params["VERBOSE"].value > 0):
             url_preview = utils.limit_line_str(self.url)
@@ -244,4 +253,23 @@ class Article():
                 "at " + filepath
             )
 
+    def __save_to_elasticsearch(self):
+        """
+        This function wraps up the article into a JSON object in a proper format and indexes it into an
+        Elasticsearch cluster
+        """
+        es = Elasticsearch([self.source.params["ES_HOST"]],
+                           http_auth=(self.source.params['ES_USER'], self.source.params['ES_PASSWORD']),
+                           port=self.source.params['ES_PORT'])
+        doc = {
+            'author': self.url_source,
+            'full_text': self.title_from_page + '\n\n' + self.full_text,
+            'body': self.full_text,
+            'created_at': self.publish_date,
+            'title': self.title_from_page,
+            'link': self.url
+        }
 
+        index = self.source.params["ES_INDEX"]
+        res = es.index(index=index, id=self.url, body=doc)
+        print(res['result'])

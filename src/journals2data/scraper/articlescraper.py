@@ -197,7 +197,7 @@ class ArticleScraper:
         def replace_parenthesis(text: str) -> str:
             return text.replace('"', "'")
 
-        article_text = replace_parenthesis(article_text)
+        #article_text = replace_parenthesis(article_text)
         self.article.set_full_text(article_text)
 
         # add last data from newspaper_article to article
@@ -207,7 +207,7 @@ class ArticleScraper:
             )
         if(newspaper_article.publish_date != None):
             self.article.publish_date = replace_parenthesis(
-                newspaper_article.publish_date
+                str(newspaper_article.publish_date)
             )
 
         # log first scraping instant as self.timestamp_start

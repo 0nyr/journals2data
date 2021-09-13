@@ -23,4 +23,5 @@ class ArticleSavingOption(IntEnum):
     WARN: Since it is an IntEnum, it is used as a value!
     """
     NO_SAVING = 0
-    SAVE_TO_FILE = 1 
+    SAVE_TO_FILE = 1
+    SAVE_TO_ELASTICSEARCH = 2
