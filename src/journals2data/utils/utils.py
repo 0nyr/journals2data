@@ -19,7 +19,10 @@ def print_pretty_json(json_data: Dict[Any, Any]):
     json_formatted_str: str = json.dumps(json_data, indent=4)
     print(json_formatted_str)
 
-def save_json_to_file(json_data, filepath: str):
+def save_json_to_file(json_data: dict, filepath: str):
+    """
+    Saves a json object (as a dict) to a file
+    """
     # serialization
     json_str: str = json.dumps(json_data, indent=4)
 
