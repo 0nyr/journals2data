@@ -1,0 +1,12 @@
+# out files
+journals2data/out/out.json
+
+# python cache
+__pycache__
+*.pyc
+*geckodriver.log
+/**/geckodriver.log
+
+# build
+journals2data/build/
+journals2data/releases/
