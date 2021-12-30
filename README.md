@@ -28,6 +28,14 @@ inside `conf/`, a .csv file with a list of source URLs, language and scraping fr
 
 A big JSON file containing unique scraped articles with metadata and full text.
 
+
+### Where to start
+
+Read `doc/README.md` to understand more how to use `journals2data` as well as what you need to install to make it works.
+
+
+## Notes 
+
 ## commands
 
 ### conda
@@ -37,6 +45,8 @@ A big JSON file containing unique scraped articles with metadata and full text.
 `source /home/onyr/Downloads/yes/bin/activate`:
 
 `conda activate venv1`: activate `venv1` virtual environment.
+
+`conda env list`: list virtual environments
 
 `conda install <package>`: install a package into a conda environment. Make sure to be inside the right environment.
 
@@ -54,7 +64,8 @@ Collecting packaging
 
 `conda -V`: display the version of `conda` installed.
 
-## Notes
+
+## Miscellaneous
 
 ##### long strings in json file
 
