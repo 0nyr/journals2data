@@ -10,3 +10,6 @@ __pycache__
 # build
 journals2data/build/
 journals2data/releases/
+
+# BERT models
+models/

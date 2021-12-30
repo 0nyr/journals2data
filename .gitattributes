@@ -1,0 +1,5 @@
+# linguist settings https://medium.com/@bolajiayodeji/introducing-github-linguist-8f09273ddea1
+
+# test code
+# remove HTML test files from detection
+src/test/data/ linguist-detectable=false
