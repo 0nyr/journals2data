@@ -2,4 +2,6 @@
 
 # test code
 # remove HTML test files from detection
-src/test/data/ linguist-detectable=false
+src/test/data/html/*.html linguist-detectable=false
+src/test/data/text/*.txt linguist-detectable=false
+src/test/data/*.txt linguist-detectable=false
