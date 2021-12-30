@@ -1,0 +1,36 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Python: try_j2d.py",
+            "type": "python",
+            "request": "launch",
+            "program": "/home/onyr/Documents/code/python/journals2data/src/scripts/try_j2d.py",
+            "console": "integratedTerminal"
+        },
+        {
+            "name": "Python: try_j2d_sync_scheduled.py",
+            "type": "python",
+            "request": "launch",
+            "program": "/home/onyr/Documents/code/python/journals2data/src/scripts/try_j2d_sync_scheduled.py",
+            "console": "integratedTerminal"
+        },
+        {
+            "name": "Python: cli.py",
+            "type": "python",
+            "request": "launch",
+            "program": "/home/onyr/Documents/code/python/journals2data/src/journals2data/cli.py",
+            "console": "integratedTerminal"
+        },
+        {
+            "name": "corpus",
+            "type": "python",
+            "request": "launch",
+            "program": "/home/onyr/Documents/code/python/infolegale/infolegale/load_json.py",
+            "console": "integratedTerminal"
+        }
+    ]
+}

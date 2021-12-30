@@ -36,6 +36,12 @@ Read `doc/README.md` to understand more how to use `journals2data` as well as wh
 
 ## Notes 
 
+### Tools
+
+If using VSCode, you can use `wayou.vscode-todo-highlight` extention, for nice syntax highlight.
+
+
+
 ## commands
 
 ### conda

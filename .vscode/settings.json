@@ -1,0 +1,137 @@
+{
+    "jupyter.jupyterServerType": "local",
+    "python.autoComplete.extraPaths": [
+        "./journals2data/src",
+        "./journals2data/src/scripts",
+        "./stage_2/stage_heuristics",
+        "./oop/src",
+        "./oop",
+        "./journals2data/test",
+        "./infolegale/infolegale"
+    ],
+    "python.analysis.extraPaths": [
+        "./journals2data/src",
+        "./journals2data/src/scripts",
+        "./stage_2/stage_heuristics",
+        "./oop/src",
+        "./oop",
+        "./journals2data/test",
+        "./infolegale/infolegale"
+    ],
+    "python.analysis.typeCheckingMode": "basic",
+    "python.analysis.stubPath": "./journals2data/typings",
+    "python.analysis.diagnosticMode": "workspace",
+    // TODO Highlight settings (wayou.vscode-todo-highlight)
+    "todohighlight.isEnable": true,
+    "todohighlight.defaultStyle": {
+        "backgroundColor": "",
+        "overviewRulerColor": "",
+        "color": ""
+    },
+    "todohighlight.keywords": [
+        {
+            "text": "TODO:",
+            "color": "#000",
+            "backgroundColor": "orange",
+            "isWholeLine": false
+        },
+        {
+            "text": "2FIX:",
+            "color": "#000",
+            "backgroundColor": "#ff5fc1",
+            "isWholeLine": false
+        },
+        {
+            "text": "ERRR",
+            "color": "#000",
+            "backgroundColor": "#fe0000",
+            "isWholeLine": false
+        },
+        {
+            "text": "NB:",
+            "color": "#000",
+            "backgroundColor": "cyan",
+            "isWholeLine": false
+        },
+        {
+            "text": "WARN:",
+            "color": "#000",
+            "backgroundColor": "#fe0074",
+            "isWholeLine": false
+        },
+        {
+            "text": "IMPT:",
+            "color": "#000",
+            "backgroundColor": "#ff6600",
+            "isWholeLine": false
+        }, 
+        {
+            "text": "DBUG:",
+            "color": "#000",
+            "backgroundColor": "#a000ff",
+            "isWholeLine": false
+        },
+        {
+            "text": "NOTE:",
+            "color": "#000",
+            "backgroundColor": "#0099ff",
+            "overviewRulerColor": "grey"
+        },
+        {
+            "text": "WTCH:",
+            "color": "#000",
+            "backgroundColor": "#0158f5",
+            "isWholeLine": false
+        },
+        {
+            "text": "INFO:",
+            "color": "#000",
+            "backgroundColor": "#40bf00",
+            "overviewRulerColor": "grey"
+        },
+        {
+            "text": "VERB:",
+            "color": "#000",
+            "backgroundColor": "#00ffb8",
+            "overviewRulerColor": "grey"
+        },
+        {
+            "text": "HACK:",
+            "color": "#000",
+            "backgroundColor": "#dffe00",
+            "isWholeLine": false
+        },
+        {
+            "text": "RCAL:",
+            "color": "#000",
+            "backgroundColor": "grey",
+            "isWholeLine": false
+        }
+    ],
+    "todohighlight.include": [
+        "**/*.js",
+        "**/*.jsx",
+        "**/*.ts",
+        "**/*.tsx",
+        "**/*.html",
+        "**/*.php",
+        "**/*.css",
+        "**/*.scss",
+        "**/*.py"
+    ],
+    "todohighlight.exclude": [
+        "**/node_modules/**",
+        "**/dist/**",
+        "**/bower_components/**",
+        "**/build/**",
+        "**/.vscode/**",
+        "**/.github/**",
+        "**/_output/**",
+        "**/*.min.*",
+        "**/*.map",
+        "**/pycache/**",
+        ],
+        "markdown.preview.breaks": true,
+        "markdown.preview.fontSize": 18,
+        "jupyter.themeMatplotlibPlots": true
+}
