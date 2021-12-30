@@ -1,7 +1,8 @@
-# linguist settings https://medium.com/@bolajiayodeji/introducing-github-linguist-8f09273ddea1
+# linguist settings tuto : https://medium.com/@bolajiayodeji/introducing-github-linguist-8f09273ddea1
+# linguist doc : https://linguist.readthedocs.io/en/latest/
+# linguist repo : https://github.com/github/linguist
 
 # test code
-# remove HTML test files from detection
 src/test/data/html/*.html linguist-detectable=false
 src/test/data/text/*.txt linguist-detectable=false
 src/test/data/*.txt linguist-detectable=false
