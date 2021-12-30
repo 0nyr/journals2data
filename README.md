@@ -1,7 +1,5 @@
 # Journals2Data
 
-## Objectif
-
 Development of a deployable Python library allowing the use of online  scraping functions at regular intervals, through the use of pre-trained models.
 
 ##### Input: CSV (or JSON?) config file
@@ -28,21 +26,20 @@ inside `conf/`, a .csv file with a list of source URLs, language and scraping fr
 
 A big JSON file containing unique scraped articles with metadata and full text.
 
-
 ### Where to start
 
 Read `doc/README.md` to understand more how to use `journals2data` as well as what you need to install to make it works.
 
 
-## Notes 
+
+
+## Notes
 
 ### Tools
 
 If using VSCode, you can use `wayou.vscode-todo-highlight` extention, for nice syntax highlight.
 
-
-
-## commands
+## Useful command remainders
 
 ### conda
 
